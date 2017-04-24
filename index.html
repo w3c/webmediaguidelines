@@ -95,8 +95,30 @@
       </section>
       <section>
             <h3>On-Demand Streaming</h3>
-            <p>TBD
+            <p>
+              Despite the almost identical mechanics in the two types of content, their generation, delivery and playout a large organsiation will typically maintain two distinct workflows for VOD and linear content as there are subtle but important ways in which they differ.
             </p>
+            <h4>Content Generation</h4>
+            <p>
+              For VOD the source is typically tape rather than a feed. The encoding profiles are also subtly different. A greater priority can be placed on high quality as the latency, time to live is not a requirement. To this end the encoder are able to pioritise density over quality via configuration allowing VOD encoders to spend more time on each frame. There are important differences in the manifests created. In HLS there is a tag that tells the player whether the playlist is VOD: #EXT-X-PLAYLIST-TYPE:VOD. As we will see shortly this is used by the player. There are also client side restrictions where certain profiles are blocked due to rights restrictions on Movies and Entertainment whilst being alowed on sports content.
+            </p>
+            <h4>Content Delivery</h4>
+            <p>
+              The CDN configuration and topology of VOD content is also different. There are different levels of caching; popular VOD content which is kept closer to the edge in the CDN network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery. Older and less popular content is retained in mid-tier caching whilst the long tail content is relegated to a lower tier.
+            </p>
+            <h4>Content Playback</h4>
+            <p>
+              As mentioned in the content generation section the player uses a tag within the manifest to determine the playout type. In HLS if there is a type is VOD then the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH the difference between a live and VOD playlist are more subtle (more detail) </p>
+              <p>
+                There are other differences in playout as well. Unlike linear, a VOD asset has a predefined duration, infomation around duration / current time can be used to update the UI to provide feedback to the user on the amount and proportion of the asset watched.
+              </p>
+              <p>
+                At a broader level the UX requirements will be different in respect to the need for representing static rather than linear content where a tile view rather an an epg is required.
+              </p>
+
+
+
+
       </section>
       <section>
             <h3>Live Streaming</h3>
