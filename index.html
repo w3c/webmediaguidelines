@@ -56,6 +56,21 @@
       <p>The focus of this document is on HTML5-based applications, however the use cases and principles described in the guidelines can be applied to native applications (applications that has been developed for use on a particular platform or device). The examples in this document provides a starting point to build your media application and includes example implementations from various providers and vendors. This document also includes sample content and manifests as well as encoding guidelines to maximize the provide hints on achieving the best quality and efficiency for your media applications.</p>
       <h3>Definitions</h3>
       <p>TBD</p>
+
+      <h3>Our Stance on Modern Web Development Techniques</h3>
+      <p>This document is squarely aimed at support developers who are building Media based web applications.  For that reason the focus on the content is around specific media-centric APIs and app scenarios.  This however does not preclude our support for web development best practices. 
+      Many of the APIs we highlight in this documentation relay on modern web developer techniques.  For example, not all browser support Encrypted Media Extensions, so a <a href="https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection">feature detection</a> would need to be implemented:  </p>
+      <pre class="hljs example">
+      if (!video.mediaKeys) {
+            navigator.requestMediaKeySystemAccess('org.w3.clearkey', [
+              { initDataTypes: ['webm'],
+                videoCapabilities: [{ contentType: 'video/webm; codecs="vp8"' }] }
+          …
+      }
+      </pre>
+
+      <p>This allows a developer to implement EME when supported, and not execute code that will generate errors in browsers that do not.  Another important practice is the use of <a href="https://developer.mozilla.org/en-US/docs/Glossary/Polyfill">polyfills</a> which in many cases can provide an alternative functionality when the browser doesn’t natively support a feature.</p>
+      <p> In general, best practices for modern web development are well documented across the web.  A great place to start to familiarize yourself with these is practices is the  Mozilla <a href="https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing">Cross browser testing guide</a>.</p>
    </section>
    <section>
       <h2>Media Playback Use Cases</h2>
