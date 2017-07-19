@@ -235,7 +235,31 @@ In a classic pc /browser, rather that mobile or stb, environment there are techn
       </section>
       <section>
         <h3>Device Content Protection Capabilities</h3>
-        <p>How to determine the content protection capabilities of a device.
+        <p>A web video application needs to determine the content protection capabilities of the device that is being used to playback the content. The method of doing this will vary from device to device and between DRM systems.<br>
+
+Like most DRM Widevine is only implemented on a subset of available devices. For native, non-browser, playout in iOS Google provide Widevine CDM which acts as a wrapper for AVPlayer or other third party players. Beyond short form DASH video being transcoded by a third party plugin such as Viblast this presupposes HLS content encrypted with widevine.<br>
+
+Android provides a DRM framework that provides an API:
+mDrmManager.getAvailableDrmEngines(), this returns an array of strings that represent the DRMs available on the android device. <br>
+
+Regardless of a device's capability to play back a stream encrypted with a specific DRM it is worth noting that a content provider will be aware of this capability in advance and consequently encrypt the streams to target a specific device. Beyond technical feasibility: can device X play back content encrypted with DRM Y? the provider will have a number of considerations when choosing a DRM for playback on a specific device; cost, utility, complexity and content value (the last consideration being mapped to contractual obligations). As a consequence, in most situations the API call that requests the stream from a back end service will either be to a service that is only configured to return streams with a suitable encryption or the server will use data from the request headers or key value pairs in the request payload to determine which streams to return.  <br>
+
+In the context of the browser the major vendors broadly dictate the DRMs available, Apple’s Safari browser and Apple TV support Apple’s FairPlay DRM. Microsoft's Internet Explorer and Edge browsers only support Microsoft's PlayReady out of the box whilst Google’s Widevine Modular is supported by Google’s Chrome browser but is also included the browser developers not tied to a significant hardware providers; Opera and Firefox. Currently Microsoft’s PlayReady dominates the market.<br>
+
+Browser DRM detection capabilities are tested via the EME (Encrypted Media Extensions) API. The API is an extension to the HTMLMediaElement. The process of determining the available system is broadly as follows:
+
+<ol>
+<li>The stream is passed to the video or audio media element</li>
+<li>The browser detects the stream is encrypted</li>
+<li>The media event encrypted is thrown</li>
+<li>A check is made to see if there are already MediaKeys associated with the element</li>
+<li>If there are no keys already associated with the element then use the EME API navigator.requestMediaKeySystemAccess() to determine which DRM system is available.
+This is done by passing a key value pair that includes a string representation of each MediaKey system to the above method which in turn returns a boolean</li>
+<li>Use the MediaKeySystemAccess.createMediaKeys() to return a new MediaKeys object.</li>
+<li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
+</ol>
+
+The remaining steps are covered in a later section on using EME but it’s worth noting at this stage that the navigator.requestMediaKeySystemAccess() is not uniformly implemented across all modern browsers that support EME. As an example Chrome returns true for ‘com.widevine.alpha’ however IE and Safari throw errors and Firefox returns null. A possible solution to this is offered <a hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a> (NB if this is dtermined to be relevent we can add more detail and/or include the code example directly).
         </p>
       </section>
       <section>
