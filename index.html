@@ -208,8 +208,20 @@
       </p>
       <section>
         <h3>Device Identification</h3>
-        <p>TBD
-        </p>
+        <p>Device identification is required both at the level of device type and family and also to uniquely identify a device. Different techniques are used in different environments.</p>
+        <h4>Device Type</h4>
+        <p>In the context of a mobile client the broad device type is already known - you can’t install an Android client on an iOS device. However, operating systems evolve and are extended. Within an the application layer you will still need to determine the level of support for feature X and branch your code accordingly. <br>
+
+If the application is hosted or the same application is deployed via different app stores then the clients runtime could be more ambiguous. The classic approach is to use the navigator.userAgent. Whilst this returns a string that does not explicitly state the device by name a regular expression match can be used to look for patterns that can confirm the device family. As an example the name ‘Tizen’ can be found in the user agent strings for Samsung and ‘netcast’ for LG devices. In the Chrome browser the strings will be different on windows, mac, android and webview.<br>
+
+Another method similar to feature detection is to look for available APIs, many of these are unique to a device, for example if(tizenGetUser){ then do X }.</p>
+
+<h4>Unique device Identifier</h4>
+<p>After you have determined what type of device you are on you need to be able to identify that device uniquely. Most device manufacturers provide an API so once you have discovered what type of device you are on you then know what API’s will be available to you. Each manufacturer provides a string constructed in a different way, some use the serial number of the device itself whilst others use lower level unique identifiers taken from the hardware. In each case the application layer should attempt to namespace this in some way to avoid an unlikely, but theoretically possible, clash with another user in any server-side database of users and devices.<br>
+
+In a classic pc /browser, rather that mobile or stb, environment there are technical issues with using unique identifiers as a user can access these stored locally and either delete them or reuse them in another context, this could allow them to watch content on more devices than their user account allows. For this reason some vendors prefer to use DRM solutions that both create and encrypt unique identifiers in a way that obscures them from the user.</p>
+
+
       </section>
       <section>
         <h3>Device Media Profile Support</h3>
