@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Web Media Application Developer Guidelines</title>
-    <script
-     src="https://www.w3.org/Tools/respec/respec-w3c-common"
-     class='remove'></script>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
     <script class="remove">
       var respecConfig = {
         specStatus: "CG-DRAFT",
@@ -35,266 +34,789 @@
   </head>
   <body>
     <section id="abstract">
-      <p>
-        This specification is a companion guide to the <a href="https://w3c.github.io/webmediaapi/" target="_blank">Web Media API spec</a>. While the Web Media API spec is targeted at device implementations to support media web apps in 2017, this specification will outline best practices and developer guidance for implementing web media apps. This specification should be updated at least annually to keep pace with the evolving Web platform. The target devices will include any device that runs a modern HTML user agent, including televisions, game machines, set-top boxes, mobile devices and personal computers.
-      </p>
-      <p>
-        The goal of this Web Media API Community Group specification is to transition to the W3C Recommendation Track for standards development.
-      </p>
+      <p> This specification is a companion guide to the <a
+          href="https://w3c.github.io/webmediaapi/" target="_blank">Web
+          Media API spec</a>. While the Web Media API spec is targeted
+        at device implementations to support media web apps in 2017,
+        this specification will outline best practices and developer
+        guidance for implementing web media apps. This specification
+        should be updated at least annually to keep pace with the
+        evolving Web platform. The target devices will include any
+        device that runs a modern HTML user agent, including
+        televisions, game machines, set-top boxes, mobile devices and
+        personal computers. </p>
+      <p> The goal of this Web Media API Community Group specification
+        is to transition to the W3C Recommendation Track for standards
+        development. </p>
     </section>
     <section id="sotd"></section>
     <section>
       <h2>Introduction</h2>
       <ol class="ednote" title="Notes on v1 draft specification:">
-        <li>This document is directed towards application developers.  Its content will contain best practices for building media applications across devices, it will not direction to device manufactures or User Agent implementers. </li>
-        <li>This is a companion spec put forth by the Web Media API Community Group.</li>
+        <li>This document is directed towards application developers.
+          Its content will contain best practices for building media
+          applications across devices, it will not direction to device
+          manufactures or User Agent implementers. </li>
+        <li>This is a companion spec put forth by the Web Media API
+          Community Group.</li>
       </ol>
       <h3>Scope</h3>
-      <p>The scope of this document includes general guidelines, best practices, and examples for building media applications across web browsers and devices.
+      <p>The scope of this document includes general guidelines, best
+        practices, and examples for building media applications across
+        web browsers and devices. </p>
+      <p>The target audience for these guidelines are software
+        developers and engineers focused on building cross-platform,
+        cross-device, HTML5-based applications that contain
+        media-specific use cases.</p>
+      <p>The focus of this document is on HTML5-based applications,
+        however the use cases and principles described in the guidelines
+        can be applied to native applications (applications that has
+        been developed for use on a particular platform or device). The
+        examples in this document provides a starting point to build
+        your media application and includes example implementations from
+        various providers and vendors. This document also includes
+        sample content and manifests as well as encoding guidelines to
+        maximize the provide hints on achieving the best quality and
+        efficiency for your media applications.</p>
+      <h3>Accessibility</h3>
+      <p>These guidelines will cover making your applications compliant
+        with accessibility requirements from the perspective of
+        delivering and consuming media. However, to make sure your
+        entire application is accessibility-friendly, please see the <a
+          href="https://www.w3.org/WAI/intro/wcag">W3C Web Content
+          Accessibility Guidelines</a>.</p>
+      <h3>Glossary of Terms</h3>
+      <p>In order to provide a common language to build this document
+        and communicate concepts to the end reader, we are providing a
+        Glossary of Terms to this guideline document.<br>
       </p>
-      <p>The target audience for these guidelines are software developers and engineers focused on building cross-platform, cross-device, HTML5-based applications that contain media-specific use cases.</p>
-      <p>The focus of this document is on HTML5-based applications, however the use cases and principles described in the guidelines can be applied to native applications (applications that has been developed for use on a particular platform or device). The examples in this document provides a starting point to build your media application and includes example implementations from various providers and vendors. This document also includes sample content and manifests as well as encoding guidelines to maximize the provide hints on achieving the best quality and efficiency for your media applications.</p>
-      <h3>Accessability</h3>
-      <p>These guidelines will cover making your applications compliant with accessibility requirements from the perspective of delivering and consuming media. However, to make sure your entire application is accessibility-friendly, please see the <a href="https://www.w3.org/WAI/intro/wcag">W3C Web Content Accessibility Guidelines</a>.</p>
-      <h3>Definitions</h3>
-      <p>TBD</p>
-   </section>
-   <section>
-      <h2>Media Playback Use Cases</h2>
       <p>
+        <table border="1" cellspacing="0" cellpadding="4">
+          <colgroup><col width="181"><col width="578"></colgroup><tbody>
+            <tr>
+              <td><b>Term</b></td>
+              <td><b>Definition</b></td>
+            </tr>
+            <tr>
+              <td>360 Video</td>
+              <td>Video content where a view in every direction is
+                recorded at the same time, shot using an
+                omni-directional camera or a collection of cameras.
+                During playback the viewer has control of the viewing
+                direction like a spherical panorama.</td>
+            </tr>
+            <tr>
+              <td valign="top">AAC<br>
+              </td>
+              <td valign="top">Advanced Audio Coding is a proprietary
+                audio coding standard for lossy digital audio
+                compression. Designed to be the successor of the MP3
+                format, AAC generally achieves better sound quality than
+                MP3 at the same bit rate.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>Adaptive Streaming (ABR)<br>
+              </td>
+              <td>Adaptive streaming / adaptive bitrate (also known as
+                ABR) is a process that adjusts the quality of a video
+                delivered to a web page based on changing network
+                conditions to ensure the best possible viewer
+                experience. The most common ABR technologies are HTTP
+                Live Streaming (HLS) created by Apple and Dynamic
+                Adaptive Streaming over HTTP (DASH).<br>
+              </td>
+            </tr>
+            <tr>
+              <td>AVOD</td>
+              <td>Advertising-supported Video on Demand. AVOD services
+                monetize their content by serving ads to users, as
+                opposed to other business models such as paid
+                subscription or pay-per-title.</td>
+            </tr>
+            <tr>
+              <td valign="top">Bit rate<br>
+              </td>
+              <td valign="top"> Bit rate, (also known as data rate), is
+                the amount of data used for each second of video. In the
+                world of video, this is generally measured in kilobits
+                per second (kbps), and can be constant and variable. </td>
+            </tr>
+            <tr>
+              <td valign="top">Codec<br>
+              </td>
+              <td valign="top">A codec is the algorithm used to capture
+                analog video or audio in digital form. Most codecs
+                employ proprietary coding algorithms for data
+                compression. MP3, H.264, and HEVC are examples of
+                codecs.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>Content Delivery Network (CDN)</td>
+              <td>A content delivery network (CDN) is a system of
+                distributed servers (network) that deliver pages and
+                other media content to a user, based on the geographic
+                locations of the user, the origin of the webpage and the
+                content delivery server.</td>
+            </tr>
+            <tr>
+              <td>Chunk(ing)</td>
+              <td>ABR technologies typically break a video or audio
+                stream into chunks to make transmission more compact and
+                efficient. These chunks are typically 2-10 seconds in
+                length and contain at least one I-Frame so that the
+                video player has complete information for which to
+                render the video from that point in the manifest. </td>
+            </tr>
+            <tr>
+              <td>Closed Captions</td>
+              <td>Used for accessibility and usability, closed captions
+                are a visual representation of the audio content of a
+                media file stored as metadata file or track and
+                displayed as an overlay in the video player in
+                synchronization with the video/audio track. Typical
+                formats for closed captioning are WebVTT and SRT.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>DRM</td>
+              <td>A combination of encryption, authentication and access
+                control technologies that are used to prevent
+                unauthorized users from consuming copyrighted media
+                content. The most widely used DRM solutions today are
+                Microsoft PlayReady, Google Widevine, and Apple FairPlay
+                Streaming.<br>
+                <br>
+                There are also open technologies that use standards such
+                as Common Encryption (MPEG-CENC) and Media Source
+                Extensions (MSE) to create a secure environment without
+                third-party products.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>Embeds</td>
+              <td>Most video players in a web page use what's called an
+                "Embed" or "Embed Code" that is placed in the code of
+                your HTML page or app that will render the video
+                playback environment. </td>
+            </tr>
+            <tr>
+              <td>Encoding</td>
+              <td>(see Transcoding)<br>
+              </td>
+            </tr>
+            <tr>
+              <td>Encrypted Media Extensions<br>
+              </td>
+              <td>Encrypted Media Extensions (EME) is a proposed W3C
+                specification for providing a communication channel
+                between web browsers and digital rights management (DRM)
+                agent software. This allows the use of HTML5 video to
+                play back DRM-wrapped content such as streaming video
+                services without the need for third-party media plugins
+                like Adobe Flash or Microsoft Silverlight. The use of a
+                third-party key management system may be required,
+                depending on whether the publisher chooses to scramble
+                the keys.<br>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">Format<br>
+              </td>
+              <td valign="top">A format or "container format", is used
+                to bind together video and audio information, along with
+                other information such as metadata or even subtitles.
+                For example, .mp4, .mov, .wmv etc. are all container
+                formats that contain both audio, video, and metadata in
+                a single file. Formats contain tracks that are encoded
+                using codecs. For example an .mp4 might use the AAC
+                audio codec together with the h.264 video codec.
+                <meta charset="utf-8">
+              </td>
+            </tr>
+            <tr>
+              <td>H.264</td>
+              <td>Also known as MPEG-4 AVC (Advanced Video Coding) it is
+                now one of the most commonly used recording formats for
+                high definition video. It offers significantly greater
+                compression than previous formats. </td>
+            </tr>
+            <tr>
+              <td valign="top">HEVC<br>
+              </td>
+              <td valign="top">High Efficiency Video Coding is one of
+                the newest generation video codecs that is able to
+                achieve efficiency up to 4x greater than H.264, but it
+                requires the HEVC codec to be present on the device.
+                HEVC typically takes considerable more processing power
+                to encode and decode than older codecs such as H.264.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>HLS</td>
+              <td>HTTP Live Streaming (HLS) is an adaptive streaming
+                technology created by Apple that allows the player to
+                automatically adjust the quality of a video delivered to
+                a web page based on changing network conditions to
+                ensure the best possible viewer experience. </td>
+            </tr>
+            <tr>
+              <td>I-Frame (video)</td>
+              <td>In video compression, an I-Frame is an independent
+                frame that is not dependent on any future or previous
+                frames to present a complete picture. I-Frames are
+                necessary to provide full key frames for the
+                encoder/decoder. </td>
+            </tr>
+            <tr>
+              <td>Live Streaming</td>
+              <td>Live streaming is a type of broadcast that is
+                delivered over the Internet where the source content is
+                typically a live event such as a sporting event,
+                religious service, etc. Unlike VOD, viewers of a live
+                stream all watch the same broadcast at the same time. </td>
+            </tr>
+            <tr>
+              <td>Manifest </td>
+              <td>A manifest is a playlist file for adaptive streaming
+                technologies (such as HLS, DASH, etc.) that provides the
+                metadata information for where to locate each segment of
+                a video or audio source. Depending on the configuration,
+                some technologies have two types of manifests: one
+                "master" manifest that contains the location of each
+                rendition manifest and one rendition manifest for each
+                rendition that contains the location (relative or
+                absolute) of each chunk of a video or audio source. </td>
+            </tr>
+            <tr>
+              <td>Metadata Track</td>
+              <td>ABR streaming technologies contain the ability to
+                include not only video and audio tracks within the
+                stream, but also allow for metadata tracks for
+                applications such as closed captions, advertising cues,
+                etc.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>MPEG-Dash</td>
+              <td>Dynamic Adaptive Streaming over HTTP (DASH), also
+                known as MPEG-DASH, is an adaptive bitrate streaming
+                technique that enables high quality streaming of media
+                content over the Internet delivered from conventional
+                HTTP web servers. </td>
+            </tr>
+            <tr>
+              <td>Player<br>
+              </td>
+              <td>A video or audio media player that is used to render a
+                media stream in your application environment. There are
+                commercially available and open source video players and
+                SDKs for almost every platform. </td>
+            </tr>
+            <tr>
+              <td>Rendition </td>
+              <td>A specific video and audio stream for a target quality
+                level or bitrate in a adaptive streaming set or
+                manifest. For example, most HLS or DASH adaptive
+                streaming manifests contain multiple renditions for
+                different quality/bitrate targets so that the viewer
+                automatically views the best quality content for their
+                specific internet connection speed. </td>
+            </tr>
+            <tr>
+              <td>SDK</td>
+              <td>A Software Development Kit is a set of tools that
+                allow the creation of applications for a certain
+                framework or development platform. Typically they are
+                the implementation of one or more APIs to interface to a
+                particular programming language, and include debugging
+                utilities, sample code, and documentation. </td>
+            </tr>
+            <tr>
+              <td>Self-hosted player</td>
+              <td>The JavaSript application files are hosted from your
+                own domain. Use this method if you have your own CDN or
+                want to stay locked into a version of the player. Note:
+                we do not recommend this as the player updates every 4-6
+                weeks.</td>
+            </tr>
+            <tr>
+              <td>Streaming</td>
+              <td>Streaming of media content is typically the delivery
+                of media assets over internet protocols such as HTTP or
+                RTMP. </td>
+            </tr>
+            <tr>
+              <td>SVOD</td>
+              <td>Subscription-supported Video on Demand. SVOD services
+                monetize their content through paid subscriptions from
+                users, as opposed to other business models such as
+                advertising or pay-per-title.</td>
+            </tr>
+            <tr>
+              <td>Transcoding</td>
+              <td>Also referred to as compression, this is the process
+                of removing redundancies from raw video and audio data,
+                thereby reducing the amount of data required to deliver
+                the media across a network, on a physical disc, etc. The
+                process can result in reduced visual or auditory quality
+                of the encoded media, but the loss is usually
+                imperceptible to the user. H.264 and HEVC are examples
+                of codecs that use compression during transcoding. </td>
+            </tr>
+            <tr>
+              <td>URL Signing</td>
+              <td>URL signing is a mechanism for securing access to
+                content. When URL Signing enforcement is enabled on a
+                property; requests to a content server or content
+                delivery network must be signed using a secure token.
+                The signing also includes an expiration time after which
+                the link will no longer work. This ensures that only
+                links generated by the customer can be used to access
+                their content and that if those links are used
+                elsewhere, the use will expire at the expiration time.</td>
+            </tr>
+            <tr>
+              <td>VOD</td>
+              <td>Video on demand is video that is served at the request
+                of a user. Delivery is typically through a content
+                delivery network to optimize delivery speed and
+                efficiency.<br>
+              </td>
+            </tr>
+            <tr>
+              <td>VR</td>
+              <td>Virtual Reality is a realistic and immersive
+                three-dimensional environment, created using interactive
+                software and hardware, and experienced or controlled by
+                movement of the body. VR experiences typically require
+                wearing a head mounted display (HMD).</td>
+            </tr>
+          </tbody>
+        </table>
       </p>
+      <p>For a more detailed list of relevant terms, please see the
+        glossary of terms for the vendors or technologies you use in
+        your workflow. </p>
+    </section>
+    <section>
+      <h2>Media Playback Use Cases</h2>
+      <p> </p>
       <section>
-            <h3>Streaming overview</h3>
-            <p>
-              NOTE: Adding a brief introductory section that removes the need for duplication of material across VOD and linear sections. Here we can outline the broad mechanics that are shared by the two use cases allowing us to focus on the distinctions in the respective sections.
-            </p>
-            <h4>General Description</h4>
-            <p>Material (typically in video or audio content) is made available by a content provider via a web-enabled application and delivered by a content distribution network. There are three distinct interlocking processes: generation, delivery and consumption / playback.
-            </p>
-            <h4>Content Generation</h4>
-            <p>
-               Original Content is normally delivered to the service provider as a file with near lossless compression. Specifically, for High Definition content at 1080p with 50 or 60 frames-per-second, the bitrate of the original content is typically 25Mbps to 150Mbps.
-            </p>
-            <p>
-              Streaming content is generated by encoding the source against an encoding profile. Firstly, the content is duplicated into different versions of the file that target delivery over a connection that achieves a certain bandwidth, these are the different bitrates. After this is it split into segments of specified length.
-            </p>
-            <p>
-              The first process is defined by an encoding profile. A profile describes the set of constraints to be used when video is being prepared for consumption by a range of video applications. The description includes the different bitrates to be generated during the encoding process that will allow for the same content to be consumed on a wide variety of devices on different networks from cellular to LAN.
-            </p>
-            <p>
-              The second process is performed by a packager which segments the different bitrates. These are then packaged into a transport format such as transport streams (.ts) or fragmented mp4s (.m4s) after this they are encrypted with a DRM that is suitable for the environment where the content is going to be played out. The packager is also responsible for the generation of a manifest file, typically a DASH (.mpd), HLS (.m3u8) or possibly Smooth (.ism) or HDS (.f4v), that specifies the location of the media and its format.
-            </p>
-            <h4>Content Delivery</h4>
-            <p>
-              After the content has been generated the resulting segments of video and corresponding manifest files are pushed to an origin server. However, the assets are rarely delivered directly from the origin.
-            </p>
-            <p>
-              At this stage, the control in the chain switches to the client's web video application. The content provider supply's the client with the URL of a manifest file located on a CDN rather than the origin. /
-              The manifest is typically passed to a player. The player makes a GET request for the manifest from CDN edge, its location is determined by DNS. The CDN does one of two things: if it has the asset it returns it to the player, if it does not it requests it from the origin. When it receives it the CDN caches the manifest for use by other sessions and then then returns it to the requesting client.
-            </p>
-            <h4>Content Playback</h4>
-            <p>
-              The player parses the manifest. At this point the behavior differs between players found on the different devices depending on the transport formats. However, broadly, it behaves in the following way: <br>
-<ol>
-<li>The client uses DRM license URL to request a secure key to enable decoding of the media.</li>
-<li>The player's ABR (adaptive bitrate) algorithm determines the bandwidth available to the client by examining the response times associated with the request for the first segment of video, how many bytes were received over what time period. This provides enough information to determine the playback quality that the player can sustain over a proportion of the length of the asset, or in the case of live streaming a specific timeframe. </li>
-<li>Once the player has this information it can then compare this with the metadata from the manifest that describes the different qualities that the content provider is supplying. It picks the quality level with an average bitrate that is as close to the available bitrate but within its bounds to avoid a situation where a consistent experience is interrupted as the player requires more data than the current network bandwidth can supply, where the player’s buffer is emptying faster than it is being filled. </li>
-<li>It then requests a segment from a location on the edge server that typically relative to the location of the manifest. </li>
-<li>Once it has received the segment it is then typically decrypted in accordance with the specific DRM used. </li>
-<li>It then adds it to the player's video buffer. </li>
-<li>The media engine pulls the video data from the buffer and passes it to the video surface where it is rendered. </li>
-<li>If the available bandwidth remains constant the player will continue to request segments from the same bitrate stream, pulling down chunks and filling its video buffer. In the event a change in network availability the player will make a decision about the need to either drop to a lower bitrate stream or request a higher bitrate child manifest and associated segment. </li>
-</ol>
-</p>
+        <h3>Streaming overview</h3>
+        <p> NOTE: Adding a brief introductory section that removes the
+          need for duplication of material across VOD and linear
+          sections. Here we can outline the broad mechanics that are
+          shared by the two use cases allowing us to focus on the
+          distinctions in the respective sections. </p>
+        <h4>General Description</h4>
+        <p>Material (typically in video or audio content) is made
+          available by a content provider via a web-enabled application
+          and delivered by a content distribution network. There are
+          three distinct interlocking processes: generation, delivery
+          and consumption / playback. </p>
+        <h4>Content Generation</h4>
+        <p> Original Content is normally delivered to the service
+          provider as a file with near lossless compression.
+          Specifically, for High Definition content at 1080p with 50 or
+          60 frames-per-second, the bitrate of the original content is
+          typically 25Mbps to 150Mbps. </p>
+        <p> Streaming content is generated by encoding the source
+          against an encoding profile. Firstly, the content is
+          duplicated into different versions of the file that target
+          delivery over a connection that achieves a certain bandwidth,
+          these are the different bitrates. After this is it split into
+          segments of specified length. </p>
+        <p> The first process is defined by an encoding profile. A
+          profile describes the set of constraints to be used when video
+          is being prepared for consumption by a range of video
+          applications. The description includes the different bitrates
+          to be generated during the encoding process that will allow
+          for the same content to be consumed on a wide variety of
+          devices on different networks from cellular to LAN. </p>
+        <p> The second process is performed by a packager which segments
+          the different bitrates. These are then packaged into a
+          transport format such as transport streams (.ts) or fragmented
+          mp4s (.m4s) after this they are encrypted with a DRM that is
+          suitable for the environment where the content is going to be
+          played out. The packager is also responsible for the
+          generation of a manifest file, typically a DASH (.mpd), HLS
+          (.m3u8) or possibly Smooth (.ism) or HDS (.f4v), that
+          specifies the location of the media and its format. </p>
+        <h4>Content Delivery</h4>
+        <p> After the content has been generated the resulting segments
+          of video and corresponding manifest files are pushed to an
+          origin server. However, the assets are rarely delivered
+          directly from the origin. </p>
+        <p> At this stage, the control in the chain switches to the
+          client's web video application. The content provider supply's
+          the client with the URL of a manifest file located on a CDN
+          rather than the origin. / The manifest is typically passed to
+          a player. The player makes a GET request for the manifest from
+          CDN edge, its location is determined by DNS. The CDN does one
+          of two things: if it has the asset it returns it to the
+          player, if it does not it requests it from the origin. When it
+          receives it the CDN caches the manifest for use by other
+          sessions and then then returns it to the requesting client. </p>
+        <h4>Content Playback</h4>
+        <p> The player parses the manifest. At this point the behavior
+          differs between players found on the different devices
+          depending on the transport formats. However, broadly, it
+          behaves in the following way: <br>
+        </p>
+        <ol>
+          <li>The client uses DRM license URL to request a secure key to
+            enable decoding of the media.</li>
+          <li>The player's ABR (adaptive bitrate) algorithm determines
+            the bandwidth available to the client by examining the
+            response times associated with the request for the first
+            segment of video, how many bytes were received over what
+            time period. This provides enough information to determine
+            the playback quality that the player can sustain over a
+            proportion of the length of the asset, or in the case of
+            live streaming a specific timeframe. </li>
+          <li>Once the player has this information it can then compare
+            this with the metadata from the manifest that describes the
+            different qualities that the content provider is supplying.
+            It picks the quality level with an average bitrate that is
+            as close to the available bitrate but within its bounds to
+            avoid a situation where a consistent experience is
+            interrupted as the player requires more data than the
+            current network bandwidth can supply, where the player’s
+            buffer is emptying faster than it is being filled. </li>
+          <li>It then requests a segment from a location on the edge
+            server that typically relative to the location of the
+            manifest. </li>
+          <li>Once it has received the segment it is then typically
+            decrypted in accordance with the specific DRM used. </li>
+          <li>It then adds it to the player's video buffer. </li>
+          <li>The media engine pulls the video data from the buffer and
+            passes it to the video surface where it is rendered. </li>
+          <li>If the available bandwidth remains constant the player
+            will continue to request segments from the same bitrate
+            stream, pulling down chunks and filling its video buffer. In
+            the event a change in network availability the player will
+            make a decision about the need to either drop to a lower
+            bitrate stream or request a higher bitrate child manifest
+            and associated segment. </li>
+        </ol>
       </section>
       <section>
-            <h3>On-Demand Streaming (VOD)</h3>
-            <p>
-              Despite the almost identical mechanics used for the two types of content, VOD and linear, the contents generation, delivery and playout a large organsiation will typically maintain two distinct workflows as there are subtle but important ways in which they differ.
-            </p>
-            <h4>Content Generation</h4>
-            <p>
-              For VOD the source is typically tape rather than a feed. The encoding profiles are also subtly different. A greater priority can be placed on high quality as the latency, time to live, is not a requirement. To this end the encoder is able to prioritise density over quality via configuration allowing VOD encoders to spend more time on each frame. There are important differences in the manifests created. In HLS there is a tag that tells the player whether the playlist is describing on demand material: #EXT-X-PLAYLIST-TYPE:VOD. As we will see shortly this is used by the player. There are also client side restrictions where certain profiles are blocked due to rights restrictions and network consumption capped bitrates on movies and entertainment whilst being allowed on sports content. Fragments size will also effect playout as a player's ABR can be more responsive if the chunks are smaller, e.g. 2 seconds rather than 10 seconds.
-            </p>
-            <h4>Content Delivery</h4>
-            <p>
-              The CDN configuration and topology for delivering VOD content is also different to linear. There are different levels of caching; popular VOD content which is kept closer to the edge in the CDN network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery. Older and less popular content is retained in mid-tier caching whilst the long tail content is relegated to a lower tier.
-            </p>
-            <h4>Content Playback</h4>
-            <p>
-              As mentioned in the content generation section the player uses a tag within the manifest to determine the playout type. In HLS if there is a type is VOD then the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH the difference between a live and VOD playlist are more subtle (more detail) </p>
-              <p>
-                There are other differences in playout as well. Unlike linear, a VOD asset has a predefined duration, information around duration and current time can be used to update the UI to provide feedback to the user on the amount and proportion of the asset watched.
-              </p>
-              <p>
-                At a broader level the UX requirements will be different in respect to the need for representing static rather than linear content where a tile view rather an epg (electronic programme guide) is required. There is also a requirement for Trick Play.
-              </p>
-
-              <h3>VOD use cases</h3>
-<p>
-              In the previous section, we outlined the use cases associated with video streaming. In this section, we give some examples of use cases that are specific to on-demand streaming and are mainly related to strategies employed on the clients to improve performance in some way.
-            </p>
-
-
-
-            <h4> Pre-caching </h4>
-               <p>
-              The key performance indicator for most streaming services will be the percentage of sessions that experience buffering as a ratio to the length of the session. Buffering, the state of the video application when the player has insufficient content within its framebuffer to continuously play content, within a session has a direct relationship to engagement and as a consequence retention. For every second of buffering within a session 10pc of users abandon a video stream. Pre-caching is a strategy used in on-demand streaming. Web video application developers will use points within an application's UX to pre-cache content, for example when entering a mezzanine/synopsis page the application might connect to a stream and begin to pull content and either add it directly to the player’s video buffer or alternatively store the chunks locally. The consequence of this is that when or if the user chooses to play the content after reading the synopsis the video will commence playing without buffering and hence provide the user with a preferable experience to a buffering indicator. This technique is used by Netflix, Sky and the BBC in the case of on-demand content being watched in an in-home context. This technique is not used for cellular sessions where user’s mobile data would be consumed potentially on content that they do not watch.
-            </p>
-
-            <h4>Client-side ad insertion</h4>
-
-          <p>Client-side ad insertion (CSAI). Typically, this involves using a script available in the client runtime, JavaScript in the case of the web, to insert an advert during the user’s session. As an example, an ad serving vendor provides a client script. Close to the player’s initiation the client library makes its api available. The web application listens to events associated with playback, for example the video elements media event ‘playing’. The web application then calls the DOM pause method on the video element and then calls the play method provided by the client-side ad library, passing it the ‘id’ of the video asset. This is then returned to the vendor, possibly along with other identifiers that can be used to target the audience with a specific ad. At this stage an auction is performed with business logic at the ad vendor determining which provider supplies the ad (this is a complex topic and outside the scope of this document). The vendor responds with a VAST (Video Ad Serving Template) payload that includes the URI of the ad content appropriate for the playback environment. In some cases, there is no ad, if this is the case the user is presented with the content they originally requested and control is passed back to the web video application. If there is an ad targeted against the content then the library performs DOM manipulation and injects a new video element into the document this is typically accompanied by a further script that provides the vendor with insights based on the current session. The ad plays. The ad object will conform to VPAID (Video Player Ad Serving Definition) and present a standardised interface to the player for possible interaction, it will issue a standard set of events which the web application can listen to. In response to an ‘adEnded’ event the local library will tear down the injected DOM elements and in turn issue an event that the web application can use to trigger a return to playing the original content.
-
-              In the case of live linear CSAI web socket technology is often used. If the content has a dynamic nature, for example a sports event or a fashion show, a web socket connection is established and ads can then be ‘pushed’ when the editorial team thinks it’s appropriate. The web video application listens to the library that establishes and manages the connection. An event is pushed to the listening clients simultaneously, this event is then used to trigger the same set of events discussed above.
-
-            </p>
-
-
-
-            <h4>Other possible VOD use cases</h4>
-            <ul>
-              <li>Buffer manipulation (device / storage dependent)</li>
-              <li>HTTP byte range requests</li>
-              <li>HTTPs support</li>
-              <li>Player event exposure</li>
-              <li>HDCP security requirement for HDMI</li>
-              <li>Watermarking</li>
-              <li>Hardware acceleration support</li>
-            </ul>
-
-
-            </p>
-
-
-
-
+        <h3>On-Demand Streaming (VOD)</h3>
+        <p> Despite the almost identical mechanics used for the two
+          types of content, VOD and linear, the contents generation,
+          delivery and playout a large organsiation will typically
+          maintain two distinct workflows as there are subtle but
+          important ways in which they differ. </p>
+        <h4>Content Generation</h4>
+        <p> For VOD the source is typically tape rather than a feed. The
+          encoding profiles are also subtly different. A greater
+          priority can be placed on high quality as the latency, time to
+          live, is not a requirement. To this end the encoder is able to
+          prioritise density over quality via configuration allowing VOD
+          encoders to spend more time on each frame. There are important
+          differences in the manifests created. In HLS there is a tag
+          that tells the player whether the playlist is describing on
+          demand material: #EXT-X-PLAYLIST-TYPE:VOD. As we will see
+          shortly this is used by the player. There are also client side
+          restrictions where certain profiles are blocked due to rights
+          restrictions and network consumption capped bitrates on movies
+          and entertainment whilst being allowed on sports content.
+          Fragments size will also effect playout as a player's ABR can
+          be more responsive if the chunks are smaller, e.g. 2 seconds
+          rather than 10 seconds. </p>
+        <h4>Content Delivery</h4>
+        <p> The CDN configuration and topology for delivering VOD
+          content is also different to linear. There are different
+          levels of caching; popular VOD content which is kept closer to
+          the edge in the CDN network in this way it can be delivered to
+          customers faster than an edge server that isn't tuned for high
+          volume delivery. Older and less popular content is retained in
+          mid-tier caching whilst the long tail content is relegated to
+          a lower tier. </p>
+        <h4>Content Playback</h4>
+        <p> As mentioned in the content generation section the player
+          uses a tag within the manifest to determine the playout type.
+          In HLS if there is a type is VOD then the player will not
+          reload the manifest. This has important consequences if there
+          are changes in availability after the session as commenced. In
+          DASH the difference between a live and VOD playlist are more
+          subtle (more detail) </p>
+        <p> There are other differences in playout as well. Unlike
+          linear, a VOD asset has a predefined duration, information
+          around duration and current time can be used to update the UI
+          to provide feedback to the user on the amount and proportion
+          of the asset watched. </p>
+        <p> At a broader level the UX requirements will be different in
+          respect to the need for representing static rather than linear
+          content where a tile view rather an epg (electronic programme
+          guide) is required. There is also a requirement for Trick
+          Play. </p>
+        <h3>VOD use cases</h3>
+        <p> In the previous section, we outlined the use cases
+          associated with video streaming. In this section, we give some
+          examples of use cases that are specific to on-demand streaming
+          and are mainly related to strategies employed on the clients
+          to improve performance in some way. </p>
+        <h4> Pre-caching </h4>
+        <p> The key performance indicator for most streaming services
+          will be the percentage of sessions that experience buffering
+          as a ratio to the length of the session. Buffering, the state
+          of the video application when the player has insufficient
+          content within its framebuffer to continuously play content,
+          within a session has a direct relationship to engagement and
+          as a consequence retention. For every second of buffering
+          within a session 10pc of users abandon a video stream.
+          Pre-caching is a strategy used in on-demand streaming. Web
+          video application developers will use points within an
+          application's UX to pre-cache content, for example when
+          entering a mezzanine/synopsis page the application might
+          connect to a stream and begin to pull content and either add
+          it directly to the player’s video buffer or alternatively
+          store the chunks locally. The consequence of this is that when
+          or if the user chooses to play the content after reading the
+          synopsis the video will commence playing without buffering and
+          hence provide the user with a preferable experience to a
+          buffering indicator. This technique is used by Netflix, Sky
+          and the BBC in the case of on-demand content being watched in
+          an in-home context. This technique is not used for cellular
+          sessions where user’s mobile data would be consumed
+          potentially on content that they do not watch. </p>
+        <h4>Client-side ad insertion</h4>
+        <p>Client-side ad insertion (CSAI). Typically, this involves
+          using a script available in the client runtime, JavaScript in
+          the case of the web, to insert an advert during the user’s
+          session. As an example, an ad serving vendor provides a client
+          script. Close to the player’s initiation the client library
+          makes its api available. The web application listens to events
+          associated with playback, for example the video elements media
+          event ‘playing’. The web application then calls the DOM pause
+          method on the video element and then calls the play method
+          provided by the client-side ad library, passing it the ‘id’ of
+          the video asset. This is then returned to the vendor, possibly
+          along with other identifiers that can be used to target the
+          audience with a specific ad. At this stage an auction is
+          performed with business logic at the ad vendor determining
+          which provider supplies the ad (this is a complex topic and
+          outside the scope of this document). The vendor responds with
+          a VAST (Video Ad Serving Template) payload that includes the
+          URI of the ad content appropriate for the playback
+          environment. In some cases, there is no ad, if this is the
+          case the user is presented with the content they originally
+          requested and control is passed back to the web video
+          application. If there is an ad targeted against the content
+          then the library performs DOM manipulation and injects a new
+          video element into the document this is typically accompanied
+          by a further script that provides the vendor with insights
+          based on the current session. The ad plays. The ad object will
+          conform to VPAID (Video Player Ad Serving Definition) and
+          present a standardised interface to the player for possible
+          interaction, it will issue a standard set of events which the
+          web application can listen to. In response to an ‘adEnded’
+          event the local library will tear down the injected DOM
+          elements and in turn issue an event that the web application
+          can use to trigger a return to playing the original content.
+          In the case of live linear CSAI web socket technology is often
+          used. If the content has a dynamic nature, for example a
+          sports event or a fashion show, a web socket connection is
+          established and ads can then be ‘pushed’ when the editorial
+          team thinks it’s appropriate. The web video application
+          listens to the library that establishes and manages the
+          connection. An event is pushed to the listening clients
+          simultaneously, this event is then used to trigger the same
+          set of events discussed above. </p>
+        <h4>Other possible VOD use cases</h4>
+        <ul>
+          <li>Buffer manipulation (device / storage dependent)</li>
+          <li>HTTP byte range requests</li>
+          <li>HTTPs support</li>
+          <li>Player event exposure</li>
+          <li>HDCP security requirement for HDMI</li>
+          <li>Watermarking</li>
+          <li>Hardware acceleration support</li>
+        </ul>
       </section>
       <section>
-            <h3>Live Streaming</h3>
-            <p>TBD
-            </p>
+        <h3>Live Streaming</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Streaming with Server Side Ad Insertion</h3>
-            <p>TBD
-            </p>
+        <h3>Live Streaming with Server Side Ad Insertion</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Streaming with Client Side Ad Insertion</h3>
-            <p>TBD
-            </p>
+        <h3>Live Streaming with Client Side Ad Insertion</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Linear Streaming</h3>
-            <p>TBD
-            </p>
+        <h3>Live Linear Streaming</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Linear Streaming with Client Side Ad Insertion</h3>
-            <p>TBD
-            </p>
+        <h3>Live Linear Streaming with Client Side Ad Insertion</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>On-Demand Streaming with Trick Mode</h3>
-            <p>TBD
-            </p>
+        <h3>On-Demand Streaming with Trick Mode</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Streaming with Trick Mode</h3>
-            <p>TBD
-            </p>
+        <h3>Live Streaming with Trick Mode</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>On-Demand Streaming with Thumbnail Navigation</h3>
-            <p>TBD
-            </p>
+        <h3>On-Demand Streaming with Thumbnail Navigation</h3>
+        <p>TBD </p>
       </section>
       <section>
-            <h3>Live Streaming with Thumbnail Navigation</h3>
-            <p>TBD
-            </p>
+        <h3>Live Streaming with Thumbnail Navigation</h3>
+        <p>TBD </p>
       </section>
-
-   </section>
-   <section>
+    </section>
+    <section>
       <h2>Media Playback Methods</h2>
-      <p>TBD
-      </p>
+      <p>TBD </p>
       <section>
         <h3>Device Identification</h3>
-        <p>Device identification is required both at the level of device type and family and also to uniquely identify a device. Different techniques are used in different environments.</p>
+        <p>Device identification is required both at the level of device
+          type and family and also to uniquely identify a device.
+          Different techniques are used in different environments.</p>
         <h4>Device Type</h4>
-        <p>In the context of a mobile client the broad device type is already known - you can’t install an Android client on an iOS device. However, operating systems evolve and are extended. Within an the application layer you will still need to determine the level of support for feature X and branch your code accordingly. <br>
-
-If the application is hosted or the same application is deployed via different app stores then the clients runtime could be more ambiguous. The classic approach is to use the navigator.userAgent. Whilst this returns a string that does not explicitly state the device by name a regular expression match can be used to look for patterns that can confirm the device family. As an example the name ‘Tizen’ can be found in the user agent strings for Samsung and ‘netcast’ for LG devices. In the Chrome browser the strings will be different on windows, mac, android and webview.<br>
-
-Another method similar to feature detection is to look for available APIs, many of these are unique to a device, for example if(tizenGetUser){ then do X }.</p>
-
-<h4>Unique device Identifier</h4>
-<p>After you have determined what type of device you are on you need to be able to identify that device uniquely. Most device manufacturers provide an API so once you have discovered what type of device you are on you then know what API’s will be available to you. Each manufacturer provides a string constructed in a different way, some use the serial number of the device itself whilst others use lower level unique identifiers taken from the hardware. In each case the application layer should attempt to namespace this in some way to avoid an unlikely, but theoretically possible, clash with another user in any server-side database of users and devices.<br>
-
-In a classic pc /browser, rather that mobile or stb, environment there are technical issues with using unique identifiers as a user can access these stored locally and either delete them or reuse them in another context, this could allow them to watch content on more devices than their user account allows. For this reason some vendors prefer to use DRM solutions that both create and encrypt unique identifiers in a way that obscures them from the user.</p>
-
-
+        <p>In the context of a mobile client the broad device type is
+          already known - you can’t install an Android client on an iOS
+          device. However, operating systems evolve and are extended.
+          Within an the application layer you will still need to
+          determine the level of support for feature X and branch your
+          code accordingly. <br>
+          If the application is hosted or the same application is
+          deployed via different app stores then the clients runtime
+          could be more ambiguous. The classic approach is to use the
+          navigator.userAgent. Whilst this returns a string that does
+          not explicitly state the device by name a regular expression
+          match can be used to look for patterns that can confirm the
+          device family. As an example the name ‘Tizen’ can be found in
+          the user agent strings for Samsung and ‘netcast’ for LG
+          devices. In the Chrome browser the strings will be different
+          on windows, mac, android and webview.<br>
+          Another method similar to feature detection is to look for
+          available APIs, many of these are unique to a device, for
+          example if(tizenGetUser){ then do X }.</p>
+        <h4>Unique device Identifier</h4>
+        <p>After you have determined what type of device you are on you
+          need to be able to identify that device uniquely. Most device
+          manufacturers provide an API so once you have discovered what
+          type of device you are on you then know what API’s will be
+          available to you. Each manufacturer provides a string
+          constructed in a different way, some use the serial number of
+          the device itself whilst others use lower level unique
+          identifiers taken from the hardware. In each case the
+          application layer should attempt to namespace this in some way
+          to avoid an unlikely, but theoretically possible, clash with
+          another user in any server-side database of users and devices.<br>
+          In a classic pc /browser, rather that mobile or stb,
+          environment there are technical issues with using unique
+          identifiers as a user can access these stored locally and
+          either delete them or reuse them in another context, this
+          could allow them to watch content on more devices than their
+          user account allows. For this reason some vendors prefer to
+          use DRM solutions that both create and encrypt unique
+          identifiers in a way that obscures them from the user.</p>
       </section>
       <section>
         <h3>Device Media Profile Support</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
       </section>
       <section>
         <h3>Device Key System Support</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
       </section>
       <section>
         <h3>Device Content Protection Capabilities</h3>
-        <p>A web video application needs to determine the content protection capabilities of the device that is being used to playback the content. The method of doing this will vary from device to device and between DRM systems.<br>
-
-Like most DRM Widevine is only implemented on a subset of available devices. For native, non-browser, playout in iOS Google provide Widevine CDM which acts as a wrapper for AVPlayer or other third party players. Beyond short form DASH video being transcoded by a third party plugin such as Viblast this presupposes HLS content encrypted with widevine.<br>
-
-Android provides a DRM framework that provides an API:
-mDrmManager.getAvailableDrmEngines(), this returns an array of strings that represent the DRMs available on the android device. <br>
-
-Regardless of a device's capability to play back a stream encrypted with a specific DRM it is worth noting that a content provider will be aware of this capability in advance and consequently encrypt the streams to target a specific device. Beyond technical feasibility: can device X play back content encrypted with DRM Y? the provider will have a number of considerations when choosing a DRM for playback on a specific device; cost, utility, complexity and content value (the last consideration being mapped to contractual obligations). As a consequence, in most situations the API call that requests the stream from a back end service will either be to a service that is only configured to return streams with a suitable encryption or the server will use data from the request headers or key value pairs in the request payload to determine which streams to return.  <br>
-
-In the context of the browser the major vendors broadly dictate the DRMs available, Apple’s Safari browser and Apple TV support Apple’s FairPlay DRM. Microsoft's Internet Explorer and Edge browsers only support Microsoft's PlayReady out of the box whilst Google’s Widevine Modular is supported by Google’s Chrome browser but is also included the browser developers not tied to a significant hardware providers; Opera and Firefox. Currently Microsoft’s PlayReady dominates the market.<br>
-
-Browser DRM detection capabilities are tested via the EME (Encrypted Media Extensions) API. The API is an extension to the HTMLMediaElement. The process of determining the available system is broadly as follows:
-
-<ol>
-<li>The stream is passed to the video or audio media element</li>
-<li>The browser detects the stream is encrypted</li>
-<li>The media event encrypted is thrown</li>
-<li>A check is made to see if there are already MediaKeys associated with the element</li>
-<li>If there are no keys already associated with the element then use the EME API navigator.requestMediaKeySystemAccess() to determine which DRM system is available.
-This is done by passing a key value pair that includes a string representation of each MediaKey system to the above method which in turn returns a boolean</li>
-<li>Use the MediaKeySystemAccess.createMediaKeys() to return a new MediaKeys object.</li>
-<li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
-</ol>
-
-The remaining steps are covered in a later section on using EME but it’s worth noting at this stage that the navigator.requestMediaKeySystemAccess() is not uniformly implemented across all modern browsers that support EME. As an example Chrome returns true for ‘com.widevine.alpha’ however IE and Safari throw errors and Firefox returns null. A possible solution to this is offered <a hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a> (NB if this is dtermined to be relevent we can add more detail and/or include the code example directly).
-        </p>
-      </section>
+        <p>A web video application needs to determine the content
+          protection capabilities of the device that is being used to
+          playback the content. The method of doing this will vary from
+          device to device and between DRM systems.<br>
+          Like most DRM Widevine is only implemented on a subset of
+          available devices. For native, non-browser, playout in iOS
+          Google provide Widevine CDM which acts as a wrapper for
+          AVPlayer or other third party players. Beyond short form DASH
+          video being transcoded by a third party plugin such as Viblast
+          this presupposes HLS content encrypted with widevine.<br>
+          Android provides a DRM framework that provides an API:
+          mDrmManager.getAvailableDrmEngines(), this returns an array of
+          strings that represent the DRMs available on the android
+          device. <br>
+          Regardless of a device's capability to play back a stream
+          encrypted with a specific DRM it is worth noting that a
+          content provider will be aware of this capability in advance
+          and consequently encrypt the streams to target a specific
+          device. Beyond technical feasibility: can device X play back
+          content encrypted with DRM Y? the provider will have a number
+          of considerations when choosing a DRM for playback on a
+          specific device; cost, utility, complexity and content value
+          (the last consideration being mapped to contractual
+          obligations). As a consequence, in most situations the API
+          call that requests the stream from a back end service will
+          either be to a service that is only configured to return
+          streams with a suitable encryption or the server will use data
+          from the request headers or key value pairs in the request
+          payload to determine which streams to return. <br>
+          In the context of the browser the major vendors broadly
+          dictate the DRMs available, Apple’s Safari browser and Apple
+          TV support Apple’s FairPlay DRM. Microsoft's Internet Explorer
+          and Edge browsers only support Microsoft's PlayReady out of
+          the box whilst Google’s Widevine Modular is supported by
+          Google’s Chrome browser but is also included the browser
+          developers not tied to a significant hardware providers; Opera
+          and Firefox. Currently Microsoft’s PlayReady dominates the
+          market.<br>
+          Browser DRM detection capabilities are tested via the EME
+          (Encrypted Media Extensions) API. The API is an extension to
+          the HTMLMediaElement. The process of determining the available
+          system is broadly as follows: </p>
+        <ol>
+          <li>The stream is passed to the video or audio media element</li>
+          <li>The browser detects the stream is encrypted</li>
+          <li>The media event encrypted is thrown</li>
+          <li>A check is made to see if there are already MediaKeys
+            associated with the element</li>
+          <li>If there are no keys already associated with the element
+            then use the EME API navigator.requestMediaKeySystemAccess()
+            to determine which DRM system is available. This is done by
+            passing a key value pair that includes a string
+            representation of each MediaKey system to the above method
+            which in turn returns a boolean</li>
+          <li>Use the MediaKeySystemAccess.createMediaKeys() to return a
+            new MediaKeys object.</li>
+          <li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
+        </ol>
+        The remaining steps are covered in a later section on using EME
+        but it’s worth noting at this stage that the
+        navigator.requestMediaKeySystemAccess() is not uniformly
+        implemented across all modern browsers that support EME. As an
+        example Chrome returns true for ‘com.widevine.alpha’ however IE
+        and Safari throw errors and Firefox returns null. A possible
+        solution to this is offered <a
+hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>
+        (NB if this is dtermined to be relevent we can add more detail
+        and/or include the code example directly). </section>
       <section>
         <h3>Using Encrypted Media Extensions</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
       </section>
       <section>
         <h3>Using Media Source Extensions</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
       </section>
-
-   </section>
-   <section>
+    </section>
+    <section>
       <h2>Content Encoding Guidelines</h2>
-      <p>Preparing your content for encoding is one of the most important steps to ensure maximum quality and excellent viewer experience. In general, there are a few steps to get your content ready for web delivery.</p>
-
+      <p>Preparing your content for encoding is one of the most
+        important steps to ensure maximum quality and excellent viewer
+        experience. In general, there are a few steps to get your
+        content ready for web delivery.</p>
       <p>These steps include the following steps:</p>
-
       <ol>
         <li>Prepare encoding master</li>
         <li>Decide on rendition set</li>
@@ -302,118 +824,121 @@ The remaining steps are covered in a later section on using EME but it’s worth
         <li>Encoder profile creation</li>
         <li>Encoding master files into specific rendition output format</li>
       </ol>
-
       <h4>Preparation</h4>
-
-      <p>The first step in preparing your master content is to render an encoding master file from your source (typically a non-linear editor or master magnetic or optical media).</p>
-
-      <p>In order to maximize quality, a lossless codec is typically used for the encoding master, such as Apple ProRes, H.264 Intra-frame, or Motion JPEG 2000. For detailed info on how to configure your encoding master, see the appropriate provider recommended settings documentation for your codec of choice.</p>
-
-      <p>Typically encoding masters are rendered in the native resolution and framerate that the source was acquired. A common configuration using Apple ProRes would be as follows:</p>
-      
+      <p>The first step in preparing your master content is to render an
+        encoding master file from your source (typically a non-linear
+        editor or master magnetic or optical media).</p>
+      <p>In order to maximize quality, a lossless codec is typically
+        used for the encoding master, such as Apple ProRes, H.264
+        Intra-frame, or Motion JPEG 2000. For detailed info on how to
+        configure your encoding master, see the appropriate provider
+        recommended settings documentation for your codec of choice.</p>
+      <p>Typically encoding masters are rendered in the native
+        resolution and framerate that the source was acquired. A common
+        configuration using Apple ProRes would be as follows:</p>
       <p>
         <table>
-          <tr>
-            <td>Codec</td>
-            <td>Resolution</td>
-            <td>Bitrate</td>
-            <td>Framerates</td>
-          </tr>
-          <tr>
-            <td rowspan="4">Apple ProRes 422</td>
-            <td>3840x2160</td>
-            <td>340-1650 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>1920x1080</td>
-            <td>145-220 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>1280x720</td>
-            <td>20-60 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>640x480</td>
-            <td>8-12 Mbps</td>
-            <td>25, 29.97, 50, 59.94</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Codec</td>
+              <td>Resolution</td>
+              <td>Bitrate</td>
+              <td>Framerates</td>
+            </tr>
+            <tr>
+              <td rowspan="4">Apple ProRes 422</td>
+              <td>3840x2160</td>
+              <td>340-1650 Mbps</td>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>1920x1080</td>
+              <td>145-220 Mbps</td>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>1280x720</td>
+              <td>20-60 Mbps</td>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>640x480</td>
+              <td>8-12 Mbps</td>
+              <td>25, 29.97, 50, 59.94</td>
+            </tr>
+          </tbody>
         </table>
       </p>
-
       <h4>Rendition Bouquet</h4>
-
-      <p>In most streaming use cases, adaptive streaming (ABR) is used. When ABR technologies such as HLS, DASH, or CMAF are used, typically a bouquet or rendition set are encoded to provide the best match of resolution and bitrate for the viewer’s device and connection.</p>
-
-        <p>
+      <p>In most streaming use cases, adaptive streaming (ABR) is used.
+        When ABR technologies such as HLS, DASH, or CMAF are used,
+        typically a bouquet or rendition set are encoded to provide the
+        best match of resolution and bitrate for the viewer’s device and
+        connection.</p>
+      <p>
         <table>
-          <tr>
-            <td>Codec</td>
-            <td>Resolution</td>
-            <td>Bitrate</td>
-            <td>Framerates</td>
-          </tr>
-          <tr>
-            <td rowspan="4">HEVC</td>
-            <td>2160p</td>
-            <td>10 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>1080p</td>
-            <td>5 Mbps<br/>
+          <tbody>
+            <tr>
+              <td>Codec</td>
+              <td>Resolution</td>
+              <td>Bitrate</td>
+              <td>Framerates</td>
+            </tr>
+            <tr>
+              <td rowspan="4">HEVC</td>
+              <td>2160p</td>
+              <td>10 Mbps</td>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>1080p</td>
+              <td>5 Mbps<br>
                 3 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>720p</td>
-            <td>2 Mbps<br/>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>720p</td>
+              <td>2 Mbps<br>
                 1 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>480p</td>
-            <td>-</td>
-            <td>Typically not done for HEVC because of resource cost</td>
-          </tr>
-           <tr>
-            <td rowspan="4">H.264</td>
-            <td>2160p</td>
-            <td>18 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>1080p</td>
-            <td>9 Mbps<br/>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>480p</td>
+              <td>-</td>
+              <td>Typically not done for HEVC because of resource cost</td>
+            </tr>
+            <tr>
+              <td rowspan="4">H.264</td>
+              <td>2160p</td>
+              <td>18 Mbps</td>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>1080p</td>
+              <td>9 Mbps<br>
                 5 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>720p</td>
-            <td>4 Mbps<br/>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>720p</td>
+              <td>4 Mbps<br>
                 2.5 Mbps</td>
-            <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-          </tr>
-          <tr>
-            <td>480p</td>
-            <td>1.5 Kbps<br/>
-                768 Kbps<br/>
+              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+            </tr>
+            <tr>
+              <td>480p</td>
+              <td>1.5 Kbps<br>
+                768 Kbps<br>
                 380 Kbps</td>
-            <td>25, 29.97, 50, 59.94</td>
-          </tr>
+              <td>25, 29.97, 50, 59.94</td>
+            </tr>
+          </tbody>
         </table>
       </p>
-
-
-      </p>
-      <p>
-      </p>
+      <p> </p>
       <section>
         <h3>For On-Demand Streaming</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -425,8 +950,7 @@ The remaining steps are covered in a later section on using EME but it’s worth
       </section>
       <section>
         <h3>For Live Streaming</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -438,8 +962,7 @@ The remaining steps are covered in a later section on using EME but it’s worth
       </section>
       <section>
         <h3>Ad Encoding for On-demand Content</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -451,8 +974,7 @@ The remaining steps are covered in a later section on using EME but it’s worth
       </section>
       <section>
         <h3>Ad Encoding for Live Streaming with Server Side Ad-insertion</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -464,8 +986,7 @@ The remaining steps are covered in a later section on using EME but it’s worth
       </section>
       <section>
         <h3>Trick Mode Track</h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -477,8 +998,7 @@ The remaining steps are covered in a later section on using EME but it’s worth
       </section>
       <section>
         <h3>Thumbnails Track </h3>
-        <p>TBD
-        </p>
+        <p>TBD </p>
         <section>
           <h4>Media Encoding</h4>
           <p>TBD</p>
@@ -488,8 +1008,6 @@ The remaining steps are covered in a later section on using EME but it’s worth
           <p>TBD</p>
         </section>
       </section>
-
-   </section>
-   
+    </section>
   </body>
 </html>
