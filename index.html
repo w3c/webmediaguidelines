@@ -626,16 +626,81 @@
           connection. An event is pushed to the listening clients
           simultaneously, this event is then used to trigger the same
           set of events discussed above. </p>
-        <h4>Other possible VOD use cases</h4>
-        <ul>
-          <li>Buffer manipulation (device / storage dependent)</li>
-          <li>HTTP byte range requests</li>
-          <li>HTTPs support</li>
-          <li>Player event exposure</li>
-          <li>HDCP security requirement for HDMI</li>
-          <li>Watermarking</li>
-          <li>Hardware acceleration support</li>
-        </ul>
+        <h3>VOD – further considerations</h3>
+
+        <h4>Byte range requests in context of web video application</h4>
+
+        <p>
+        An HTTP range request allows a client to request a portion of a larger
+        file. This is helpful in a few scenarios. In the vod scenario the user
+        may want to access a specific location in a file, a range request
+        allows you to access content at a specific location without downloading
+        the entire transport chunk.
+        </p>
+        <p>
+        Both the player and the server need to support range requests. The
+        player needs to be able to playback a source buffer and server must be
+        configured to serve ranges. The exchange begins when a client makes an
+        HTTP HEAD request, the server will then respond with a header that
+        includes Accept-Ranges: bytes. If this is the case then the client can
+        issue subsequent requests for partial content. The returned bytes are
+        added to an Array Buffer and then appended to the sourceBuffer which in
+        turn is used as the src parameter of the of the video element.
+        </p>
+        <h4>HDCP security requirement for HDMI</h4>
+        <p>
+        Most content has some limitation placed on its distribution by the
+        owners. There are different ways of protecting the owner’s rights. The
+        most common is DRM (digital rights management) this prevents the
+        content being watched on a client device if the user cannot ‘unlock’ it
+        with a key. However, once the content is unlocked the service provider
+        should make every effort to prevent the user from re-distributing this
+        content.
+        </p>
+        <p>
+        There is an illicit market for high value content such as live sports
+        and premium vod and attempts are made to re-distribute it. The
+        potential pirate may attempt to re-broadcast a stream. It could be
+        taken into the pirate’s home system and re-encoded once the source has
+        been decrypted. Alternatively, a stream could be output to a projector
+        or split and taken off to multiple local locations.
+        </p>
+        <p>
+        A technical solution to prevent interception as a signal travels from a device
+        to a television or projector is termed High Bandwidth Content Protection
+        (HDCP). If implemented by a device manufacturer it takes the form of a key
+        exchange between devices. If the exchange fails the signal is stopped and the
+        client is notified. The client can then use this notification to present the
+        user with a message altering them.
+        </p>
+
+        <h4>Watermarking</h4>
+        <p>
+        Support for real-time watermarking is becoming an important consideration
+        for distributors of high-value content. A service provider’s right to
+        distribute content is linked to their ability to protect it with studios and
+        sports channels insisting on the capacity for a service provider to detect a
+        breach of copyright on a stream by stream basis.  A service provider can
+        include a vendors sdk in the client that can add a watermark at run-time.
+        Normally, the watermark is invisible to the consumer and takes the form of a
+        digital signal, this is referred to as forensic water marking. Part of the
+        service provided by the vendor of this technology if to monitor the black
+        market for re-distributed material. Ilicit streams or files are intercepted
+        screened for the digital fingerprint inserted on the client. If a suspect
+        stream is found they then direct the service providers to the location where
+        the streams have been misappropriated.
+        </p>
+
+        <p>
+        Whilst this is not an issue that developers will often be faced with,
+        this requirement can dictate the choice of platform for the content
+        distribution. This type of process in itself requires processing power
+        and platforms such as Android, iOS or Roku provide developers with an
+        interface to low-level functionality in situations where the resources
+        can be effectively ring-fenced. The options for watermarking in the
+        browser are limited to overlays and this limitation is then reflected
+        in a distributor’s choice of platform for their web video application.
+        </p>
       </section>
       <section>
       <h3>Live Streaming</h3>
@@ -745,27 +810,6 @@
             for more details. Each switch between periods is a trigger for the
             player to potentially reset the decoder.
             </p>
-
-            <h3>VOD – further considerations</h3>
-
-<h4>Byte range requests in context of web video application</h4>
-
-<p>An HTTP range request allows a client to request a portion of a larger file. This is helpful in a few scenarios. In the vod scenario the user may want to access a specific location in a file, a range request allows you to access content at a specific location without downloading the entire transport chunk.</p>
-
-<p>Both the player and the server need to support range requests. The player needs to be able to playback a source buffer and server must be configured to serve ranges. The exchange begins when a client makes an HTTP HEAD request, the server will then respond with a header that includes Accept-Ranges: bytes. If this is the case then the client can issue subsequent requests for partial content. The returned bytes are added to an Array Buffer and then appended to the sourceBuffer which in turn is used as the src parameter of the of the video element.</p>
-
-
-<h4>HDCP security requirement for HDMI</h4>
-<p>Most content has some limitation placed on its distribution by the owners. There are different ways of protecting the owner’s rights. The most common is DRM (digital rights management) this prevents the content being watched on a client device if the user cannot ‘unlock’ it with a key. However, once the content is unlocked the service provider should make every effort to prevent the user from re-distributing this content.
-There is an illicit market for high value content such as live sports and premium vod and attempts are made to re-distribute it. The potential pirate may attempt to re-broadcast a stream. It could be taken into the pirate’s home system and re-encoded once the source has been decrypted. Alternatively, a stream could be output to a projector or split and taken off to multiple local locations.
-A technical solution to prevent interception as a signal travels from a device to a television or projector is termed High Bandwidth Content Protection (HDCP). If implemented by a device manufacturer it takes the form of a key exchange between devices. If the exchange fails the signal is stopped and the client is notified. The client can then use this notification to present the user with a message altering them. </p>
-
-<h4>Watermarking</h4>
-<p>Support for real-time watermarking is becoming an important consideration for distributors of high-value content. A service provider’s right to distribute content is linked to their ability to protect it with studios and sports channels insisting on the capacity for a service provider to detect a breach of copyright on a stream by stream basis.
-A service provider can include a vendors sdk in the client that can add a watermark at run-time. Normally, the watermark is invisible to the consumer and takes the form of a digital signal, this is referred to as forensic water marking. Part of the service provided by the vendor of this technology if to monitor the black market for re-distributed material. Ilicit streams or files are intercepted screened for the digital fingerprint inserted on the client. If a suspect stream is found they then direct the service providers to the location where the streams have been misappropriated. </p>
-
-<p>Whilst this is not an issue that developers will often be faced with, this requirement can dictate the choice of platform for the content distribution. This type of process in itself requires processing power and platforms such as Android, iOS or Roku provide developers with an interface to low-level functionality in situations where the resources can be effectively ring-fenced. The options for watermarking in the browser are limited to overlays and this limitation is then reflected in a distributor’s choice of platform for their web video application.</p>
-
 
       </section>
       <section>
