@@ -638,12 +638,119 @@
         </ul>
       </section>
       <section>
-        <h3>Live Streaming</h3>
-        <p>TBD </p>
+      <h3>Live Streaming</h3>
+            <p>
+              Even though Live and On-Demand streaming scenarios have a lot in
+              common, there are a few distict differences.
+            </p>
+            <h4>Content Generation</h4>
+            <p>
+            In contrast to VoD content generation, the typical input is a live
+            feed of data. Ususally there is also a higher priority on
+            low-latency and time to live, which is in turn reflected in smaller
+            segments.
+            </p>
+            <p>
+            A big difference between VoD and Live content generation can be
+            found in the differences between Manifests for the two content
+            types.
+            Besides a general profile that tells the player if the Manifest
+            represents live content, there are a few other, important properties
+            that define how a player will be able to playback the live content,
+            when updates will be fetched, and how close to the live edge playback
+            starts.
+            These properties are pre-defined and expressed in the Manifest during
+            content preparation, but play an important role in content playback
+            and view experience.
+            </p>
+
+            <h4>Content Delivery</h4>
+            <p>
+            The content deliver through a CDN is generally very similar to the
+            VoD playback use-case. There might be slight differences when it
+            comes to caching and distribution of segments, and you might
+            observe higher load on the origin when playback is configured to be
+            very close to the live edge.
+            </p>
+
+            <h4>Content Playback</h4>
+            <p>
+            Even though playback and playback parameters between Live and VoD
+            playback are very similar, there are critical differences. Maybe
+            the biggest difference is the playback start position. While VoD
+            playback session usually start at the beginning on the stream, a
+            Live playout usually starts close to the live edge of the stream,
+            with only a few segments between the playback start position and
+            the end of the current manifest.
+            </p>
+            <p>
+            The other main difference is that the live content changes over
+            time and the player needs to be aware of these changes. In both
+            DASH and HLS, this results in regular manifest updates. Depending
+            on the format, it is possible to define the interval for the
+            Manifest updates.
+            </p>
+            <p>
+            What happens during a typical playback session is:
+            <ol>
+                <li>Player loads the Manifest for the first time</li>
+                <li>Playback starts at the live-edge defined in the Manifest</li>
+                <li>Player re-loads the manifest in regular, pre-defined, intervals.</li>
+                <li>The new Manifest is used to update playback state information and the segment list</li>
+            </ol>
+            This is a typical loop that the player goes through on each
+            manifest update cycle.
+            </p>
+
+            <h4>Potential Issues</h4>
+            <p>
+            One of the most common cases that an Applcation needs to be
+            prepared for is the player falling behind the live window. Assume
+            for example that you have a buffer windows of 10 seconds on your
+            live stream. Even if the user interface does not allow explicit
+            seeking, buffering events can still stall the playout and push the
+            playback position towards the border of the live window and event
+            beyond it. Depending on the player implemntation the actual error
+            might be different, but implementation should be aware of the
+            scenario and be prepared to recover from it.
+            </p>
+
       </section>
       <section>
-        <h3>Live Streaming with Server Side Ad Insertion</h3>
-        <p>TBD </p>
+            <h3>Live Streaming with Server Side Ad Insertion</h3>
+            <p>
+            Because of the live nature of the playout, ad-insertions are
+            usually not handle client side. The problem here is that the live
+            feed continues and might not be aware of the client side ad
+            insertion. In that case the player can easily fall behind the live
+            window.  Usually this means that Ad-Insertion is handled server
+            side and the Ads are "injected" into to feed.
+            </p>
+            <p>
+            One of the requirements of the underlying streaming format such as
+            DASH or HLS is that the encoding does not change during the playout
+            of a single rendition. To still be able to insert advertisments,
+            HLS and DASH propose different strategies.
+            </p>
+            <p>
+            HLS allows the packager to add a "discontinuity" tag. This is
+            expressed with a <code>#EXT-X-DISCONTINUITY</code> entry before any
+            potential format change.  See Section 4.3.2.3. in [[HLS]] for more
+            detail. This tag then usually appears before the Ad starts and
+            before the main content continues.
+            </p>
+            <p>
+            In contrase, DASH uses multiple "periods" to split the content into
+            main and advertisment sections.  See Section 3.1.31 in [[MPEGDASH]]
+            for more details. Each switch between periods is a trigger for the
+            player to potentially reset the decoder.
+            </p>
+            <p>
+            With the split of the content into advertisment and main content
+            segments, the player can not reacto on the advertisment accordingly
+            and adjust its settings.
+            </p>
+
       </section>
       <section>
         <h3>Live Streaming with Client Side Ad Insertion</h3>
