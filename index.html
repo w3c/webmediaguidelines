@@ -685,7 +685,7 @@
         Normally, the watermark is invisible to the consumer and takes the form of a
         digital signal, this is referred to as forensic water marking. Part of the
         service provided by the vendor of this technology if to monitor the black
-        market for re-distributed material. Ilicit streams or files are intercepted
+        market for re-distributed material. Illicit streams or files are intercepted
         screened for the digital fingerprint inserted on the client. If a suspect
         stream is found they then direct the service providers to the location where
         the streams have been misappropriated.
@@ -706,7 +706,7 @@
       <h3>Live Streaming</h3>
             <p>
               Even though Live and On-Demand streaming scenarios have a lot in
-              common, there are a few distict differences.
+              common, there are a few distinct differences.
             </p>
             <h4>Content Generation</h4>
             <p>
@@ -769,13 +769,13 @@
 
             <h4>Potential Issues</h4>
             <p>
-            One of the most common cases that an Applcation needs to be
+            One of the most common cases that an Application needs to be
             prepared for is the player falling behind the live window. Assume
             for example that you have a buffer windows of 10 seconds on your
             live stream. Even if the user interface does not allow explicit
             seeking, buffering events can still stall the playout and push the
             playback position towards the border of the live window and event
-            beyond it. Depending on the player implemntation the actual error
+            beyond it. Depending on the player implementation the actual error
             might be different, but implementation should be aware of the
             scenario and be prepared to recover from it.
             </p>
@@ -794,7 +794,7 @@
             <p>
             One of the requirements of the underlying streaming format such as
             DASH or HLS is that the encoding does not change during the playout
-            of a single rendition. To still be able to insert advertisments,
+            of a single rendition. To still be able to insert advertisements,
             HLS and DASH propose different strategies.
             </p>
             <p>
@@ -805,25 +805,16 @@
             before the main content continues.
             </p>
             <p>
-            In contrase, DASH uses multiple "periods" to split the content into
-            main and advertisment sections.  See Section 3.1.31 in [[MPEGDASH]]
+            In contrast, DASH uses multiple "periods" to split the content into
+            main and advertisement sections.  See Section 3.1.31 in [[MPEGDASH]]
             for more details. Each switch between periods is a trigger for the
             player to potentially reset the decoder.
             </p>
 
       </section>
-      <section>
-        <h3>On-Demand Streaming with Thumbnail Navigation</h3>
-        <p>TBD </p>
-      </section>
-      <section>
-        <h3>Live Streaming with Thumbnail Navigation</h3>
-        <p>TBD </p>
-      </section>
     </section>
     <section>
       <h2>Media Playback Methods</h2>
-      <p>TBD </p>
       <section>
         <h3>Device Identification</h3>
         <p>Device identification is required both at the level of device
@@ -871,29 +862,25 @@
           identifiers in a way that obscures them from the user.</p>
       </section>
       <section>
-        <h3>Device Media Profile Support</h3>
-        <p>TBD </p>
-      </section>
-      <section>
-        <h3>Device Key System Support</h3>
-        <p>TBD </p>
-      </section>
-      <section>
         <h3>Device Content Protection Capabilities</h3>
         <p>A web video application needs to determine the content
           protection capabilities of the device that is being used to
           playback the content. The method of doing this will vary from
-          device to device and between DRM systems.<br>
+          device to device and between DRM systems.
+          </p>
+          <p>
           Like most DRM Widevine is only implemented on a subset of
           available devices. For native, non-browser, playout in iOS
           Google provide Widevine CDM which acts as a wrapper for
           AVPlayer or other third party players. Beyond short form DASH
           video being transcoded by a third party plugin such as Viblast
-          this presupposes HLS content encrypted with widevine.<br>
+          this presupposes HLS content encrypted with widevine.
           Android provides a DRM framework that provides an API:
           mDrmManager.getAvailableDrmEngines(), this returns an array of
           strings that represent the DRMs available on the android
-          device. <br>
+          device. </p>
+
+          <p>
           Regardless of a device's capability to play back a stream
           encrypted with a specific DRM it is worth noting that a
           content provider will be aware of this capability in advance
@@ -908,7 +895,9 @@
           either be to a service that is only configured to return
           streams with a suitable encryption or the server will use data
           from the request headers or key value pairs in the request
-          payload to determine which streams to return. <br>
+          payload to determine which streams to return.</p>
+
+          <p>
           In the context of the browser the major vendors broadly
           dictate the DRMs available, Apple’s Safari browser and Apple
           TV support Apple’s FairPlay DRM. Microsoft's Internet Explorer
@@ -917,7 +906,8 @@
           Google’s Chrome browser but is also included the browser
           developers not tied to a significant hardware providers; Opera
           and Firefox. Currently Microsoft’s PlayReady dominates the
-          market.<br>
+          market.</p>
+          <p>
           Browser DRM detection capabilities are tested via the EME
           (Encrypted Media Extensions) API. The API is an extension to
           the HTMLMediaElement. The process of determining the available
@@ -938,7 +928,8 @@
             new MediaKeys object.</li>
           <li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
         </ol>
-        The remaining steps are covered in a later section on using EME
+
+        <p>The remaining steps are covered in a later section on using EME
         but it’s worth noting at this stage that the
         navigator.requestMediaKeySystemAccess() is not uniformly
         implemented across all modern browsers that support EME. As an
@@ -946,16 +937,10 @@
         and Safari throw errors and Firefox returns null. A possible
         solution to this is offered <a
 hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>
-        (NB if this is dtermined to be relevent we can add more detail
-        and/or include the code example directly). </section>
-      <section>
-        <h3>Using Encrypted Media Extensions</h3>
-        <p>TBD </p>
-      </section>
-      <section>
-        <h3>Using Media Source Extensions</h3>
-        <p>TBD </p>
-      </section>
+        (NB if this is determined to be relevant we can add more detail
+        and/or include the code example directly).
+        </p>
+        </section>
     </section>
     <section>
       <h2>Content Encoding Guidelines</h2>
@@ -984,7 +969,8 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
         resolution and framerate that the source was acquired. A common
         configuration using Apple ProRes would be as follows:</p>
       <p>
-        <table>
+        <table border="1" cellspacing="0" cellpadding="4">
+          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
           <tbody>
             <tr>
               <td>Codec</td>
@@ -1016,14 +1002,19 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
           </tbody>
         </table>
       </p>
-      <h4>Rendition Bouquet</h4>
+      <h4>Renditions</h4>
       <p>In most streaming use cases, adaptive streaming (ABR) is used.
         When ABR technologies such as HLS, DASH, or CMAF are used,
-        typically a bouquet or rendition set are encoded to provide the
+        typically a collection or rendition set are encoded to provide the
         best match of resolution and bitrate for the viewer’s device and
         connection.</p>
+        <p>You should select optimum bitrates for your target user based upon
+        your target devices and user experience. For example, for OTT (Over-the-top) 
+        applications for Smart Televisions, typically a higher bitrate rendition is 
+        set as the default.</p>
       <p>
-        <table>
+        <table border="1" cellspacing="0" cellpadding="4">
+          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
           <tbody>
             <tr>
               <td>Codec</td>
@@ -1082,82 +1073,9 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
           </tbody>
         </table>
       </p>
-      <p> </p>
-      <section>
-        <h3>For On-Demand Streaming</h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
-      <section>
-        <h3>For Live Streaming</h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
-      <section>
-        <h3>Ad Encoding for On-demand Content</h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
-      <section>
-        <h3>Ad Encoding for Live Streaming with Server Side Ad-insertion</h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
-      <section>
-        <h3>Trick Mode Track</h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
-      <section>
-        <h3>Thumbnails Track </h3>
-        <p>TBD </p>
-        <section>
-          <h4>Media Encoding</h4>
-          <p>TBD</p>
-        </section>
-        <section>
-          <h4>Manifest Preparation</h4>
-          <p>TBD</p>
-        </section>
-      </section>
     </section>
     <section>
-      <h2> Web App Structure</h2>
+      <h2>Web App Structure</h2>
       <p>
         Media companies more and more are making their content and channels available where ever users are consuming media.  More often than not this includes the web and native app platforms.  As we see rise in media companies using web technologies to build cross platform apps (that stretch across the web and native app platforms) it becomes more important to define clarify the different approaches you can take to building "apps" with web technologies.
       </p>
@@ -1193,7 +1111,7 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
           Progressive web apps or PWAs has become the de facto app format for the web. Just like hosted web apps, progressive web apps load their content from the server when the app is opened. However, Progressive Web apps also can store this web app locally through a new technology called service workers, which allows progressive web apps to bridge across both the benefits of package web apps and hosted web apps.  Some platforms run PWAs in the browser while others (like android and Windows 10) run PWAs in a stand along app container.  
         </p>
         <p>
-          PWAs are build around a common universal <a href="http://www.w3.org/TR/appmanifest/">web app manifest</a> that is being standardized by the W3C.  The web manifest cotains meta data about your applicaiton such as presentation preference, start URL, and even ratings and catigories for store listing. 
+          PWAs are build around a common universal <a href="http://www.w3.org/TR/appmanifest/">web app manifest</a> that is being standardized by the W3C.  The web manifest contains meta data about your application such as presentation preference, start URL, and even ratings and categories for store listing. 
         </p>
         <pre class="example json" title="common manifest">
           {
@@ -1247,13 +1165,13 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
           Some platforms such as web OS are themselves a web based environment, meaning all applications in that environment or built with the web. And run as independent applications within the environment just like a web page may run inside of a web browser.  Device manufacturers (of all kinds) use web engines as a basis for a web based platform that will allow web apps to run as standalone applications. 
         </p>
         <p>
-          The most common platform may be <a href="http://www.chromium.org/chromium-os">ChromeOS</a> itslef.  ChromeOS is Chromium running on top of Linux that uses Web Apps for it's primary app Eco system (however it recently has been agumented to run android apps as well).  Another common Example is WebOS, which powers many LG tvs today, and runs web content as stand alone apps.
+          The most common platform may be <a href="http://www.chromium.org/chromium-os">ChromeOS</a> itself.  ChromeOS is Chromium running on top of Linux that uses Web Apps for it's primary app Eco system (however it recently has been augmented to run android apps as well).  Another common Example is WebOS, which powers many LG tvs today, and runs web content as stand alone apps.
         </p>
       </section>
       <section>
         <h3>Web App Containers</h3>
         <p>
-          Delivering the Web app on the platform is not a trivial task as each platform may have a different approach on how a web app is delivered to a user. Some platforms such as <a href="https://developer.microsoft.com/en-us/windows/bridges/hosted-web-apps">Xbox (windows 10)</a> and <a href="https://www.playstation.com/develop/">Play station</a> give the Web apps their own standalone container, which allows the app to be downloaded from a store and run independently of a browser.  These apps are rendered with the web rendering engin native to the operating system, and generally have lower overhead than running in a browser, and often are granted access to OS level APIs not available in the browser.
+          Delivering the Web app on the platform is not a trivial task as each platform may have a different approach on how a web app is delivered to a user. Some platforms such as <a href="https://developer.microsoft.com/en-us/windows/bridges/hosted-web-apps">Xbox (windows 10)</a> and <a href="https://www.playstation.com/develop/">Play station</a> give the Web apps their own standalone container, which allows the app to be downloaded from a store and run independently of a browser.  These apps are rendered with the web rendering engine native to the operating system, and generally have lower overhead than running in a browser, and often are granted access to OS level APIs not available in the browser.
         </p>
         <section>
           <h4>Mobile App Containers</h4>
@@ -1262,9 +1180,9 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
           </p>
         </section>
         <section>
-          <h4>Chrome Imbedded Framework and Electron</h4>
+          <h4>Chrome Embedded Framework and Electron</h4>
           <p>
-            In desktop environments, we see the use of <a href="https://electron.atom.io/">Electron</a> and <a href="https://code.google.com/archive/p/chromiumembedded/">Chromium Imbedded Framework (CEF)</a> to deliver web apps as desktop applications.  CEF and Electron uses the open source version of chrome as a runtime environment for the application. Much like we see one mobile platforms, this approach has additional overhead as instead of using the native rendering engine of the platform, chromium is delivered inside each application to render the web app. This gives the Web app additional privileges to access native API’s, but at the same time raises many security concerns.
+            In desktop environments, we see the use of <a href="https://electron.atom.io/">Electron</a> and <a href="https://code.google.com/archive/p/chromiumembedded/">Chromium Embedded Framework (CEF)</a> to deliver web apps as desktop applications.  CEF and Electron uses the open source version of chrome as a runtime environment for the application. Much like we see one mobile platforms, this approach has additional overhead as instead of using the native rendering engine of the platform, chromium is delivered inside each application to render the web app. This gives the Web app additional privileges to access native API’s, but at the same time raises many security concerns.
           </p>
         </section>
       </section>
