@@ -956,123 +956,127 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
         <li>Encoder profile creation</li>
         <li>Encoding master files into specific rendition output format</li>
       </ol>
-      <h4>Preparation</h4>
-      <p>The first step in preparing your master content is to render an
-        encoding master file from your source (typically a non-linear
-        editor or master magnetic or optical media).</p>
-      <p>In order to maximize quality, a lossless codec is typically
-        used for the encoding master, such as Apple ProRes, H.264
-        Intra-frame, or Motion JPEG 2000. For detailed info on how to
-        configure your encoding master, see the appropriate provider
-        recommended settings documentation for your codec of choice.</p>
-      <p>Typically encoding masters are rendered in the native
-        resolution and framerate that the source was acquired. A common
-        configuration using Apple ProRes would be as follows:</p>
-      <p>
-        <table border="1" cellspacing="0" cellpadding="4">
-          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
-          <tbody>
-            <tr>
-              <td>Codec</td>
-              <td>Resolution</td>
-              <td>Bitrate</td>
-              <td>Framerates</td>
-            </tr>
-            <tr>
-              <td rowspan="4">Apple ProRes 422</td>
-              <td>3840x2160</td>
-              <td>340-1650 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>1920x1080</td>
-              <td>145-220 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>1280x720</td>
-              <td>20-60 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>640x480</td>
-              <td>8-12 Mbps</td>
-              <td>25, 29.97, 50, 59.94</td>
-            </tr>
-          </tbody>
-        </table>
-      </p>
-      <h4>Renditions</h4>
-      <p>In most streaming use cases, adaptive streaming (ABR) is used.
-        When ABR technologies such as HLS, DASH, or CMAF are used,
-        typically a collection or rendition set are encoded to provide the
-        best match of resolution and bitrate for the viewer’s device and
-        connection.</p>
-        <p>You should select optimum bitrates for your target user based upon
-        your target devices and user experience. For example, for OTT (Over-the-top) 
-        applications for Smart Televisions, typically a higher bitrate rendition is 
-        set as the default.</p>
-      <p>
-        <table border="1" cellspacing="0" cellpadding="4">
-          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
-          <tbody>
-            <tr>
-              <td>Codec</td>
-              <td>Resolution</td>
-              <td>Bitrate</td>
-              <td>Framerates</td>
-            </tr>
-            <tr>
-              <td rowspan="4">HEVC</td>
-              <td>2160p</td>
-              <td>10 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>1080p</td>
-              <td>5 Mbps<br>
-                3 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>720p</td>
-              <td>2 Mbps<br>
-                1 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>480p</td>
-              <td>-</td>
-              <td>Typically not done for HEVC because of resource cost</td>
-            </tr>
-            <tr>
-              <td rowspan="4">H.264</td>
-              <td>2160p</td>
-              <td>18 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>1080p</td>
-              <td>9 Mbps<br>
-                5 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>720p</td>
-              <td>4 Mbps<br>
-                2.5 Mbps</td>
-              <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
-            </tr>
-            <tr>
-              <td>480p</td>
-              <td>1.5 Kbps<br>
-                768 Kbps<br>
-                380 Kbps</td>
-              <td>25, 29.97, 50, 59.94</td>
-            </tr>
-          </tbody>
-        </table>
-      </p>
+      <section>
+        <h3>Preparation</h3>
+        <p>The first step in preparing your master content is to render an
+          encoding master file from your source (typically a non-linear
+          editor or master magnetic or optical media).</p>
+        <p>In order to maximize quality, a lossless codec is typically
+          used for the encoding master, such as Apple ProRes, H.264
+          Intra-frame, or Motion JPEG 2000. For detailed info on how to
+          configure your encoding master, see the appropriate provider
+          recommended settings documentation for your codec of choice.</p>
+        <p>Typically encoding masters are rendered in the native
+          resolution and framerate that the source was acquired. A common
+          configuration using Apple ProRes would be as follows:</p>
+        <p>
+          <table border="1" cellspacing="0" cellpadding="4">
+            <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
+            <tbody>
+              <tr>
+                <td>Codec</td>
+                <td>Resolution</td>
+                <td>Bitrate</td>
+                <td>Framerates</td>
+              </tr>
+              <tr>
+                <td rowspan="4">Apple ProRes 422</td>
+                <td>3840x2160</td>
+                <td>340-1650 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>1920x1080</td>
+                <td>145-220 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>1280x720</td>
+                <td>20-60 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>640x480</td>
+                <td>8-12 Mbps</td>
+                <td>25, 29.97, 50, 59.94</td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+      </section>
+      <section>
+        <h3>Renditions</h3>
+        <p>In most streaming use cases, adaptive streaming (ABR) is used.
+          When ABR technologies such as HLS, DASH, or CMAF are used,
+          typically a collection or rendition set are encoded to provide the
+          best match of resolution and bitrate for the viewer’s device and
+          connection.</p>
+          <p>You should select optimum bitrates for your target user based upon
+          your target devices and user experience. For example, for OTT (Over-the-top) 
+          applications for Smart Televisions, typically a higher bitrate rendition is 
+          set as the default.</p>
+        <p>
+          <table border="1" cellspacing="0" cellpadding="4">
+            <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
+            <tbody>
+              <tr>
+                <td>Codec</td>
+                <td>Resolution</td>
+                <td>Bitrate</td>
+                <td>Framerates</td>
+              </tr>
+              <tr>
+                <td rowspan="4">HEVC</td>
+                <td>2160p</td>
+                <td>10 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>1080p</td>
+                <td>5 Mbps<br>
+                  3 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>720p</td>
+                <td>2 Mbps<br>
+                  1 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>480p</td>
+                <td>-</td>
+                <td>Typically not done for HEVC because of resource cost</td>
+              </tr>
+              <tr>
+                <td rowspan="4">H.264</td>
+                <td>2160p</td>
+                <td>18 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>1080p</td>
+                <td>9 Mbps<br>
+                  5 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>720p</td>
+                <td>4 Mbps<br>
+                  2.5 Mbps</td>
+                <td>23.98, 24, 25, 29.97, 30, 50, 59.94, 60</td>
+              </tr>
+              <tr>
+                <td>480p</td>
+                <td>1.5 Kbps<br>
+                  768 Kbps<br>
+                  380 Kbps</td>
+                <td>25, 29.97, 50, 59.94</td>
+              </tr>
+            </tbody>
+          </table>
+        </p>
+      </section>
     </section>
     <section>
       <h2>Web App Structure</h2>
