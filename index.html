@@ -765,6 +765,40 @@
         <h3>Live Streaming with Thumbnail Navigation</h3>
         <p>TBD </p>
       </section>
+      <section>
+          <h3>Thumbnail Navigation</h3>
+          <p>
+          Thumbnails are are small images of the content taken at regular time
+          intervals. They are an effective way to visualize scrubbing and
+          seeking through content.
+          </p>
+          <p>
+          There is currently no default way to add thumbnail support to a playback
+          application. And there is not out-of-the-box browser support. However,
+          since thumbnails are just image data, the browser has all the capabilities
+          for a client to implement thumbnail navigation in an application.
+          </p>
+          <p>
+          The most common way to generate thumbnails is to render a set of images out of
+          the main content in a regular time interval, for example every 10 seconds.
+          The information about the location of these images then needs to be passed
+          down to the client, which can then request and load an image for a given
+          playback position.  For more efficient loading, images
+          are often merged into larger grids. This way, the client
+          only needs to make a single request to load a set of thumbnails
+          instead of a request per image.
+          </p>
+          <p>
+          Unfortuantely, neither DASH or HLS do currently specify a way to
+          reference thumbnail images directly from manifests. This however is
+          certainly possible and there is already a <a
+          href="http://dashif.org/wp-content/uploads/2017/03/CR-image-thumbnails-v0.9.pdf">proposal</a>
+          to add support for thumbnails to the DASH-IF guidlines [[DASHIFIOP]].
+          This would certainly simplify live playback case where the
+          application has to update the information about thumbnails with each
+          manifest update.
+          </p>
+      </section>
     </section>
     <section>
       <h2>Media Playback Methods</h2>
