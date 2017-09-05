@@ -583,49 +583,6 @@
           an in-home context. This technique is not used for cellular
           sessions where user’s mobile data would be consumed
           potentially on content that they do not watch. </p>
-        <h4>Client-side ad insertion</h4>
-        <p>Client-side ad insertion (CSAI). Typically, this involves
-          using a script available in the client runtime, JavaScript in
-          the case of the web, to insert an advert during the user’s
-          session. As an example, an ad serving vendor provides a client
-          script. Close to the player’s initiation the client library
-          makes its api available. The web application listens to events
-          associated with playback, for example the video elements media
-          event ‘playing’. The web application then calls the DOM pause
-          method on the video element and then calls the play method
-          provided by the client-side ad library, passing it the ‘id’ of
-          the video asset. This is then returned to the vendor, possibly
-          along with other identifiers that can be used to target the
-          audience with a specific ad. At this stage an auction is
-          performed with business logic at the ad vendor determining
-          which provider supplies the ad (this is a complex topic and
-          outside the scope of this document). The vendor responds with
-          a VAST (Video Ad Serving Template) payload that includes the
-          URI of the ad content appropriate for the playback
-          environment. In some cases, there is no ad, if this is the
-          case the user is presented with the content they originally
-          requested and control is passed back to the web video
-          application. If there is an ad targeted against the content
-          then the library performs DOM manipulation and injects a new
-          video element into the document this is typically accompanied
-          by a further script that provides the vendor with insights
-          based on the current session. The ad plays. The ad object will
-          conform to VPAID (Video Player Ad Serving Definition) and
-          present a standardised interface to the player for possible
-          interaction, it will issue a standard set of events which the
-          web application can listen to. In response to an ‘adEnded’
-          event the local library will tear down the injected DOM
-          elements and in turn issue an event that the web application
-          can use to trigger a return to playing the original content.
-          In the case of live linear CSAI web socket technology is often
-          used. If the content has a dynamic nature, for example a
-          sports event or a fashion show, a web socket connection is
-          established and ads can then be ‘pushed’ when the editorial
-          team thinks it’s appropriate. The web video application
-          listens to the library that establishes and manages the
-          connection. An event is pushed to the listening clients
-          simultaneously, this event is then used to trigger the same
-          set of events discussed above. </p>
         <h3>VOD – further considerations</h3>
 
         <h4>Byte range requests in context of web video application</h4>
@@ -779,38 +736,68 @@
             might be different, but implementation should be aware of the
             scenario and be prepared to recover from it.
             </p>
-
       </section>
       <section>
-            <h3>Live Streaming with Server Side Ad Insertion</h3>
-            <p>
-            Because of the live nature of the playout, ad-insertions are
-            usually not handle client side. The problem here is that the live
-            feed continues and might not be aware of the client side ad
-            insertion. In that case the player can easily fall behind the live
-            window.  Usually this means that Ad-Insertion is handled server
-            side and the Ads are "injected" into to feed.
-            </p>
-            <p>
-            One of the requirements of the underlying streaming format such as
-            DASH or HLS is that the encoding does not change during the playout
-            of a single rendition. To still be able to insert advertisements,
-            HLS and DASH propose different strategies.
-            </p>
-            <p>
-            HLS allows the packager to add a "discontinuity" tag. This is
-            expressed with a <code>#EXT-X-DISCONTINUITY</code> entry before any
-            potential format change.  See Section 4.3.2.3. in [[HLS]] for more
-            detail. This tag then usually appears before the Ad starts and
-            before the main content continues.
-            </p>
-            <p>
-            In contrast, DASH uses multiple "periods" to split the content into
-            main and advertisement sections.  See Section 3.1.31 in [[MPEGDASH]]
-            for more details. Each switch between periods is a trigger for the
-            player to potentially reset the decoder.
-            </p>
-
+        <h3>Live Streaming with Client Side Ad Insertion</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>Live Linear Streaming</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>Live Linear Streaming with Client Side Ad Insertion</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>On-Demand Streaming with Trick Mode</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>Live Streaming with Trick Mode</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>On-Demand Streaming with Thumbnail Navigation</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>Live Streaming with Thumbnail Navigation</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+          <h3>Thumbnail Navigation</h3>
+          <p>
+          Thumbnails are are small images of the content taken at regular time
+          intervals. They are an effective way to visualize scrubbing and
+          seeking through content.
+          </p>
+          <p>
+          There is currently no default way to add thumbnail support to a playback
+          application. And there is not out-of-the-box browser support. However,
+          since thumbnails are just image data, the browser has all the capabilities
+          for a client to implement thumbnail navigation in an application.
+          </p>
+          <p>
+          The most common way to generate thumbnails is to render a set of images out of
+          the main content in a regular time interval, for example every 10 seconds.
+          The information about the location of these images then needs to be passed
+          down to the client, which can then request and load an image for a given
+          playback position.  For more efficient loading, images
+          are often merged into larger grids. This way, the client
+          only needs to make a single request to load a set of thumbnails
+          instead of a request per image.
+          </p>
+          <p>
+          Unfortuantely, neither DASH or HLS do currently specify a way to
+          reference thumbnail images directly from manifests. This however is
+          certainly possible and there is already a <a
+          href="http://dashif.org/wp-content/uploads/2017/03/CR-image-thumbnails-v0.9.pdf">proposal</a>
+          to add support for thumbnails to the DASH-IF guidlines [[DASHIFIOP]].
+          This would certainly simplify live playback case where the
+          application has to update the information about thumbnails with each
+          manifest update.
+          </p>
       </section>
     </section>
     <section>
@@ -935,12 +922,116 @@
         implemented across all modern browsers that support EME. As an
         example Chrome returns true for ‘com.widevine.alpha’ however IE
         and Safari throw errors and Firefox returns null. A possible
-        solution to this is offered <a
-hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>
+        solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>
         (NB if this is determined to be relevant we can add more detail
         and/or include the code example directly).
         </p>
         </section>
+      <section>
+        <h3>Using Encrypted Media Extensions</h3>
+        <p>TBD </p>
+      </section>
+      <section>
+        <h3>Using Media Source Extensions</h3>
+        <p>TBD </p>
+      </section>
+
+      <section>
+        <h3>Ad Insertions</h3>
+        There are two primariy ways to insert Advertisments into a playback
+        session. <i>Client-side ad insertion (CSAI)</i> and <i>Server-side
+        ad insertion (SSAI)</i>. The differece here is that Server-side
+        insertions are ebedded into the playbout directly, while Client-side
+        insertions are added dynamically by the player and are handled in
+        parallel to the main playout.
+        <h4>Client-side Ad Insertion</h4>
+        <p>
+        Client-side ad insertions typically involve using a script
+        available in the client runtime, JavaScript in the case of the web,
+        to insert an advert during the user’s session.
+        </p>
+        <p>
+        As an example, an ad serving vendor provides a client script. Close
+        to the player’s initiation the client library makes its API
+        available. The web application listens to events associated with
+        playback, for example the video elements media event ‘playing’. The
+        web application then calls the DOM pause method on the video
+        element and then calls the play method provided by the client-side
+        ad library, passing it the ‘id’ of the video asset. This is then
+        returned to the vendor, possibly along with other identifiers that
+        can be used to target the audience with a specific ad. At this
+        stage an auction is performed with business logic at the ad vendor
+        determining which provider supplies the ad (this is a complex topic
+        and outside the scope of this document). The vendor responds with a
+        VAST (Video Ad Serving Template) payload that includes the URI of
+        the ad content appropriate for the playback environment. In some
+        cases, there is no ad, if this is the case the user is presented
+        with the content they originally requested and control is passed
+        back to the web video application. If there is an ad targeted
+        against the content then the library performs DOM manipulation and
+        injects a new video element into the document this is typically
+        accompanied by a further script that provides the vendor with
+        insights based on the current session. The ad plays. The ad object
+        will conform to VPAID (Video Player Ad Serving Definition) and
+        present a standardised interface to the player for possible
+        interaction, it will issue a standard set of events which the web
+        application can listen to. In response to an ‘adEnded’ event the
+        local library will tear down the injected DOM elements and in turn
+        issue an event that the web application can use to trigger a return
+        to playing the original content.
+        </p>
+        <p>
+        In the case of live linear CSAI web socket technology is
+        often used. If the content has a dynamic nature, for example a
+        sports event or a fashion show, a web socket connection is
+        established and ads can then be ‘pushed’ when the editorial team
+        thinks it’s appropriate. The web video application listens to the
+        library that establishes and manages the connection. An event is
+        pushed to the listening clients simultaneously, this event is then
+        used to trigger the same set of events discussed above.
+        </p>
+
+        <h4>Server Side Ad Insertion</h4>
+        <p>
+        Especially in live playback environments, because of the live
+        nature of the playout, ad-insertions are usually not handle client
+        side. One of the reasons is that the live feed continues
+        independent of the client side ad insertion. In that case the
+        player can easily fall behind the live window. Server side ad
+        insertions allow the player to play a continous feed, independent
+        of any ad insertions, which are "injected" on the server side,
+        directly into the playout feed.
+        </p>
+        <p>
+        One of the requirements of the underlying streaming format such as
+        DASH or HLS is that the encoding does not change during the playout
+        of a single rendition. To still be able to insert advertisments,
+        HLS and DASH propose different strategies.
+        </p>
+        <p>
+        HLS allows the packager to add a "discontinuity" tag. This is
+        expressed with a <code>#EXT-X-DISCONTINUITY</code> entry before any
+        potential format change.  See Section 4.3.2.3. in [[HLS]] for more
+        detail. This tag then usually appears before the ad starts and
+        again before the main content continues.
+        </p>
+        <p>
+        In contrase, DASH uses multiple "periods" to split the content into
+        main and advertisment sections.  See Section 3.1.31 in [[MPEGDASH]]
+        for more details. Each switch between periods is a trigger for the
+        player to potentially reset the decoder.
+        </p>
+        <p>
+        Where the player usually receives dedicated events in CSAI such as
+        'adStarted' or 'adEnded', Server-side insertions require a
+        different setup to trigger such events.  Typically, inband
+        notification are used to trigger time based events. For example,
+        SCTE-35 markers are a common format to insert time based
+        meta-data into the feed. These markers are read and interpreted
+        by the player and can be used to triggere events or carry additional
+        meta-data such as callback urls.
+        </p>
+      </section>
     </section>
         <section>
       <h2>Content Encoding Guidelines</h2>
@@ -1003,10 +1094,12 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
       <h4>Decide on Rendition Set</h4>
       <p>In modern video streaming use cases, adaptive bitrate (ABR) streaming technologies use a rendition set to ensure every playback environment has an appropriate file to render.  A rendition set is simply a grouping of the different transcodes of the same Mezzanine file. During playback,  ABR technologies detect the user's playback environment, availabe codecs, resolution and bandwidth; then selects the right segment from one of the video renditions to send to the video player.  This reduces probability of buffering as only the segments of the matching video rendition is loaded.  To create a proper rendition set, you should list the codecs and resolutions that exists for your target audience. Then you need to acertain the proper bitrate for each codec & resolution, high enough to meet your quality goals but not exceed bandwidth availability <p>
 
-        <p>You should select optimum bitrates for your target user based upon
-        your target devices and user experience. For example, for OTT (Over-the-top) 
+      <p>In order to select optimum bitrates, determine your target user based upon
+          target devices and user experience. For example, for OTT (Over-the-top) 
         applications for Smart Televisions, typically a higher bitrate rendition is 
-        set as the default since resolution & bandwidth are reliably available.  The table below represents a rendition set for an OTT delivery that uses an ABR technology</p>
+        set as the default since resolution & bandwidth are reliably available.  The table 
+          below represents a rendition set for an OTT delivery that uses an ABR technology</p>
+
       <p>
         <table border="1" cellspacing="0" cellpadding="4">
           <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
@@ -1096,7 +1189,7 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
       </p>
       <section>
         <h3>Web App Content Management Approaches</h3>
-        <p>The easiest way to delineate between the types of Web apps are by how we manage the content inside them. In the case of traditional applications and mobile apps, the entire application is downloaded from the store and then ran locally. In web terms. In contrast, a website keeps all of its content on the server and then when the pages loader. It brings the entire application down into the browser. The same approaches are utilized with web content inside of the app space there often known as packaged web apps and hosted web apps. 
+        <p>The easiest way to delineate between the types of Web apps are by how we manage the content inside them. In the case of traditional applications and mobile apps, the entire application is downloaded from the store and then ran locally. In web terms. In contrast, a website keeps all of its content on the server and then when the pages loader. It brings the entire application down into the browser. The same approaches are utilized with web content inside of the app space there often known as packaged web apps and hosted web apps.
         </p>
         <section>
           <h4>The Packaged App</h4>
@@ -1106,7 +1199,7 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
             <li>Generally offline by default, as all the code is living on the users device</li>
             <li>Retrieve data from the internet via services similar to native apps. generally called via ajax</li>
           </ul>
-          <p>Some Markets, such as Window Store and Amazon App Store enable you to submit packaged apps directly to the market without the need of any external packaging tools. These markets also expose additional APIs for packaged apps that aren’t available to apps via the browser. Other markets, such as iOS App Store and Android Play require a third party utility such as Cordova or cross walk to enable packaged web apps. 
+          <p>Some Markets, such as Window Store and Amazon App Store enable you to submit packaged apps directly to the market without the need of any external packaging tools. These markets also expose additional APIs for packaged apps that aren’t available to apps via the browser. Other markets, such as iOS App Store and Android Play require a third party utility such as Cordova or cross walk to enable packaged web apps.
           </p>
         </section>
       <section>
@@ -1123,10 +1216,10 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
       <section>
         <h4>Progressive Web Apps</h4>
         <p>
-          Progressive web apps or PWAs has become the de facto app format for the web. Just like hosted web apps, progressive web apps load their content from the server when the app is opened. However, Progressive Web apps also can store this web app locally through a new technology called service workers, which allows progressive web apps to bridge across both the benefits of package web apps and hosted web apps.  Some platforms run PWAs in the browser while others (like android and Windows 10) run PWAs in a stand along app container.  
+          Progressive web apps or PWAs has become the de facto app format for the web. Just like hosted web apps, progressive web apps load their content from the server when the app is opened. However, Progressive Web apps also can store this web app locally through a new technology called service workers, which allows progressive web apps to bridge across both the benefits of package web apps and hosted web apps.  Some platforms run PWAs in the browser while others (like android and Windows 10) run PWAs in a stand along app container.
         </p>
         <p>
-          PWAs are build around a common universal <a href="http://www.w3.org/TR/appmanifest/">web app manifest</a> that is being standardized by the W3C.  The web manifest contains meta data about your application such as presentation preference, start URL, and even ratings and categories for store listing. 
+          PWAs are build around a common universal <a href="http://www.w3.org/TR/appmanifest/">web app manifest</a> that is being standardized by the W3C.  The web manifest contains meta data about your application such as presentation preference, start URL, and even ratings and categories for store listing.
         </p>
         <pre class="example json" title="common manifest">
           {
@@ -1170,14 +1263,14 @@ hreh="https://stackoverflow.com/questions/35086625/determine-drm-system-supporte
 
         </pre>
         <p>
-          You can learn more about building progressive web apps <a href="https://developers.google.com/web/progressive-web-apps/">here</a>.  
+          You can learn more about building progressive web apps <a href="https://developers.google.com/web/progressive-web-apps/">here</a>.
         </p>
       </section>
       </section>
       <section>
         <h3>Web Based Platforms</h3>
         <p>
-          Some platforms such as web OS are themselves a web based environment, meaning all applications in that environment or built with the web. And run as independent applications within the environment just like a web page may run inside of a web browser.  Device manufacturers (of all kinds) use web engines as a basis for a web based platform that will allow web apps to run as standalone applications. 
+          Some platforms such as web OS are themselves a web based environment, meaning all applications in that environment or built with the web. And run as independent applications within the environment just like a web page may run inside of a web browser.  Device manufacturers (of all kinds) use web engines as a basis for a web based platform that will allow web apps to run as standalone applications.
         </p>
         <p>
           The most common platform may be <a href="http://www.chromium.org/chromium-os">ChromeOS</a> itself.  ChromeOS is Chromium running on top of Linux that uses Web Apps for it's primary app Eco system (however it recently has been augmented to run android apps as well).  Another common Example is WebOS, which powers many LG tvs today, and runs web content as stand alone apps.
