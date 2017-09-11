@@ -413,16 +413,10 @@
     </section>
     <section>
       <h2>Media Playback Use Cases</h2>
-      <p> </p>
-      <section>
-        <h3>Streaming overview</h3>
-        <p> NOTE: Adding a brief introductory section that removes the
-          need for duplication of material across VOD and linear
-          sections. Here we can outline the broad mechanics that are
-          shared by the two use-cases allowing us to focus on the
-          distinctions in the respective sections. </p>
+   
+
         <section>
-        <h4>General Description</h4>
+        <h3>General Description</h3>
         <p>Material (typically in video or audio content) is made
           available by a content provider via a web-enabled application
           and delivered by a content distribution network. There are
@@ -430,7 +424,7 @@
           and consumption / playback. </p>
         </section>
         <section>
-        <h4>Content Generation</h4>
+        <h3>Content Generation</h3>
         <p> Original Content (mezzanine files, discussed in section below) is normally delivered to the service
           provider as a file with near lossless compression.
           Specifically, for High Definition content at 1080p with 50 or
@@ -460,7 +454,7 @@
           specifies the location of the media and its format. </p>
         </section>
         <section>
-        <h4>Content Delivery</h4>
+        <h3>Content Delivery</h3>
         <p> After the content has been generated the resulting segments
           of video and corresponding manifest files are pushed to an
           origin server. However, the assets are rarely delivered
@@ -477,7 +471,7 @@
           sessions and then then returns it to the requesting client. </p>
         </section>
         <section>
-        <h4>Content Playback</h4>
+        <h3>Content Playback</h3>
         <p> The player parses the manifest. At this point the behavior
           differs between players found on the different devices
           depending on the transport formats. However, broadly, it
@@ -519,9 +513,7 @@
             bitrate stream or request a higher bitrate child manifest
             and associated segment. </li>
         </ol>
-        <section>
-      </section>
-      <section>
+        </section>
       	<section>
         <h3>On-Demand Streaming (VOD)</h3>
         <p> Despite the almost identical mechanics used for the two
@@ -531,7 +523,7 @@
           important ways in which they differ. </p>
         </section>
         <section>
-        <h4>Content Generation</h4>
+        <h3>Content Generation</h4>
         <p> For VOD the source is typically static file-based rather than a feed. The
           encoding profiles are also subtly different. A greater
           priority can be placed on high quality as the latency, time to
@@ -550,7 +542,7 @@
           rather than 10 seconds. </p>
         </section>
         <section>
-        <h4>Content Delivery</h4>
+        <h3>Content Delivery</h4>
         <p> The CDN configuration and topology for delivering VOD
           content is also different to linear. There are different
           levels of caching; popular VOD content which is kept closer to
@@ -561,7 +553,7 @@
           a lower tier. </p>
         </section>
         <section>
-        <h4>Content Playback</h4>
+        <h3>Content Playback</h4>
         <p> As mentioned in the content generation section the player
           uses a tag within the manifest to determine the playout type.
           In HLS if there is a type with the value of VOD, then the player will not
@@ -580,7 +572,6 @@
           guide) is required. There is also a requirement for Trick
           Play. </p>
         </section>
-       </section>
        <section>
         <h3>VOD Use-cases</h3>
         <p> In the previous section, we outlined the use cases
@@ -614,9 +605,9 @@
           sessions where user’s mobile data would be consumed
           potentially on content that they do not watch. </p>
         </section>
-      </section>
-      <section>
-      <h3>VOD – further considerations</h3>
+    
+        <section>
+        <h3>VOD – further considerations</h3>
       	<section>
         <h4>Byte range requests in context of web video application</h4>
 
