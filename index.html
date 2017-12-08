@@ -468,11 +468,11 @@
           client's web video application. The content provider supplies
           the client with the URL of a manifest file located on a CDN
           rather than the origin. The manifest is typically passed to
-          a player. The player makes a HTTP GET request for the manifest from CDN edge, the edge server's location is determined via DNS. If the CDN edge does not currently have the manifest available, the CDN requests a copy of the file from the origin and the file is cached within the server for later use. The CDN edge then returns the the manifest to the requesting player. </p>
+          a player. The player makes a HTTP GET request for the manifest from CDN edge, the edge server's location is determined via DNS. If the CDN edge does not currently have the manifest available, the CDN requests a copy of the file from the origin and the file is cached within the server for later use. There are different levels of caching; popular VOD content is kept closer to the edge in the CDN network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery. The CDN edge then returns the the manifest to the requesting player.</p>
         </section>
         <section>
         <h3>Content Playback</h3>
-        <p> The player parses the manifest. At this point the behavior
+        <p> As mentioned in the Content Generation section, the player uses a tag within the manifest to determine the playout type. In HLS, if there is a type with the value of VOD, the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH, the difference between a live and VOD playlist are more subtle. At this point the behavior
           differs between players found on the different devices
           depending on the transport formats. However, broadly, it
           behaves in the following way: <br>
@@ -552,48 +552,32 @@
           subtle (more detail) </p>
         <p> There are other differences in playout as well. Unlike
           linear, a VOD asset has a predefined duration, information
-          around duration and current time can be used to update the UI
-          to provide feedback to the user on the amount and proportion
+          around duration and playback position can be used to update the UI
+          to provide feedback to the user on the proportion
           of the asset watched. </p>
-        <p> At a broader level the UX requirements will be different in
-          respect to the need for representing static rather than linear
-          content where a tile view rather an EPG (electronic program
-          guide) is required. There is also a requirement for Trick
-          Play. </p>
+        <p>Additionally, the UX requirements are different between VOD and linear. Unlike linear content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a trick play bar to view the current playback position and seek to other points within the content. </p>
         </section>
        <section>
-        <h3>VOD Use-cases</h3>
-        <p> In the previous section, we outlined the use cases
+        <h3>VOD Pre-caching</h3>
+        <p>In the previous sections, we outlined the use cases
           associated with video streaming. In this section, we give some
           examples of use-cases that are specific to on-demand streaming
           and are mainly related to strategies employed on the clients
           to improve performance in some way. </p>
-        <section>
-        <h4> Pre-caching </h4>
-        <p> The key performance indicator for most streaming services
-          will be the percentage of sessions that experience buffering
-          as a ratio to the length of the session. Buffering, the state
+
+        <p>Pre-caching is a strategy used in on-demand streaming and is important to ensure the best user experience. 
+          By buffering the beginning segments of a video, you can make playback as close to instantaneous as possible. 
+          This is important because buffering (the state
           of the video application when the player has insufficient
-          content within its framebuffer to continuously play content,
-          within a session has a direct relationship to engagement and
-          as a consequence retention. For every second of buffering
-          within a session 10% of users abandon a video stream.
-          Pre-caching is a strategy used in on-demand streaming. Web
-          video application developers will use points within an
-          application's UX to pre-cache content, for example when
-          entering a mezzanine/synopsis page the application might
-          connect to a stream and begin to pull content and either add
-          it directly to the player’s video buffer or alternatively
-          store the chunks locally. The consequence of this is that when
-          or if the user chooses to play the content after reading the
-          synopsis the video will commence playing without buffering and
-          hence provide the user with a preferable experience to a
-          buffering indicator. This technique is used by Netflix, Sky
+          content within its framebuffer to continuously play content),
+           has a direct relationship to engagement and
+           retention. For every second of buffering
+          within a session a certain amount of users abandon a video stream.
+           Web video application developers will use points within an
+          application's UX to pre-cache content. For example, when entering a mezzanine/synopsis page, the application might preemptively cache the content by filling the player’s video buffer or, alternatively, storing the chunks locally.. Pre-caching allows the video to commence playing without buffering and provides the user with a more responsive initial playback experience. This technique is used by Netflix, Sky
           and the BBC in the case of on-demand content being watched in
-          an in-home context. This technique is not used for cellular
-          sessions where user’s mobile data would be consumed
-          potentially on content that they do not watch. </p>
-        </section>
+          an in-home context. This technique is not used for cellular sessions where the user’s mobile data would be consumed on content that they do not watch. </p>
+        
       </section>
         <section>
         <h3>VOD – further considerations</h3>
