@@ -24,11 +24,12 @@
           company: "Microsoft",
           companyURL: "http://www.microsoft.com"
         }],
-        processVersion: 2015,
-        edDraftURI: "http://w3c.github.io/webmediaguidelines",
+        processVersion: 2017,
+        edDraftURI: "https://w3c.github.io/webmediaguidelines",
         shortName: "dahut",
         wg: "Web Media API Community Group",
         wgURI: "https://www.w3.org/community/webmediaapi/",
+        github: "https://github.com/w3c/webmediaguidelines"
       };
     </script>
   </head>
@@ -158,7 +159,7 @@
             <tr>
               <td valign="top">Codec<br>
               </td>
-              <td valign="top">a codec is an algorithm defining the compression 
+              <td valign="top">a codec is an algorithm defining the compression
                 and decompression of digital video or audio. Most codecs
                 employ proprietary coding algorithms for data
                 compression. MP3, H.264, and HEVC are examples of
@@ -311,7 +312,7 @@
             <tr>
               <td>Media Renderer</td>
               <td>A process that takes as input file-based video bytes and renders those bytes
-              to the client display, such as a computer monitor or television display. The media renderer is 
+              to the client display, such as a computer monitor or television display. The media renderer is
               responsible to ensure that the video is displayed accurately, per the encoded profile.</td>
             </tr>
             <tr>
@@ -325,9 +326,9 @@
             </tr>
             <tr>
               <td>Mezzanine File</td>
-              <td>An intermediate file typically created after post-production that is used for distribution or 
+              <td>An intermediate file typically created after post-production that is used for distribution or
                 for input into another workflow process, such as transcoding. Mezzanine files
-                are typically very high quality to ensure the minimum 
+                are typically very high quality to ensure the minimum
                 quality degredation. Often times, a lossless codec is used
                 to achieve this high quality.<br>
               </td>
@@ -423,7 +424,7 @@
     </section>
     <section>
       <h2>Media Playback Use Cases</h2>
-   
+
 
         <section>
         <h3>General Description</h3>
@@ -565,8 +566,8 @@
           and are mainly related to strategies employed on the clients
           to improve performance in some way. </p>
 
-        <p>Pre-caching is a strategy used in on-demand streaming and is important to ensure the best user experience. 
-          By buffering the beginning segments of a video, you can make playback as close to instantaneous as possible. 
+        <p>Pre-caching is a strategy used in on-demand streaming and is important to ensure the best user experience.
+          By buffering the beginning segments of a video, you can make playback as close to instantaneous as possible.
           This is important because buffering (the state
           of the video application when the player has insufficient
           content within its framebuffer to continuously play content),
@@ -577,7 +578,7 @@
           application's UX to pre-cache content. For example, when entering a mezzanine/synopsis page, the application might preemptively cache the content by filling the player’s video buffer or, alternatively, storing the chunks locally.. Pre-caching allows the video to commence playing without buffering and provides the user with a more responsive initial playback experience. This technique is used by Netflix, Sky
           and the BBC in the case of on-demand content being watched in
           an in-home context. This technique is not used for cellular sessions where the user’s mobile data would be consumed on content that they do not watch. </p>
-        
+
       </section>
         <section>
         <h3>VOD – further considerations</h3>
@@ -1018,7 +1019,7 @@
       </ol>
 
       <section>
-      <h4>Create a Mezzanine File</h4>
+      <h3>Create a Mezzanine File</h3>
 
       <p>The first step in preparing your content is to create a high quality encoding master file from your source footage. This mezzanine file will be used as a source file to create all downstream outputs.  Content producers typically export files from a non-linear editor using the highest resolution input files available; from a master magnetic, optical media or digital source.  This ensures all downstream outputs have the necessary quality to work with, without needing to re-export from the editor every time. </p>
 
@@ -1063,13 +1064,13 @@
       </p>
       </section>
       <section>
-      <h4>Decide on Rendition Set</h4>
+      <h3>Decide on Rendition Set</h3>
       <p>In modern video streaming use-cases, adaptive bitrate (ABR) streaming technologies use a rendition set to ensure every playback environment has an appropriate file to render.  A rendition set is simply a grouping of the different transcodes of the same mezzanine file. During playback,  ABR technologies detect the user's playback environment, available codecs, resolution and bandwidth; then selects the right segment from one of the video renditions to send to the video player.  This reduces probability of buffering as only the segments of the matching video rendition is loaded.  To create a proper rendition set, you should list the codecs and resolutions that exists for your target audience. Then you need to ascertain the proper bitrate for each codec &amp; resolution, high enough to meet your quality goals but not exceed bandwidth availability.<p>
 
       <p>In order to select optimum bitrates, determine your target user based upon
-          target devices and user experience. For example, for OTT (Over-the-top) 
-        applications for Smart Televisions, typically a higher bitrate rendition is 
-        set as the default since resolution &amp; bandwidth are reliably available.  The table 
+          target devices and user experience. For example, for OTT (Over-the-top)
+        applications for Smart Televisions, typically a higher bitrate rendition is
+        set as the default since resolution &amp; bandwidth are reliably available.  The table
           below represents a rendition set for an OTT delivery that uses an ABR technology</p>
 
       <p>
@@ -1134,15 +1135,15 @@
         </table>
         </section>
         <section>
-    <h4>Decide on Delivery Formats to support</h4>
+    <h3>Decide on Delivery Formats to support</h3>
         <p>In addition to defining resolutions and bitrates in your Rendition Set, the delivery format should also be considered.  For most audiences, a format of a MP4 container with H.264 video and AAC audio is sufficient for most SD/HD videos.  However if your video content warrants the need for advanced features, then you should also consider adding a renditions to your set that includes higher profile H.264, H.265, VP9, AAC-HI formats, so that users with environments supporting those features can enjoy them, while still providing a baseline experience via the H.264/AAC MP4 rendition set.</p>
         </section>
         <section>
-    <h4>Create encoding profiles</h4>
+    <h3>Create encoding profiles</h3>
         <p>After you have listed all the renditions that will be necessary, then create transcoding profiles (or templates depending on your tool) for each rendition in your transcoding software of choice (FFMPEG, Compressor, Vantage). </p>
         </section>
         <section>
-    <h4>Transcode</h4>
+    <h3>Transcode</h3>
         <p>If all the previous steps have been carefully thought out, then actual transcoding is comparatively easy.  It is the act of taking the mezzanine file and sending it to each transcoding profile.  To save time, this should be eventually scripted if possible since you may need to revisit this step each time you adjust your rendition set.</p>
 
     <p>At the end of this process you should have a set of files that can be hosted at for web delivery.  You will need to package these so that your chosen ABR technology can utilize them, this process is known as packaging.</p>
@@ -1150,18 +1151,11 @@
 
 
     <section>
-        <h4>Packaging your video files for ABR delivery</h4>
+        <h3>Packaging your video files for ABR delivery</h3>
     <p>In order for an ABR technology to utilize your rendition set, each file needs to be properly segmented and exposed to the ABR technology following their spec.  Segmentation refers to the breakdown of each file into timed chunks so ABR can smoothly switch renditions without causing a break in the video playback.  Exposure of rendition set and segments are done through a manifest file - .m3u8 for HLS and .mpd for DASH.  The manifest is simply a text file that serves as a directory for the renditions and includes details (resolution, codec, bitrate, etc) about each file available.  This is necessary so that the ABR can find the correct segment for the users playback environment. A manifest can also contain references to other files that may be necessary for specific video features, such as .vtt files for subtitles and additional audio tracks for multi-lingual video. </p>
     <p>Information about authoring a manifest for HLS can be found here, https://tools.ietf.org/html/draft-pantos-http-live-streaming-23 and authoring for DASH can be here, http://dashif.org/guidelines/ </p>
     </section>
     </section>
-<section>
-
-
-
-
-
-</section>
     <section>
       <h2>Web App Structure</h2>
       <p>
