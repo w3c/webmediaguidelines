@@ -526,7 +526,7 @@
           shortly this is used by the player. There are also client side
           restrictions where certain profiles are blocked due to rights
           restrictions and network consumption capped bitrates on movies
-          and entertainment whilst being allowed on sports content.
+          and entertainment while being allowed on sports content.
           Fragments size will also effect playout as a player's ABR can
           be more responsive if the chunks are smaller, e.g. 2 seconds
           rather than 10 seconds. </p>
@@ -539,7 +539,7 @@
           the edge in the CDN network in this way it can be delivered to
           customers faster than an edge server that isn't tuned for high
           volume delivery. Older and less popular content is retained in
-          mid-tier caching whilst the long tail content is relegated to
+          mid-tier caching while the long tail content is relegated to
           a lower tier. </p>
         </section>
         <section>
@@ -587,26 +587,27 @@
 
         <p>
         An HTTP range request allows a client to request a portion of a larger
-        file. This is helpful in a few scenarios. In the vod scenario the user
-        may want to access a specific location in a file, a range request
-        allows you to access content at a specific location without downloading
-        the entire transport chunk.
+        file. In the VoD scenario where a user wants to access a specific
+        location, a range request allows the player access content at a
+        specific location without downloading the entire transport chunk.
         </p>
         <p>
         Both the player and the server need to support range requests. The
-        player needs to be able to playback a source buffer and server must be
-        configured to serve ranges. The exchange begins when a client makes an
-        HTTP HEAD request, the server will then respond with a header that
-        includes Accept-Ranges: bytes. If this is the case then the client can
-        issue subsequent requests for partial content. The returned bytes are
-        added to an Array Buffer and then appended to the sourceBuffer which in
-        turn is used as the SRC parameter of the of the video HTML5 tag/element.
+        player needs to be able to playback a source buffer and the server must
+        be configured to serve ranges. The exchange begins when a client makes
+        an HTTP HEAD request. If range requests are supported, the server will
+        then respond with a header that includes <code>Accept-Ranges:
+            bytes</code> and the client can issue subsequent requests for
+        partial content. The returned bytes are added to an
+        <code>ArrayBuffer</code> and then appended to the
+        <code>SourceBuffer</code> which in turn is used as the SRC parameter of
+        the of the video HTML5 tag/element.
         </p>
         </section>
         <section>
         <h4>HDCP security requirement for HDMI</h4>
         <p>
-        Some content have limitations placed on its distribution by the
+        Some content has limitations placed on its distribution by the
         owners. There are different ways of protecting the owner’s rights. The
         most common is DRM (digital rights management) which prevents the
         content being watched on a client device if the user cannot ‘unlock’ it
@@ -615,12 +616,12 @@
         content.
         </p>
         <p>
-        A technical solution to prevent interception as a signal travels from a device
-        to a television or projector is termed High Bandwidth Content Protection
-        (HDCP). If implemented by a device manufacturer it takes the form of a key
-        exchange between devices. If the exchange fails the signal is stopped and the
-        client is notified. The client can then use this notification to present the
-        user with a message altering them.
+        A technical solution to prevent interception as a signal travels from a
+        device to a television or projector is termed High Bandwidth Content
+        Protection (HDCP). If implemented by a device manufacturer, HDCP takes
+        the form of a key exchange between devices. If the exchange fails, the
+        signal is not transmitted to the display and the device is responsible
+        for notifying the end user of the error.
         </p>
         </section>
         <section>
@@ -631,25 +632,25 @@
         distribute content is linked to their ability to protect it with studios and
         sports channels insisting on the capacity for a service provider to detect a
         breach of copyright on a stream by stream basis.  A service provider can
-        include a vendors SDK in the client that can add a watermark at run-time.
+        include a vendor's SDK in the client that can add a watermark at run-time.
         Normally, the watermark is invisible to the consumer and takes the form of a
         digital signal, this is referred to as forensic water marking. Part of the
-        service provided by the vendor of this technology if to monitor the black
-        market for re-distributed material. Illicit streams or files are intercepted
+        service provided by the watermarking vendor is to monitor the black
+        market for re-distributed material. Illicit streams or files are intercepted and
         screened for the digital fingerprint inserted on the client. If a suspect
-        stream is found they then direct the service providers to the location where
-        the streams have been misappropriated.
+        stream is found the vendor directs the service provider(s) to the source
+        of the misappropriated stream.
         </p>
 
         <p>
-        Whilst this is not an issue that developers will often be faced with,
-        this requirement can dictate the choice of platform for the content
-        distribution. This type of process in itself requires processing power
-        and platforms such as Android, iOS or Roku provide developers with an
-        interface to low-level functionality in situations where the resources
-        can be effectively ring-fenced. The options for watermarking in the
-        browser are limited to overlays and this limitation is then reflected
-        in a distributor’s choice of platform for their web video application.
+        While watermarking is not an issue that developers will often be faced
+        with, the processing requirements can dictate the choice of platform
+        for the content distribution. The watermarking process might require
+        processing power and low-level functionallity through ring-fenced
+        resources that platforms such as Android, iOS or Roku provide. The
+        options for watermarking in the browser are limited to overlays and
+        this limitation is then reflected in a distributor’s choice of platform
+        for their web video application.
         </p>
         </section>
         </section>
@@ -791,7 +792,7 @@
           If the application is hosted or the same application is
           deployed via different app stores then the clients runtime
           could be more ambiguous. The classic approach is to use the
-          navigator.userAgent. Whilst this returns a string that does
+          navigator.userAgent. While this returns a string that does
           not explicitly state the device by name a regular expression
           match can be used to look for patterns that can confirm the
           device family. As an example the name ‘Tizen’ can be found in
@@ -811,7 +812,7 @@
           type of device you are on you then know what API’s will be
           available to you. Each manufacturer provides a string
           constructed in a different way, some use the serial number of
-          the device itself whilst others use lower level unique
+          the device itself while others use lower level unique
           identifiers taken from the hardware. In each case the
           application layer should attempt to namespace this in some way
           to avoid an unlikely, but theoretically possible, clash with
@@ -864,7 +865,7 @@
           dictate the DRMs available, Apple’s Safari browser and Apple
           TV support Apple’s FairPlay DRM. Microsoft's Internet Explorer
           and Edge browsers only support Microsoft's PlayReady out of
-          the box whilst Google’s Widevine Modular is supported by
+          the box while Google’s Widevine Modular is supported by
           Google’s Chrome browser but is also included the browser
           developers not tied to a significant hardware providers; Opera
           and Firefox.</p>
