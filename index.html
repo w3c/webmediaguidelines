@@ -761,14 +761,23 @@
           </p>
           <p>
           Unfortunately, neither DASH or HLS do currently specify a way to
-          reference thumbnail images directly from manifests. This however is
-          certainly possible and there is already a <a
-          href="http://dashif.org/wp-content/uploads/2017/03/CR-image-thumbnails-v0.9.pdf">proposal</a>
-          to add support for thumbnails to the DASH-IF guidelines [[DASHIFIOP]].
-          This would certainly simplify live playback case where the
-          application has to update the information about thumbnails with each
-          manifest update.
+          reference thumbnail images directly from manifests. However, the
+          DASH-IF Guidelines [[DASHIFIOP]] describe an extension to
+          reference thumbnail images. The thumbnails would be exposed as single
+          or gridded images. All parameters required to load and display the
+          thumbnail images are contained in the Manifest. This approach
+          also works for live Manifests that are updated regularly by the player.
+          The following example shows how thumbnails can be referenced according
+          to the DASH-IF Guidelines:
           </p>
+          <pre class="example xml" title="Thumbnail Reference in DASH-Manifest">
+          &lt;AdaptationSet id="3" mimeType="image/jpeg" contentType="image"&gt;
+            &lt;SegmentTemplate media="$RepresentationID$/tile$Number$.jpg" duration="125" startNumber="1"/&gt;
+            &lt;Representation bandwidth="10000" id="thumbnails" width="6400" height="180"&gt;
+                &lt;EssentialProperty schemeIdUri="http://dashif.org/guidelines/thumbnail_tile" value="25x1"/&gt;
+            &lt;/Representation&gt;
+          &lt;/AdaptationSet&gt;
+          </pre>
       </section>
     </section>
     </section>
