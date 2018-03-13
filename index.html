@@ -842,14 +842,6 @@
           playback the content. The method of doing this will vary from
           device to device and between DRM systems.
           </p>
-          <p>
-          Like most DRM Widevine is only implemented on a subset of
-          available devices. For native, non-browser, playout in iOS
-          Google provide Widevine CDM which acts as a wrapper for
-          AVPlayer or other third party players. Beyond short form DASH
-          video being transcoded by a third party plugin such as Viblast
-          this presupposes HLS content encrypted with widevine.
-          </p>
 
           <p>
           Regardless of a device's capability to play back a stream
@@ -879,7 +871,7 @@
           and Firefox.</p>
           <p>
           Browser DRM detection capabilities are tested via the EME
-          (Encrypted Media Extensions) API. The API is an extension to
+          (Encrypted Media Extensions) API [[encrypted-media]]. The API is an extension to
           the HTMLMediaElement. The process of determining the available
           system is broadly as follows: </p>
         <ol>
@@ -903,11 +895,9 @@
         but it’s worth noting at this stage that the
         navigator.requestMediaKeySystemAccess() is not uniformly
         implemented across all modern browsers that support EME. As an
-        example Chrome returns true for ‘com.widevine.alpha’ however IE
+        example Chrome returns true for <code>com.widevine.alpha</code> however IE
         and Safari throw errors and Firefox returns null. A possible
         solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>
-        (NB if this is determined to be relevant we can add more detail
-        and/or include the code example directly).
         </p>
         </section>
 
