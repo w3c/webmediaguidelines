@@ -735,6 +735,21 @@
             might be different, but implementation should be aware of the
             scenario and be prepared to recover from it.
             </p>
+            <p>
+            Another common problem that can occur both in Live and VoD playback
+            session are missing segment data or timestamp alignment issues. It
+            might happen that a segment for a given quality is not available on
+            the server. At the same time, misalignments in segment timestaps
+            might occur. Although both of these issues migh be critical, how
+            they are handled depends on the player implementation. A player can
+            try to jump over missing segments or alignment gaps. A player can
+            also try to work around missing segments by downloading the segment
+            from a different rendition and allow a temporary quality switch.
+
+            At the same time, a player implementation might also decide to
+            treat such issues as fatal errors and abort playback. Applications
+            can try to manually restart playback sessions in such scenarios.
+            </p>
             </section>
       </section>
       <section>
