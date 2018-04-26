@@ -891,6 +891,14 @@
             new MediaKeys object.</li>
           <li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
         </ol>
+        <p>
+        Please note that the browser will throw the encrypted event if it
+        detects DRM init data or identifies an encrypted stream by other means.
+        That does not mean that a client can establish encrypted playback only
+        once the encrypted event was triggered. An encrypted session can also
+        be established manually, without relying on the browser to detect
+        encrypted content first.
+        </p>
 
         <p>The remaining steps are covered in a later section on using EME
         but it’s worth noting at this stage that the
