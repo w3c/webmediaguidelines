@@ -290,6 +290,10 @@
                 encoder/decoder. </td>
             </tr>
             <tr>
+              <td>In-stream Advertisement</td>
+              <td>A video advertisement that accompanies the main video content. Examples include pre-rolls, mid-rolls, and post-rolls which play before, during, or after a main piece of content, respectively.</td>
+            </tr>
+            <tr>
               <td>Live Streaming</td>
               <td>Live streaming is a type of broadcast that is
                 delivered over the Internet where the source content is
@@ -340,6 +344,11 @@
                 technique that enables high quality streaming of media
                 content over the Internet delivered from conventional
                 HTTP web servers. </td>
+            </tr>
+             <tr>
+              <td>Outstream Advertisement</td>
+              <td>A video advertisement that stands alone, without accompanying main video 
+              content. Eamples include a video ad that is embedded within a text news article page that contains text and images as the main content medium.</td>
             </tr>
             <tr>
               <td>Player<br>
@@ -927,22 +936,40 @@
 
       <section>
         <h3>Ad Insertions</h3>
-        There are two primary ways to insert advertisements into a playback
+        <p>There are many ways to incorporate media advertisements into an application. The most
+        	common types are:
+        	<ol>
+        		<li>In-stream: Video advertisement that is played before, mid, or after main content
+        		(such as a clip or episode)</li>
+        		<li>Outstream: Video advertisement stands alone (without other video content) and is 
+        		placed natively within other parts of the application</li>
+        	</ol>
+        	For the purposes of these guidelines, we will focus on in-stream.
+        </p>
+        <p>There are two primary ways to insert advertisements into an in-stream media playback
         session. <i>Client-side ad insertion (CSAI)</i> and <i>Server-side
         ad insertion (SSAI)</i>. The difference here is that Server-side
         insertions are embedded into the playout directly, while Client-side
         insertions are added dynamically by the player and are handled in
-        parallel to the main playout.
+        parallel to the main playout.</p>
 
         <section>
         <h4>Client-side Ad Insertion</h4>
         <p>
         Client-side ad insertions typically involve using a script
         available in the client runtime, JavaScript in the case of the web,
-        to insert an advert during the user’s session.
+        to insert an advertisement during the user’s session. CSAI can be used for any type
+        of content, including on-demand and live.
         </p>
         <p>
-        As an example, an ad serving vendor provides a client script. Close
+        For live streaming use cases, in-video-stream metadata (for example, using ID3 in HLS) can be used to enable all viewers to see an ad at the same time, synced with the content at a specific time offset. Another approach is to use web sockets to signal a player via a pushed event to play an advertisement.
+        </p>
+        <p>
+		Additionally, for linear live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for HLS/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
+        </p>
+        <p>
+        As an example workflow: an ad serving vendor typically provides a client-side script that a publisher 
+    	can embed in their application. These scripts createa bridge between the advertising demand source and the publisher's video player. Close
         to the player’s initiation the client library makes its API
         available. The web application listens to events associated with
         playback, for example the video elements media event ‘playing’. The
@@ -958,7 +985,9 @@
         the ad content appropriate for the playback environment. In some
         cases, there is no ad, if this is the case the user is presented
         with the content they originally requested and control is passed
-        back to the web video application. If there is an ad targeted
+        back to the web video application. 
+    	</p>
+    	<p>If there is an ad targeted
         against the content then the library performs DOM manipulation and
         injects a new video element into the document this is typically
         accompanied by a further script that provides the vendor with
@@ -970,16 +999,6 @@
         local library will tear down the injected DOM elements and in turn
         issue an event that the web application can use to trigger a return
         to playing the original content.
-        </p>
-        <p>
-        In the case of live linear CSAI web socket technology is
-        often used. If the content has a dynamic nature, for example a
-        sports event or a fashion show, a web socket connection is
-        established and ads can then be ‘pushed’ when the editorial team
-        thinks it’s appropriate. The web video application listens to the
-        library that establishes and manages the connection. An event is
-        pushed to the listening clients simultaneously, this event is then
-        used to trigger the same set of events discussed above.
         </p>
         </section>
 
