@@ -475,8 +475,6 @@
           behaves in the following way: <br>
         </p>
         <ol>
-          <li>The player uses its <a>DRM</a> license URL to request a secure key to
-            enable decoding of the media.</li>
           <li>The player's <a>ABR</a> algorithm determines the data throughput rate available to the client by calculating the throughput from the first segment of video. This provides enough information to determine the initial playback quality level the player can sustain.</li>
           <li>Once the player has this information it can then compare
             this with the metadata from the manifest that describes the
@@ -490,8 +488,6 @@
           <li>It then requests a segment from a location on the edge
             server that typically relative to the location of the
             manifest. </li>
-          <li>Once it has received the segment it is then typically
-            decrypted in accordance with the specific <a>DRM</a> used. </li>
           <li>It then adds it to the player's video buffer. </li>
           <li>The media renderer pulls the video data from the buffer and
             passes it to the video surface where it is rendered. </li>
@@ -503,6 +499,7 @@
             bitrate stream or request a higher bitrate child manifest
             and associated segment. </li>
         </ol>
+        <i>NOTE: This workflow may have additional steps if DRM is used.</i>
         </section>
         <section>
         <h3>On-Demand Streaming (VOD)</h3>
