@@ -429,8 +429,9 @@
           and delivered by a content distribution network. There are
           three distinct interlocking processes: generation, delivery
           and consumption / playback. </p>
-        </section>
+        
         <section>
+
         <h3>Content Generation</h3>
         <p> <a>Mezzanine File</a> content is normally delivered to the service
           provider as a file with near lossless compression.
@@ -456,7 +457,7 @@
           specifies the location of the media and its <a>format</a>. </p>
         </section>
         <section>
-        <h3>Content Delivery</h3>
+        <h4>Content Delivery</h4>
         <p> After the content has been generated the resulting segments
           of video and corresponding manifest files are pushed to an
           origin server. However, the assets are rarely delivered
@@ -465,6 +466,7 @@
           client's web video application. The content provider supplies the client with the URL of a manifest file located on a <a>CDN</a> rather than the origin. The manifest URL is typically passed to a video player for playback. The player makes a HTTP GET request for the manifest from <a>CDN</a> edge. If the <a>CDN</a> edge does not currently have the manifest available, the <a>CDN</a> requests a copy of the file from the origin and the file is cached at the edge for later use. The CDN edge then returns the the manifest to the requesting player. <i>(NOTE: There are different levels of caching; popular <a>VOD</a> content is kept closer to the edge in the <a>CDN</a> network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery.)</i> </p>
         </section>
         <section>
+
         <h3>Content Playback</h3>
         <p> As mentioned in the Content Generation section, the player uses a tag within the manifest to determine the playout type. In <a>HLS</a>, if there is a type with the value of <a>VOD</a>, the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH, the difference between a live and VOD playlist are more subtle. At this point the behavior
           differs between players found on the different devices
@@ -498,12 +500,15 @@
         </ol>
         <i>NOTE: This workflow may have additional steps if <a>DRM</a> is used.</i>
         </section>
-        <section>
-        <h3>On-Demand Streaming (VOD)</h3>
-        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and linear, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
         </section>
         <section>
-        <h3>Content Generation</h3>
+        <h3>On-Demand Streaming (VOD)</h3>
+
+        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and linear, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
+        </section>
+
+        <section>
+        <h4>Content Generation</h4>
         <p> For VOD the source is typically static file-based rather than a feed. The
           <a>encoding</a> profiles are also subtly different. A greater
           priority can be placed on high quality as the latency, time to
@@ -522,8 +527,10 @@
           rather than 10 seconds. </p>
         </section>
         <section>
+
         <h3>Content Delivery</h3>
         <p> The <a>CDN</a> configuration and topology for delivering <a>VOD</a>
+
           content is also different to linear. There are different
           levels of caching; popular <a>VOD</a> content which is kept closer to
           the edge in the <a>CDN</a> network in this way it can be delivered to
@@ -533,7 +540,7 @@
           a lower tier. </p>
         </section>
         <section>
-        <h3>Content Playback</h3>
+        <h4>Content Playback</h4>
         <p> As mentioned in the content generation section the player
           uses a tag within the manifest to determine the playout type.
           In <a>HLS</a> if there is a type with the value of VOD, then the player will not
@@ -549,7 +556,7 @@
         <p>Additionally, the UX requirements are different between <a>VOD</a> and linear. Unlike linear content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a <a>trick play</a> bar to view the current playback position and seek to other points within the content. </p>
         </section>
        <section>
-        <h3>VOD Pre-caching</h3>
+        <h4>VOD Pre-caching</h4>
         <p>In the previous sections, we outlined the use cases
           associated with video streaming. In this section, we give some
           examples of use-cases that are specific to on-demand streaming
@@ -568,7 +575,7 @@
           application's UX to pre-cache content. For example, when entering a mezzanine/synopsis page, the application might preemptively cache the content by filling the player’s video buffer or, alternatively, storing the <a>chunk</a>s locally.. Pre-caching allows the video to commence playing without buffering and provides the user with a more responsive initial playback experience. This technique is used by Netflix, Sky
           and the BBC in the case of on-demand content being watched in
           an in-home context. This technique is not used for cellular sessions where the user’s mobile data would be consumed on content that they do not watch. </p>
-
+        </section>
       </section>
         <section>
         <h3>VOD – further considerations</h3>
