@@ -462,10 +462,7 @@
           origin server. However, the assets are rarely delivered
           directly from the origin. </p>
         <p> At this stage, the control in the chain switches to the
-          client's web video application. The content provider supplies
-          the client with the URL of a manifest file located on a <a>CDN</a>
-          rather than the origin. The manifest is typically passed to
-          a player. The player makes a HTTP GET request for the manifest from <a><a>CDN</a></a> edge, the edge server's location is determined via DNS. If the <a><a>CDN</a></a> edge does not currently have the manifest available, the <a><a>CDN</a></a> requests a copy of the file from the origin and the file is cached within the server for later use. There are different levels of caching; popular VOD content is kept closer to the edge in the <a><a>CDN</a></a> network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery. The <a><a>CDN</a></a> edge then returns the the manifest to the requesting player.</p>
+          client's web video application. The content provider supplies the client with the URL of a manifest file located on a <a>CDN</a> rather than the origin. The manifest URL is typically passed to a video player for playback. The player makes a HTTP GET request for the manifest from <a>CDN</a> edge. If the <a>CDN</a> edge does not currently have the manifest available, the <a>CDN</a> requests a copy of the file from the origin and the file is cached at the edge for later use. The CDN edge then returns the the manifest to the requesting player. <i>(NOTE: There are different levels of caching; popular <a>VOD</a> content is kept closer to the edge in the <a>CDN</a> network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery.)</i> </p>
         </section>
         <section>
         <h3>Content Playback</h3>
