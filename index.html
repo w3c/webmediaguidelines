@@ -824,6 +824,15 @@
           Another method similar to feature detection is to look for
           available APIs, many of these are unique to a device, for
           example if(tizenGetUser){ then do X }.</p>
+          <p>Besides the mentioned feature switches, device type identification
+          can be crucial to determine which content should be loaded on a
+          client device. A typical scenario for DRM protected content is to
+          have different content types for different platforms based on the
+          platforms playback capabilities. One might for instance package
+          <a>HLS</a> and <a>MPEG-Dash</a> variants of the same content but
+          using different encryption and DRM schemes. In that case the client
+          application needs to decide which content to load based on the device
+          type and its capabilities.</p>
         </section>
         <section>
         <h4>Unique device Identifier</h4>
@@ -846,6 +855,11 @@
           user account allows. For this reason some vendors prefer to
           use <a>DRM</a> solutions that both create and encrypt unique
           identifiers in a way that obscures them from the user.</p>
+          <p>As mentioned above one typical use case where a unique device
+          identifier is needed is to restrict the number of devices that a user
+          can use. This could refer to overall devices or the number of devices
+          a user can use in parallel. In both cases a unique device identifier
+          will be required.</p>
          </section>
       </section>
       <section>
