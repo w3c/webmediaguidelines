@@ -474,7 +474,16 @@
           behaves in the following way: <br>
         </p>
         <ol>
-          <li>The player's <a>ABR</a> algorithm determines the data throughput rate available to the client by calculating the throughput from the first segment of video. This provides enough information to determine the initial playback quality level the player can sustain.</li>
+            <li>While the player's <a>ABR</a> algorithm determines which
+            <a>rendition</a> to use during playback, for instance based on
+            the currently measured network throughput or the current buffer,
+            the algorithm might not have enough information at playback start
+            to use such metrics.  The initial decision depends on the player's
+            <a>ABR</a> algorithm but is often based on prior knowledge. This
+            can for instance be previous measurements of network throughput, a
+            simple default value that is used if not enough data is available
+            to estimate the current network throughput, or a custom algorithm to
+            determine the initial bandwidth estimation.</li>
           <li>Once the player has this information it can then compare
             this with the metadata from the manifest that describes the
             different qualities that the content provider is supplying.
