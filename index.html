@@ -511,8 +511,11 @@
             stream, pulling down chunks and filling its video buffer. In
             the event a change in network availability the player will
             make a decision about the need to either drop to a lower
-            bitrate stream or request a higher bitrate child manifest
-            and associated segment. </li>
+            bitrate stream or request a higher bitrate. In case of <a>HLS</a>,
+            switching the <a>rendition</a> will trigger a download of a new
+            child manifest prior to the download of the associated segment. In case
+            of <a>MPEG-Dash</a> the player can start downloading the associated
+            segment directly.</li>
         </ol>
         <i>NOTE: This workflow may have additional steps if <a>DRM</a> is used.</i>
         </section>
