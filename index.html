@@ -192,7 +192,7 @@
                 <br>
                 There are also open technologies that use standards such
                 as Common Encryption (MPEG-CENC) and Media Source
-                Extensions (MSE) to create a secure environment without
+                Extensions (MSE) [[media-source]] to create a secure environment without
                 third-party products.<br>
               </td>
             </tr>
@@ -496,7 +496,14 @@
           <li>It then requests a segment from a location on the edge
             server that typically relative to the location of the
             manifest. </li>
-          <li>It then adds it to the player's video buffer. </li>
+          <li>The downloaded segment is then added to the video decoder
+              pipeline for playback. For player's that are based on Media
+              Source Extensions [[[media-source]] the segment is appended to the
+              corresponding media source buffer. Note that the segment is
+              appended as is even if the content is encrypted. The
+              underlying <a>DRM</a> system is usually integrated with the
+              decoder pipeline and will decrypt the samples prior to decoding.
+          </li>
           <li>The media renderer pulls the video data from the buffer and
             passes it to the video surface where it is rendered. </li>
           <li>If the available bandwidth remains constant the player
