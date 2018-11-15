@@ -33,7 +33,7 @@
       };
     </script>
   </head>
-  <body>
+  <body class="informative">
     <section id="abstract">
       <p> This specification is a companion guide to the <a
           href="https://w3c.github.io/webmediaapi/" target="_blank">Web
@@ -86,9 +86,8 @@
       <p>These guidelines will cover making your applications compliant
         with accessibility requirements from the perspective of
         delivering and consuming media. However, to make sure your
-        entire application is accessibility-friendly, please see the <a
-          href="https://www.w3.org/WAI/intro/wcag">W3C Web Content
-          Accessibility Guidelines</a>.</p>
+        entire application is accessibility-friendly, please see the W3C Web Content
+          Accessibility Guidelines [[WAI-WEBCONTENT]].</p>
       </section>
       <section>
       <h3>Glossary of Terms</h3>
@@ -191,8 +190,8 @@
                 Streaming.<br>
                 <br>
                 There are also open technologies that use standards such
-                as Common Encryption (MPEG-CENC) and Media Source
-                Extensions (MSE) [[media-source]] to create a secure environment without
+                as Common Encryption [[MPEGCENC]] and Media Source
+                Extensions (MSE) [[MEDIA-SOURCE]] to create a secure environment without
                 third-party products.<br>
               </td>
             </tr>
@@ -334,7 +333,7 @@
             </tr>
              <tr>
               <td><dfn>Outstream Advertisement</dfn></td>
-              <td>A video advertisement that stands alone, without accompanying main video 
+              <td>A video advertisement that stands alone, without accompanying main video
               content. Eamples include a video ad that is <a>embed</a>ded within a text news article page that contains text and images as the main content medium.</td>
             </tr>
             <tr>
@@ -429,7 +428,7 @@
           and delivered by a content distribution network. There are
           three distinct interlocking processes: generation, delivery
           and consumption / playback. </p>
-        
+
         <section>
 
         <h3>Content Generation</h3>
@@ -498,7 +497,7 @@
             manifest. </li>
           <li>The downloaded segment is then added to the video decoder
               pipeline for playback. For player's that are based on Media
-              Source Extensions [[[media-source]] the segment is appended to the
+              Source Extensions [[MEDIA-SOURCE]] the segment is appended to the
               corresponding media source buffer. Note that the segment is
               appended as is even if the content is encrypted. The
               underlying <a>DRM</a> system is usually integrated with the
@@ -524,7 +523,7 @@
         <h3>On-Demand Streaming (VOD)</h3>
 
         <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and linear, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
-        
+
 
         <section>
         <h4>Content Generation</h4>
@@ -917,7 +916,7 @@
           and Firefox.</p>
           <p>
           Browser <a>DRM</a> detection capabilities are tested via the <a>EME</a>
-          (Encrypted Media Extensions) API [[encrypted-media]]. The API is an extension to
+          (Encrypted Media Extensions) API [[ENCRYPTED-MEDIA]]. The API is an extension to
           the HTMLMediaElement. The process of determining the available
           system is broadly as follows: </p>
         <ol>
@@ -962,7 +961,7 @@
         	<ol>
         		<li><a>In-stream</a>: Video advertisement that is played before, mid, or after main content
         		(such as a clip or episode)</li>
-        		<li>Outstream: Video advertisement stands alone (without other video content) and is 
+        		<li>Outstream: Video advertisement stands alone (without other video content) and is
         		placed natively within other parts of the application</li>
         	</ol>
         	For the purposes of these guidelines, we will focus on <a>in-stream</a>.
@@ -989,7 +988,7 @@
 		Additionally, for linear live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
         </p>
         <p>
-        As an example workflow: an ad serving vendor typically provides a client-side script that a publisher 
+        As an example workflow: an ad serving vendor typically provides a client-side script that a publisher
     	can <a>embed</a> in their application. These scripts createa bridge between the advertising demand source and the publisher's video player. Close
         to the player’s initiation the client library makes its API
         available. The web application listens to events associated with
@@ -1006,7 +1005,7 @@
         the ad content appropriate for the playback environment. In some
         cases, there is no ad, if this is the case the user is presented
         with the content they originally requested and control is passed
-        back to the web video application. 
+        back to the web video application.
     	</p>
     	<p>If there is an ad targeted
         against the content then the library performs DOM manipulation and
@@ -1044,7 +1043,7 @@
         <p>
         <a>HLS</a> allows the packager to add a "discontinuity" tag. This is
         expressed with a <code>#EXT-X-DISCONTINUITY</code> entry before any
-        potential format change.  See Section 4.3.2.3. in [[<a>HLS</a>]] for more
+        potential format change.  See Section 4.3.2.3. in [[HLS]] for more
         detail. This tag then usually appears before the ad starts and
         again before the main content continues.
         </p>
