@@ -523,7 +523,7 @@
         <section>
         <h3>On-Demand Streaming (VOD)</h3>
 
-        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and linear, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
+        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and live, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
         
 
         <section>
@@ -531,9 +531,7 @@
         <p>For VOD the source is typically static file-based rather than a feed. The
           <a>encoding</a> profiles are also subtly different. A greater
           priority can be placed on high quality as the latency, time to
-          live, is not a requirement. To this end the encoder is able to
-          prioritize density over quality via configuration allowing <a>VOD</a>
-          encoders to spend more time on each frame. There are important
+          live, is not a requirement. There are important
           differences in the manifests created. In <a>HLS</a> there is a tag
           that tells the player whether the playlist is describing on
           demand material: #EXT-X-PLAYLIST-TYPE:VOD. As we will see
@@ -550,7 +548,7 @@
         <h3>Content Delivery</h3>
         <p> The <a>CDN</a> configuration and topology for delivering <a>VOD</a>
 
-          content is also different to linear. There are different
+          content is also different to live. There are different
           levels of caching; popular <a>VOD</a> content which is kept closer to
           the edge in the <a>CDN</a> network in this way it can be delivered to
           customers faster than an edge server that isn't tuned for high
@@ -572,11 +570,11 @@
           to indicate live content.
         </p>
         <p> There are other differences in playout as well. Unlike
-          linear, a VOD asset has a predefined duration, information
+          live, a VOD asset has a predefined duration, information
           around duration and playback position can be used to update the UI
           to provide feedback to the user on the proportion
           of the asset watched. </p>
-        <p>Additionally, the UX requirements are different between <a>VOD</a> and linear. Unlike linear content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a <a href='#dfn-trick-play-mode'>trick play</a> bar to view the current playback position and seek to other points within the content. </p>
+        <p>Additionally, the UX requirements are different between <a>VOD</a> and live. Unlike live content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a <a href='#dfn-trick-play-mode'>trick play</a> bar to view the current playback position and seek to other points within the content. </p>
         </section>
        <section>
         <h4>VOD Pre-caching</h4>
@@ -990,7 +988,7 @@
         For <a>Live Streaming</a> use cases, in-video-stream metadata (for example, using ID3 in <a>HLS</a>) can be used to enable all viewers to see an ad at the same time, synced with the content at a specific time offset. Another approach is to use web sockets to signal a player via a pushed event to play an advertisement.
         </p>
         <p>
-		Additionally, for linear live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
+		Additionally, for live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
         </p>
         <p>
         As an example workflow: an ad serving vendor typically provides a client-side script that a publisher 
@@ -1088,7 +1086,7 @@
       <section>
       <h3>Create a Mezzanine File</h3>
 
-      <p>The first step in preparing your content is to create a high quality encoding master file from your source footage. This <a>mezzanine file</a> will be used as a source file to create all downstream outputs.  Content producers typically export files from a non-linear editor using the highest resolution input files available; from a master magnetic, optical media or digital source.  This ensures all downstream outputs have the necessary quality to work with, without needing to re-export from the editor every time. </p>
+      <p>The first step in preparing your content is to create a high quality encoding master file from your source footage. This <a>mezzanine file</a> will be used as a source file to create all downstream outputs.  Content producers typically export files from a non-live editor using the highest resolution input files available; from a master magnetic, optical media or digital source.  This ensures all downstream outputs have the necessary quality to work with, without needing to re-export from the editor every time. </p>
 
       <p>In order to maximize quality of the mezzanine, your export settings should use a lossless <a>codec</a> such as Apple ProRes, <a>H.264</a> Intra-frame, or Motion JPEG 2000.  A lossless <a>codec</a> guarantees all data from the original will exist on the export. For detailed info on how to configure your output settings, see the appropriate provider recommended settings documentation for your <a>codec</a> of choice.</p>
 
