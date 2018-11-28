@@ -57,7 +57,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="informative">
     <section id="abstract">
       <p> This specification is a companion guide to the <a
           href="https://w3c.github.io/webmediaapi/" target="_blank">Web
@@ -110,9 +110,8 @@
       <p>These guidelines will cover making your applications compliant
         with accessibility requirements from the perspective of
         delivering and consuming media. However, to make sure your
-        entire application is accessibility-friendly, please see the <a
-          href="https://www.w3.org/WAI/intro/wcag">W3C Web Content
-          Accessibility Guidelines</a>.</p>
+        entire application is accessibility-friendly, please see the W3C Web Content
+          Accessibility Guidelines [[WAI-WEBCONTENT]].</p>
       </section>
       <section>
       <h3>Glossary of Terms</h3>
@@ -215,8 +214,8 @@
                 Streaming.<br>
                 <br>
                 There are also open technologies that use standards such
-                as Common Encryption (MPEG-CENC) and Media Source
-                Extensions (MSE) [[media-source]] to create a secure environment without
+                as Common Encryption [[MPEGCENC]] and Media Source
+                Extensions (MSE) [[MEDIA-SOURCE]] to create a secure environment without
                 third-party products.<br>
               </td>
             </tr>
@@ -522,7 +521,7 @@
             manifest. </li>
           <li>The downloaded segment is then added to the video decoder
               pipeline for playback. For player's that are based on Media
-              Source Extensions [[[media-source]] the segment is appended to the
+              Source Extensions [[MEDIA-SOURCE]] the segment is appended to the
               corresponding media source buffer. Note that the segment is
               appended as is even if the content is encrypted. The
               underlying <a>DRM</a> system is usually integrated with the
@@ -941,7 +940,7 @@
           and Firefox.</p>
           <p>
           Browser <a>DRM</a> detection capabilities are tested via the <a>EME</a>
-          (Encrypted Media Extensions) API [[encrypted-media]]. The API is an extension to
+          (Encrypted Media Extensions) API [[ENCRYPTED-MEDIA]]. The API is an extension to
           the HTMLMediaElement. The process of determining the available
           system is broadly as follows: </p>
         <ol>
@@ -1068,7 +1067,7 @@
         <p>
         <a>HLS</a> allows the packager to add a "discontinuity" tag. This is
         expressed with a <code>#EXT-X-DISCONTINUITY</code> entry before any
-        potential format change.  See Section 4.3.2.3. in [[<a>HLS</a>]] for more
+        potential format change.  See Section 4.3.2.3. in [[HLS]] for more
         detail. This tag then usually appears before the ad starts and
         again before the main content continues.
         </p>
