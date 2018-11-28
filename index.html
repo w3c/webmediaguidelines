@@ -66,7 +66,7 @@
         this specification will outline best practices and developer
         guidance for implementing web media apps. This specification
         should be updated at least annually to keep pace with the
-        evolving Web platform. The target devices will include any
+        evolving web platform. The target devices will include any
         device that runs a modern HTML user agent, including
         televisions, game machines, set-top boxes, mobile devices and
         personal computers. </p>
@@ -98,11 +98,11 @@
         however the use-cases and principles described in the guidelines
         can be applied to native applications (applications that have
         been developed for use on a particular platform or device). The
-        examples in this document provides a starting point to build
+        examples in this document provide a starting point to build
         your media application and includes example implementations from
         various providers and vendors. This document also includes
         sample content and manifests as well as <a>encoding</a> guidelines to
-        maximize the provide hints on achieving the best quality and
+        provide hints on achieving the best quality and
         efficiency for your media applications.</p>
       </section>
       <section>
@@ -348,7 +348,7 @@
               </td>
             </tr>
             <tr>
-              <td><dfn>MPEG-Dash</dfn></td>
+              <td><dfn>MPEG-DASH</dfn></td>
               <td>Dynamic Adaptive Streaming over HTTP (DASH), also
                 known as MPEG-DASH, is an adaptive bitrate streaming
                 technique that enables high quality streaming of media
@@ -357,8 +357,8 @@
             </tr>
              <tr>
               <td><dfn>Outstream Advertisement</dfn></td>
-              <td>A video advertisement that stands alone, without accompanying main video
-              content. Eamples include a video ad that is <a>embed</a>ded within a text news article page that contains text and images as the main content medium.</td>
+              <td>A video advertisement that stands alone, without accompanying main video 
+              content. Examples include a video ad that is <a>embed</a>ded within a text news article page that contains text and images as the main content medium.</td>
             </tr>
             <tr>
               <td><dfn>Player</dfn><br>
@@ -534,10 +534,10 @@
             stream, pulling down chunks and filling its video buffer. In
             the event a change in network availability the player will
             make a decision about the need to either drop to a lower
-            bitrate stream or request a higher bitrate. In case of <a>HLS</a>,
+            <a>rendition</a> or request a higher bitrate. In case of <a>HLS</a>,
             switching the <a>rendition</a> will trigger a download of a new
             child manifest prior to the download of the associated segment. In case
-            of <a>MPEG-Dash</a> the player can start downloading the associated
+            of <a>MPEG-DASH</a> the player can start downloading the associated
             segment directly.</li>
         </ol>
         <i>NOTE: This workflow may have additional steps if <a>DRM</a> is used.</i>
@@ -546,17 +546,14 @@
         <section>
         <h3>On-Demand Streaming (VOD)</h3>
 
-        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and linear, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
-
+        <p> Despite the almost identical mechanics, content generation, delivery, and play out used for <a>VOD</a> and live, a large organization will typically maintain two distinct workflows as there are subtle but important ways in which they differ. </p>
 
         <section>
         <h4>Content Generation</h4>
-        <p> For VOD the source is typically static file-based rather than a feed. The
+        <p>For VOD the source is typically static file-based rather than a feed. The
           <a>encoding</a> profiles are also subtly different. A greater
           priority can be placed on high quality as the latency, time to
-          live, is not a requirement. To this end the encoder is able to
-          prioritize density over quality via configuration allowing <a>VOD</a>
-          encoders to spend more time on each frame. There are important
+          live, is not a requirement. There are important
           differences in the manifests created. In <a>HLS</a> there is a tag
           that tells the player whether the playlist is describing on
           demand material: #EXT-X-PLAYLIST-TYPE:VOD. As we will see
@@ -573,7 +570,7 @@
         <h3>Content Delivery</h3>
         <p> The <a>CDN</a> configuration and topology for delivering <a>VOD</a>
 
-          content is also different to linear. There are different
+          content is also different to live. There are different
           levels of caching; popular <a>VOD</a> content which is kept closer to
           the edge in the <a>CDN</a> network in this way it can be delivered to
           customers faster than an edge server that isn't tuned for high
@@ -589,13 +586,17 @@
           reload the manifest. This has important consequences if there
           are changes in availability after the session as commenced. In
           DASH the difference between a live and <a>VOD</a> playlist are more
-          subtle (more detail) </p>
+          subtle but one of the primary identifier for liven content in <a>MPEG-DASH</a>
+          is the <code>profiles</code> attribute of the <code>MPD</code> element which could
+          for example reference the <code>urn:mpeg:dash:profile:isoff-live:2011</code> profile
+          to indicate live content.
+        </p>
         <p> There are other differences in playout as well. Unlike
-          linear, a VOD asset has a predefined duration, information
+          live, a VOD asset has a predefined duration, information
           around duration and playback position can be used to update the UI
           to provide feedback to the user on the proportion
           of the asset watched. </p>
-        <p>Additionally, the UX requirements are different between <a>VOD</a> and linear. Unlike linear content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a <a href='#dfn-trick-play-mode'>trick play</a> bar to view the current playback position and seek to other points within the content. </p>
+        <p>Additionally, the UX requirements are different between <a>VOD</a> and live. Unlike live content, which lends itself to being browsed within an EPG (electronic program guide), VOD content is typically navigated using tiles or poster galleries. There is also a <a href='#dfn-trick-play-mode'>trick play</a> bar to view the current playback position and seek to other points within the content. </p>
         </section>
        <section>
         <h4>VOD Pre-caching</h4>
@@ -776,7 +777,7 @@
             </p>
             <p>
             Another common problem that can occur both in Live and VoD playback
-            session are missing segment data or timestamp alignment issues. It
+            sessions are missing segment data or timestamp alignment issues. It
             might happen that a segment for a given quality is not available on
             the server. At the same time, misalignments in segment timestaps
             might occur. Although both of these issues migh be critical, how
@@ -810,7 +811,7 @@
           The information about the location of these images then needs to be passed
           down to the client, which can then request and load an image for a given
           playback position.  For more efficient loading, images
-          are often merged into larger grids. This way, the client
+          are often merged into larger grids (sometimes called sprites). This way, the client
           only needs to make a single request to load a set of thumbnails
           instead of a request per image.
           </p>
@@ -855,7 +856,7 @@
           If the application is hosted or the same application is
           deployed via different app stores then the clients runtime
           could be more ambiguous. The classic approach is to use the
-          navigator.userAgent. While this returns a string that does
+          <code>navigator.userAgent</code>. While this returns a string that does
           not explicitly state the device by name a regular expression
           match can be used to look for patterns that can confirm the
           device family. As an example the name ‘Tizen’ can be found in
@@ -865,13 +866,13 @@
           <p>
           Another method similar to feature detection is to look for
           available APIs, many of these are unique to a device, for
-          example if(tizenGetUser){ then do X }.</p>
+          example <code>if(tizenGetUser){ then do X }</code>.</p>
           <p>Besides the mentioned feature switches, device type identification
           can be crucial to determine which content should be loaded on a
           client device. A typical scenario for DRM protected content is to
           have different content types for different platforms based on the
           platforms playback capabilities. One might for instance package
-          <a>HLS</a> and <a>MPEG-Dash</a> variants of the same content but
+          <a>HLS</a> and <a>MPEG-DASH</a> variants of the same content but
           using different encryption and DRM schemes. In that case the client
           application needs to decide which content to load based on the device
           type and its capabilities.</p>
@@ -946,18 +947,18 @@
         <ol>
           <li>The stream is passed to the VIDEO or AUDIO HTML5 tag/media element</li>
           <li>The browser detects the stream is encrypted</li>
-          <li>The media event encrypted is thrown</li>
+          <li>The media event <code>encrypted</code> is thrown</li>
           <li>A check is made to see if there are already MediaKeys
             associated with the element</li>
           <li>If there are no keys already associated with the element
-            then use the <a>EME</a>API navigator.requestMediaKeySystemAccess()
+            then use the <a>EME</a> API <code>navigator.requestMediaKeySystemAccess()</code>
             to determine which <a>DRM</a> system is available. This is done by
             passing a key value pair that includes a string
             representation of each MediaKey system to the above method
             which in turn returns a boolean</li>
-          <li>Use the MediaKeySystemAccess.createMediaKeys() to return a
+          <li>Use the <code>MediaKeySystemAccess.createMediaKeys()</code> to return a
             new MediaKeys object.</li>
-          <li>Then use HTMLMediaElement.setMediaKeys(mediaKeys)</li>
+          <li>Then use <code>HTMLMediaElement.setMediaKeys(mediaKeys)</code></li>
         </ol>
         <p>
         Please note that the browser will throw the encrypted event if it
@@ -974,7 +975,7 @@
         implemented across all modern browsers that support EME. As an
         example Chrome returns true for <code>com.widevine.alpha</code> however IE
         and Safari throw errors and Firefox returns null. A possible
-        solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-<a>DRM</a>-system-supported-by-browser">here</a>
+        solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-<a>DRM</a>-system-supported-by-browser">here</a>.
         </p>
         </section>
 
@@ -1009,7 +1010,7 @@
         For <a>Live Streaming</a> use cases, in-video-stream metadata (for example, using ID3 in <a>HLS</a>) can be used to enable all viewers to see an ad at the same time, synced with the content at a specific time offset. Another approach is to use web sockets to signal a player via a pushed event to play an advertisement.
         </p>
         <p>
-		Additionally, for linear live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
+		Additionally, for live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
         </p>
         <p>
         As an example workflow: an ad serving vendor typically provides a client-side script that a publisher
@@ -1107,7 +1108,7 @@
       <section>
       <h3>Create a Mezzanine File</h3>
 
-      <p>The first step in preparing your content is to create a high quality encoding master file from your source footage. This <a>mezzanine file</a> will be used as a source file to create all downstream outputs.  Content producers typically export files from a non-linear editor using the highest resolution input files available; from a master magnetic, optical media or digital source.  This ensures all downstream outputs have the necessary quality to work with, without needing to re-export from the editor every time. </p>
+      <p>The first step in preparing your content is to create a high quality encoding master file from your source footage. This <a>mezzanine file</a> will be used as a source file to create all downstream outputs.  Content producers typically export files from a non-live editor using the highest resolution input files available; from a master magnetic, optical media or digital source.  This ensures all downstream outputs have the necessary quality to work with, without needing to re-export from the editor every time. </p>
 
       <p>In order to maximize quality of the mezzanine, your export settings should use a lossless <a>codec</a> such as Apple ProRes, <a>H.264</a> Intra-frame, or Motion JPEG 2000.  A lossless <a>codec</a> guarantees all data from the original will exist on the export. For detailed info on how to configure your output settings, see the appropriate provider recommended settings documentation for your <a>codec</a> of choice.</p>
 
@@ -1239,7 +1240,10 @@
     <section>
         <h3>Packaging your video files for <a>ABR</a> delivery</h3>
     <p>In order for an <a>ABR</a> technology to utilize your <a>rendition</a> set, each file needs to be properly segmented and exposed to the <a>ABR</a> technology following their spec.  Segmentation refers to the breakdown of each file into timed <a>chunk</a>s so <a>ABR</a> can smoothly switch <a>rendition</a>s without causing a break in the video playback.  Exposure of <a>rendition</a> set and segments are done through a manifest file - .m3u8 for <a>HLS</a> and .mpd for DASH.  The manifest is simply a text file that serves as a directory for the <a>rendition</a>s and includes details (resolution, <a>codec</a>, bitrate, etc) about each file available.  This is necessary so that the <a>ABR</a> can find the correct segment for the users playback environment. A manifest can also contain references to other files that may be necessary for specific video features, such as .vtt files for subtitles and additional audio tracks for multi-lingual video. </p>
-    <p>Information about authoring a manifest for <a>HLS</a> can be found here, https://tools.ietf.org/html/draft-pantos-http-live-streaming-23 and authoring for DASH can be here, http://dashif.org/guidelines/ </p>
+    <p>Information about authoring a manifest for <a>HLS</a> can be found 
+      <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-23">here</a>, 
+      and authoring for DASH can be <a href="http://dashif.org/guidelines/">here</a>. 
+    </p>
     </section>
     </section>
     <section>
@@ -1249,7 +1253,7 @@
       </p>
       <section>
         <h3>Web App Content Management Approaches</h3>
-        <p>The easiest way to delineate between the types of Web apps are by how we manage the content inside them. In the case of traditional applications and mobile apps, the entire application is downloaded from the store and then ran locally. In contrast, a website keeps all of its content on the server and then when the pages loader. It brings the entire application down into the browser. The same approaches are utilized with web content inside of the app space there often known as packaged web apps and hosted web apps.
+        <p>The easiest way to delineate between the types of web apps are by how we manage the content inside them. In the case of traditional applications and mobile apps, the entire application is downloaded from the store and then ran locally. In contrast, a website keeps all of its content on the server and then when the pages loader. It brings the entire application down into the browser. The same approaches are utilized with web content inside of the app space there often known as packaged web apps and hosted web apps.
         </p>
         <section>
           <h4>The Packaged App</h4>
@@ -1259,7 +1263,7 @@
             <li>Generally offline by default, as all the code is living on the users device</li>
             <li>Retrieve data from the Internet via services similar to native apps. generally called via AJAX</li>
           </ul>
-          <p>Some Markets, such as Window Store and Amazon App Store enable you to submit packaged apps directly to the market without the need of any external packaging tools. These markets also expose additional APIs for packaged apps that aren’t available to apps via the browser. Other markets, such as iOS App Store and Android Play require a third party utility such as Cordova or cross walk to enable packaged web apps.
+          <p>Some Markets, such as Window Store and Amazon App Store enable you to submit packaged apps directly to the market without the need of any external packaging tools. These markets also expose additional APIs for packaged apps that aren’t available to apps via the browser. Other markets, such as iOS App Store and Android Play require a third party utility such as Cordova or Crosswalk to enable packaged web apps.
           </p>
         </section>
       <section>
@@ -1276,7 +1280,7 @@
       <section>
         <h4>Progressive Web Apps</h4>
         <p>
-          Progressive Web Apps or PWAs has become the de facto app format for the web. Just like hosted web apps, Progressive Web Apps load their content from the server when the app is opened. However, Progressive Web Apps also can store this web app locally through a new technology called service workers, which allows Progressive Web Apps to bridge across both the benefits of package web apps and hosted web apps.  Some platforms run PWAs in the browser while others (like android and Windows 10) run PWAs in a stand along app container.
+          Progressive web apps or PWAs has become the de facto app format for the web. Just like hosted web apps, Progressive web apps load their content from the server when the app is opened. However, Progressive web apps also can store this web app locally through a new technology called service workers, which allows Progressive web apps to bridge across both the benefits of package web apps and hosted web apps.  Some platforms run PWAs in the browser while others (like Android and Windows 10) run PWAs in a stand along app container.
         </p>
         <p>
           PWAs are build around a common universal <a href="http://www.w3.org/TR/appmanifest/">web app manifest</a> that is being standardized by the W3C.  The web manifest contains meta data about your application such as presentation preference, start URL, and even ratings and categories for store listing.
@@ -1330,27 +1334,27 @@
       <section>
         <h3>Web Based Platforms</h3>
         <p>
-          Some platforms such as web OS are themselves a web based environment, meaning all applications in that environment or built with the web. And run as independent applications within the environment just like a web page may run inside of a web browser.  Device manufacturers (of all kinds) use web engines as a basis for a web based platform that will allow web apps to run as standalone applications.
+          Some platforms such as webOS are themselves a web based environment, meaning all applications in that environment or built with the web and run as independent applications within the environment just like a web page may run inside of a web browser.  Device manufacturers (of all kinds) use web engines as a basis for a web based platform that will allow web apps to run as standalone applications.
         </p>
         <p>
-          The most common platform may be <a href="http://www.chromium.org/chromium-os">ChromeOS</a> itself.  ChromeOS is Chromium running on top of Linux that uses Web Apps for it's primary app Eco system (however it recently has been augmented to run android apps as well).  Another common Example is WebOS, which powers many LG tvs today, and runs web content as stand alone apps.
+          The most common platform may be <a href="http://www.chromium.org/chromium-os">ChromeOS</a> itself.  ChromeOS is Chromium running on top of Linux that uses web apps for it's primary app ecosystem (however it recently has been augmented to run Android apps as well).  Another common Example is WebOS, which powers many LG tvs today, and runs web content as stand alone apps.
         </p>
       </section>
       <section>
         <h3>Web App Containers</h3>
         <p>
-          Delivering the Web app on the platform is not a trivial task as each platform may have a different approach on how a web app is delivered to a user. Some platforms such as <a href="https://developer.microsoft.com/en-us/windows/bridges/hosted-web-apps">Xbox (windows 10)</a> and <a href="https://www.playstation.com/develop/">Play station</a> give the Web apps their own standalone <a>container</a>, which allows the app to be downloaded from a store and run independently of a browser.  These apps are rendered with the web rendering engine native to the operating system, and generally have lower overhead than running in a browser, and often are granted access to OS level APIs not available in the browser.
+          Delivering the web app on the platform is not a trivial task as each platform may have a different approach on how a web app is delivered to a user. Some platforms such as <a href="https://developer.microsoft.com/en-us/windows/bridges/hosted-web-apps">Xbox (Windows 10)</a> and <a href="https://www.playstation.com/develop/">Play station</a> give the web apps their own standalone <a>container</a>, which allows the app to be downloaded from a store and run independently of a browser.  These apps are rendered with the web rendering engine native to the operating system, and generally have lower overhead than running in a browser, and often are granted access to OS level APIs not available in the browser.
         </p>
         <section>
           <h4>Mobile App container</h4>
           <p>
-            For a Web app to be distributed through the store on platforms like iOS and Android, an app <a>container</a> needs to be used. popular app containers such as <a href="http://cordova.apache.org/">Cordova</a> and <a href="https://crosswalk-project.org/">cross walk</a> are used by web developers to deliver a web app through a store.  This approach often adds over head to the application as the web app is rendered in a webview or the app may contain the entire browser runtime within each app <a>container</a>.
+            For a web app to be distributed through the store on platforms like iOS and Android, an app <a>container</a> needs to be used. Popular app containers such as <a href="http://cordova.apache.org/">Cordova</a> and <a href="https://crosswalk-project.org/">Crosswalk</a> are used by web developers to deliver a web app through a store.  This approach often adds over head to the application as the web app is rendered in a webview or the app may contain the entire browser runtime within each app <a>container</a>.
           </p>
         </section>
         <section>
           <h4>Chrome Embedded Framework and Electron</h4>
           <p>
-            In desktop environments, we see the use of <a href="https://electron.atom.io/">Electron</a> and <a href="https://code.google.com/archive/p/chromiumembedded/">Chromium Embedded Framework (CEF)</a> to deliver web apps as desktop applications.  CEF and Electron uses the open source version of chrome as a runtime environment for the application. Much like we see one mobile platforms, this approach has additional overhead as instead of using the native rendering engine of the platform, chromium is delivered inside each application to render the web app. This gives the Web app additional privileges to access native API’s, but at the same time raises many security concerns.
+            In desktop environments, we see the use of <a href="https://electron.atom.io/">Electron</a> and <a href="https://code.google.com/archive/p/chromiumembedded/">Chromium Embedded Framework (CEF)</a> to deliver web apps as desktop applications.  CEF and Electron uses the open source version of chrome as a runtime environment for the application. Much like we see one mobile platforms, this approach has additional overhead as instead of using the native rendering engine of the platform, chromium is delivered inside each application to render the web app. This gives the web app additional privileges to access native API’s, but at the same time raises many security concerns.
           </p>
         </section>
       </section>
