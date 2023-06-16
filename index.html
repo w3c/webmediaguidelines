@@ -1,7 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Web Media Application Developer Guidelines</title>
     <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
@@ -54,6 +53,17 @@
         border: none;
         text-decoration: none;
         background: transparent;
+      }
+
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td {
+        border: 1px solid gray;
+        padding: 4px;
+        vertical-align: top;
       }
     </style>
   </head>
@@ -117,9 +127,7 @@
       <h3>Glossary of Terms</h3>
       <p>The following lexicon provides the common language used to build this document and communicate concepts to the end reader.<br>
       </p>
-      <p>
-        <table border="1" cellspacing="0" cellpadding="4">
-          <colgroup><col width="181"><col width="578"></colgroup><tbody>
+        <table>
             <tr>
               <td><b>Term</b></td>
               <td><b>Definition</b></td>
@@ -133,9 +141,9 @@
                 direction like a spherical panorama.</td>
             </tr>
             <tr>
-              <td valign="top"><dfn>AAC</dfn><br>
+              <td><dfn>AAC</dfn><br>
               </td>
-              <td valign="top">Advanced Audio Coding is a proprietary
+              <td>Advanced Audio Coding is a proprietary
                 audio coding standard for lossy digital audio
                 compression. Designed to be the successor of the MP3
                 format, AAC generally achieves better sound quality than
@@ -143,9 +151,9 @@
               </td>
             </tr>
             <tr>
-              <td valign="top"><dfn>ABR</dfn><br>
+              <td><dfn>ABR</dfn><br>
               </td>
-              <td valign="top">Adaptive Bitrate Streaming is a method to optimize
+              <td>Adaptive Bitrate Streaming is a method to optimize
                 video playback by automatically selecting a specific bitrate rendtion
                 of a video file within the video player. Some ABR algorithms use client bandwidth throughput to determine
                 which <a>rendition</a> to play. For example, if a client tries to play a video on a slow internet connection, the
@@ -160,17 +168,17 @@
                 subscription or pay-per-title.</td>
             </tr>
             <tr>
-              <td valign="top"><dfn>Bit rate</dfn><br>
+              <td><dfn>Bit rate</dfn><br>
               </td>
-              <td valign="top"> Bit rate, (also known as data rate), is
+              <td> Bit rate, (also known as data rate), is
                 the amount of data used for each second of video. In the
                 world of video, this is generally measured in kilobits
                 per second (kbps), and can be constant or variable. </td>
             </tr>
             <tr>
-              <td valign="top"><dfn>codec</dfn><br>
+              <td><dfn>codec</dfn><br>
               </td>
-              <td valign="top">a codec is an algorithm defining the compression
+              <td>a codec is an algorithm defining the compression
                 and decompression of digital video or audio. Most codecs
                 employ proprietary coding algorithms for data
                 compression. MP3, <a>H.264</a>, and <a>HEVC</a> are examples of
@@ -252,9 +260,9 @@
               </td>
             </tr>
             <tr>
-              <td valign="top"><dfn>Container</dfn> (Format)<br>
+              <td><dfn>Container</dfn> (Format)<br>
               </td>
-              <td valign="top">A format or "container format" is used
+              <td>A format or "container format" is used
                 to bind together video and audio information, along with
                 other information such as metadata or even subtitles.
                 For example, .MP4, .MOV, .WMV etc. are all container
@@ -262,7 +270,6 @@
                 a single file. Formats contain tracks that are encoded
                 using <a>codec</a>s. For example an .MP4 might use the <a>AAC</a>
                 audio <a>codec</a> together with the <a>H.264</a> video <a>codec</a>.
-                <meta charset="utf-8">
               </td>
             </tr>
             <tr>
@@ -273,9 +280,9 @@
                 compression than previous formats. </td>
             </tr>
             <tr>
-              <td valign="top"><dfn>HEVC</dfn><br>
+              <td><dfn>HEVC</dfn><br>
               </td>
-              <td valign="top">High Efficiency Video Coding is one of
+              <td>High Efficiency Video Coding is one of
                 the newest generation video <a>codec</a>s that is able to
                 achieve efficiency up to 4x greater than <a>H.264</a>, but it
                 requires the HEVC <a>codec</a> to be present on the device.
@@ -331,7 +338,7 @@
             </tr>
             <tr>
               <td><dfn>Metadata Track</dfn></td>
-              <td><a><a>ABR</a></a> streaming technologies contain the ability to
+              <td><a>ABR</a> streaming technologies contain the ability to
                 include not only video and audio tracks within the
                 stream, but also allow for metadata tracks for
                 applications such as <a>Closed Captions</a>, advertising cues,
@@ -372,7 +379,7 @@
               <td><dfn>Rendition</dfn></td>
               <td>A specific video and audio stream for a target quality
                 level or bitrate in an adaptive streaming set or
-                manifest. For example, most <a><a>HLS</a></a> or DASH adaptive
+                manifest. For example, most <a>HLS</a> or DASH adaptive
                 streaming manifests contain multiple renditions for
                 different quality/bitrate targets so that the viewer
                 automatically views the best quality content for their
@@ -434,7 +441,6 @@
             </tr>
           </tbody>
         </table>
-      </p>
       <p>For a more detailed list of relevant terms, please see the
         glossary of terms for the vendors or technologies you use in
         your workflow. </p>
@@ -475,7 +481,7 @@
           MP4s (.m4s). Lastly, they are optionally encrypted with a <a>DRM</a> that is
           suitable for the environment where the content is going to be
           played out. The packager is also responsible for the
-          generation of a manifest file, typically a DASH (.mpd), <a><a>HLS</a></a>
+          generation of a manifest file, typically a DASH (.mpd), <a>HLS</a>
           (.m3u8) or possibly Smooth (.ism) or HDS (.f4v), that
           specifies the location of the media and its <a href='#dfn-container'>format</a>. </p>
         </section>
@@ -752,12 +758,14 @@
             </p>
             <p>
             What happens during a typical playback session is:
+            </p>
             <ol>
                 <li>Player loads the manifest for the first time</li>
                 <li>Playback starts at the live-edge defined in the manifest</li>
                 <li>Player re-loads the manifest in regular, pre-defined, intervals.</li>
                 <li>The new manifest is used to update playback state information and the segment list</li>
             </ol>
+            <p>
             This is a typical loop that the player goes through on each
             manifest update cycle.
             </p>
@@ -835,7 +843,6 @@
           &lt;/AdaptationSet&gt;
           </pre>
       </section>
-    </section>
     </section>
     <section>
       <h2>Media Playback Methods</h2>
@@ -975,22 +982,21 @@
         implemented across all modern browsers that support EME. As an
         example Chrome returns true for <code>com.widevine.alpha</code> however IE
         and Safari throw errors and Firefox returns null. A possible
-        solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-<a>DRM</a>-system-supported-by-browser">here</a>.
+        solution to this is offered <a href="https://stackoverflow.com/questions/35086625/determine-drm-system-supported-by-browser">here</a>.
         </p>
         </section>
 
       <section>
         <h3>Ad Insertions</h3>
         <p>There are many ways to incorporate media advertisements into an application. The most
-        	common types are:
-        	<ol>
-        		<li><a>In-stream</a>: Video advertisement that is played before, mid, or after main content
-        		(such as a clip or episode)</li>
-        		<li>Outstream: Video advertisement stands alone (without other video content) and is
-        		placed natively within other parts of the application</li>
-        	</ol>
-        	For the purposes of these guidelines, we will focus on <a>in-stream</a>.
-        </p>
+        	common types are:</p>
+      	<ol>
+      		<li><a>In-stream</a>: Video advertisement that is played before, mid, or after main content
+      		(such as a clip or episode)</li>
+      		<li>Outstream: Video advertisement stands alone (without other video content) and is
+      		placed natively within other parts of the application</li>
+      	</ol>
+        <p>For the purposes of these guidelines, we will focus on <a>in-stream</a>.</p>
         <p>There are two primary ways to insert advertisements into an <a>in-stream</a> media playback
         session. <i>Client-side ad insertion (CSAI)</i> and <i>Server-side
         ad insertion (SSAI)</i>. The difference here is that Server-side
@@ -1115,9 +1121,7 @@
       <p>Mezzanines are typically rendered in the native
         resolution and frame-rate that the source material was captured with. A common
         configuration using Apple ProRes would be as follows:</p>
-      <p>
-        <table border="1" cellspacing="0" cellpadding="4">
-          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
+        <table>
           <tbody>
             <tr>
               <td><a>codec</a></td>
@@ -1148,7 +1152,6 @@
             </tr>
           </tbody>
         </table>
-      </p>
       </section>
       <section>
       <h3>Decide on Rendition Set</h3>
@@ -1160,9 +1163,7 @@
         set as the default since resolution &amp; bandwidth are reliably available. The table
           below shows an example of some possible renditions, resolutions, and framerates. This is not an exhaustive list nor is it meant to be used as best practices.</p>
 
-      <p>
-        <table border="1" cellspacing="0" cellpadding="4">
-          <colgroup><col width="181"><col width="181"><col width="181"><col width="384"></colgroup>
+        <table>
           <tbody>
             <tr>
               <td><a>codec</a></td>
