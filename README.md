@@ -4,4 +4,4 @@ This repository contains the [Web Media Application Developer Guidelines](https:
 
 ### Deprecation Notice
 
-Given the lack of recent updates, we are targeting these guidelines for deprecation in 2023. If you are using these guidelines and would like to see continued development of them, please comment on [Issue #109](https://github.com/w3c/webmediaguidelines/issues/109).
+These guidelines were [deprecated in 2023](https://github.com/w3c/webmediaguidelines/issues/109). If you are using these guidelines and would like the development of them to be restarted, please [open an issue](https://github.com/w3c/webmediaguidelines/issues/new).

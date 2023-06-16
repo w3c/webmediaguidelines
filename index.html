@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Web Media Application Developer Guidelines</title>
-    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove"></script>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
     <script class="remove">
       var respecConfig = {
         specStatus: "CG-DRAFT",
@@ -21,8 +21,7 @@
           company: "Microsoft",
           companyURL: "http://www.microsoft.com"
         }],
-        shortName: "WMADG",
-        wg: "Web Media API Community Group",
+        group: "webmediaapi",
         wgURI: "https://www.w3.org/community/webmediaapi/",
         github: "https://github.com/w3c/webmediaguidelines",
         copyrightStart: 2017,
@@ -35,7 +34,7 @@
           height: 48,
           id: 'w3c-logo',
         }, {
-          src: 'http://www.cta.tech/CTA/media/Logos/cta-logo.png',
+          src: 'https://cdn.cta.tech/cta/media/media/home/cta-logo.png',
           href: "https://cta.tech/Research-Standards.aspx",
           alt: "Consumer Technology Association (CTA)",
           width: 100,
@@ -80,11 +79,14 @@
         device that runs a modern HTML user agent, including
         televisions, game machines, set-top boxes, mobile devices and
         personal computers. </p>
-      <p> The goal of this Web Media API Community Group specification
-        is to transition to the W3C Recommendation Track for standards
-        development. </p>
     </section>
-    <section id="sotd"></section>
+    <section id="sotd">
+      <p style='border: 5px solid red; border-radius: 10px; padding: 1em; margin: 1em; text-align: center; font-weight: 300; font-size: 120%;'>🚩
+        <br>This document is deprecated and <strong>MUST NOT</strong> be used for further technical work.</p>
+        <p style='position: fixed; bottom: 1em; right: 1em; padding: 0.5em; border-radius: 5px; background-color: red; color: white;font-weight: bold; font-size: 150%;writing-mode: vertical-rl;
+        text-orientation: mixed;'><span style='background-color: white;padding: 4px; border-radius: 3px;z-index: 1000;'>🚩</span> Deprecated document. Do not use.</p>
+      <p>This is a deprecated document and is no longer updated. It is inappropriate to cite this document as other than deprecated work.</p>
+    </section>
     <section>
       <h2>Introduction</h2>
       <ol class="ednote" title="Notes on v1 draft specification:">
@@ -111,7 +113,7 @@
         examples in this document provide a starting point to build
         your media application and includes example implementations from
         various providers and vendors. This document also includes
-        sample content and manifests as well as <a>encoding</a> guidelines to
+        sample content and <a>manifests</a> as well as <a>encoding</a> guidelines to
         provide hints on achieving the best quality and
         efficiency for your media applications.</p>
       </section>
@@ -133,7 +135,7 @@
               <td><b>Definition</b></td>
             </tr>
             <tr>
-              <td><dfn>360 Video</dfn></td>
+              <td><b>360 Video</b></td>
               <td>Video content where a view in every direction is
                 recorded at the same time, shot using an
                 omni-directional camera or a collection of cameras.
@@ -161,7 +163,7 @@
               </td>
             </tr>
             <tr>
-              <td><dfn>AVOD</dfn></td>
+              <td><b>AVOD</b></td>
               <td>Advertising-supported Video on Demand. AVOD services
                 monetize their content by serving ads to users, as
                 opposed to other business models such as paid
@@ -194,7 +196,7 @@
                 content delivery server.</td>
             </tr>
             <tr>
-              <td><dfn>Chunk</dfn> or <dfn>Chunking</dfn></td>
+              <td><dfn>Chunk</dfn> or <b>Chunking</b></td>
               <td><a>ABR</a> technologies typically break a video or audio
                 stream into chunks to make transmission more compact and
                 efficient. These chunks are typically 2-10 seconds in
@@ -337,7 +339,7 @@
               responsible to ensure that the video is displayed accurately, per the encoded profile.</td>
             </tr>
             <tr>
-              <td><dfn>Metadata Track</dfn></td>
+              <td><b>Metadata Track</b></td>
               <td><a>ABR</a> streaming technologies contain the ability to
                 include not only video and audio tracks within the
                 stream, but also allow for metadata tracks for
@@ -363,8 +365,8 @@
                 HTTP web servers. </td>
             </tr>
              <tr>
-              <td><dfn>Outstream Advertisement</dfn></td>
-              <td>A video advertisement that stands alone, without accompanying main video 
+              <td><b>Outstream Advertisement</b></td>
+              <td>A video advertisement that stands alone, without accompanying main video
               content. Examples include a video ad that is <a>embed</a>ded within a text news article page that contains text and images as the main content medium.</td>
             </tr>
             <tr>
@@ -400,7 +402,7 @@
                 RTMP.</td>
             </tr>
             <tr>
-              <td><dfn>SVOD</dfn></td>
+              <td><b>SVOD</b></td>
               <td>Subscription-supported Video on Demand. SVOD services
                 monetize their content through paid subscriptions from
                 users, as opposed to other business models such as
@@ -415,7 +417,7 @@
               <td>Trick mode, sometimes called trick play, is a feature of digital video systems including Digital Video Recorders and Video on Demand systems that mimics the visual feedback given during fast-forward and rewind operations that were provided by analogue systems such as VCRs.</td>
             </tr>
             <tr>
-              <td><dfn>URL Signing</dfn></td>
+              <td><b>URL Signing</b></td>
               <td>URL signing is a mechanism for securing access to
                 content. When URL Signing enforcement is enabled on a
                 property; requests to a content server or content
@@ -432,7 +434,7 @@
               </td>
             </tr>
             <tr>
-              <td><dfn>VR</dfn></td>
+              <td><b>VR</b></td>
               <td>Virtual Reality is a realistic, immerse,
                 three-dimensional environment, created using interactive
                 software and hardware, and experienced or controlled by
@@ -467,7 +469,7 @@
           Specifically, for High Definition content at 1080p with 24, 30, 50, or
           60 frames-per-second, the bitrate of the original content is
           typically 25Mbps to 150Mbps for 1080P HD and 150Mbps - 300 Mbps for 4K UHD. </p>
-        <p><a>ABR</a> streaming content is generated by <a>transcoding</a> the <a>Mezzanine File</a>  against an <a>transcoding</a> profile. Firstly, the mezzanine file is transcoded into a set of versions, each with its own average bitrate. Secondly, each version is packaged into segments of a specified duration. </p>
+        <p><a>ABR</a> <a>streaming</a> content is generated by <a>transcoding</a> the <a>Mezzanine File</a>  against an <a>transcoding</a> profile. Firstly, the mezzanine file is transcoded into a set of versions, each with its own average bitrate. Secondly, each version is packaged into segments of a specified duration. </p>
         <p> The first process is defined by an <a>transcoding</a> profile. A
           profile describes the set of constraints to be used when video
           is being prepared for consumption by a range of video
@@ -481,23 +483,23 @@
           MP4s (.m4s). Lastly, they are optionally encrypted with a <a>DRM</a> that is
           suitable for the environment where the content is going to be
           played out. The packager is also responsible for the
-          generation of a manifest file, typically a DASH (.mpd), <a>HLS</a>
+          generation of a <a>manifest</a> file, typically a DASH (.mpd), <a>HLS</a>
           (.m3u8) or possibly Smooth (.ism) or HDS (.f4v), that
           specifies the location of the media and its <a href='#dfn-container'>format</a>. </p>
         </section>
         <section>
         <h4>Content Delivery</h4>
         <p> After the content has been generated the resulting segments
-          of video and corresponding manifest files are pushed to an
+          of video and corresponding <a>manifest</a> files are pushed to an
           origin server. However, the assets are rarely delivered
           directly from the origin. </p>
         <p> At this stage, the control in the chain switches to the
-          client's web video application. The content provider supplies the client with the URL of a manifest file located on a <a>CDN</a> rather than the origin. The manifest URL is typically passed to a video player for playback. The player makes a HTTP GET request for the manifest from <a>CDN</a> edge. If the <a>CDN</a> edge does not currently have the manifest available, the <a>CDN</a> requests a copy of the file from the origin and the file is cached at the edge for later use. The CDN edge then returns the the manifest to the requesting player. <i>(NOTE: There are different levels of caching; popular <a>VOD</a> content is kept closer to the edge in the <a>CDN</a> network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery.)</i> </p>
+          client's web video application. The content provider supplies the client with the URL of a manifest file located on a <a>CDN</a> rather than the origin. The manifest URL is typically passed to a video <a>player</a> for playback. The player makes a HTTP GET request for the manifest from <a>CDN</a> edge. If the <a>CDN</a> edge does not currently have the manifest available, the <a>CDN</a> requests a copy of the file from the origin and the file is cached at the edge for later use. The CDN edge then returns the the manifest to the requesting player. <i>(NOTE: There are different levels of caching; popular <a>VOD</a> content is kept closer to the edge in the <a>CDN</a> network in this way it can be delivered to customers faster than an edge server that isn't tuned for high volume delivery.)</i> </p>
         </section>
         <section>
 
         <h3>Content Playback</h3>
-        <p> As mentioned in the Content Generation section, the player uses a tag within the manifest to determine the playout type. In <a>HLS</a>, if there is a type with the value of <a>VOD</a>, the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH, the difference between a live and VOD playlist are more subtle. At this point the behavior
+        <p> As mentioned in the Content Generation section, the <a>player</a> uses a tag within the <a>manifest</a> to determine the playout type. In <a>HLS</a>, if there is a type with the value of <a>VOD</a>, the player will not reload the manifest. This has important consequences if there are changes in availability after the session as commenced. In DASH, the difference between a live and VOD playlist are more subtle. At this point the behavior
           differs between players found on the different devices
           depending on the transport formats. However, broadly, it
           behaves in the following way: <br>
@@ -533,7 +535,7 @@
               underlying <a>DRM</a> system is usually integrated with the
               decoder pipeline and will decrypt the samples prior to decoding.
           </li>
-          <li>The media renderer pulls the video data from the buffer and
+          <li>The <a>media renderer</a> pulls the video data from the buffer and
             passes it to the video surface where it is rendered. </li>
           <li>If the available bandwidth remains constant the player
             will continue to request segments from the same bitrate
@@ -560,8 +562,8 @@
           <a>encoding</a> profiles are also subtly different. A greater
           priority can be placed on high quality as the latency, time to
           live, is not a requirement. There are important
-          differences in the manifests created. In <a>HLS</a> there is a tag
-          that tells the player whether the playlist is describing on
+          differences in the <a>manifests</a> created. In <a>HLS</a> there is a tag
+          that tells the <a>player</a> whether the playlist is describing on
           demand material: #EXT-X-PLAYLIST-TYPE:VOD. As we will see
           shortly this is used by the player. There are also client side
           restrictions where certain profiles are blocked due to rights
@@ -586,8 +588,8 @@
         </section>
         <section>
         <h4>Content Playback</h4>
-        <p> As mentioned in the content generation section the player
-          uses a tag within the manifest to determine the playout type.
+        <p> As mentioned in the content generation section the <a>player</a>
+          uses a tag within the <a>manifest</a> to determine the playout type.
           In <a>HLS</a> if there is a type with the value of VOD, then the player will not
           reload the manifest. This has important consequences if there
           are changes in availability after the session as commenced. In
@@ -607,7 +609,7 @@
        <section>
         <h4>VOD Pre-caching</h4>
         <p>In the previous sections, we outlined the use cases
-          associated with video streaming. In this section, we give some
+          associated with video <a>streaming</a>. In this section, we give some
           examples of use-cases that are specific to on-demand streaming
           and are mainly related to strategies employed on the clients
           to improve performance in some way. </p>
@@ -615,7 +617,7 @@
         <p>Pre-caching is a strategy used in on-demand streaming and is important to ensure the best user experience.
           By buffering the beginning segments of a video, you can make playback as close to instantaneous as possible.
           This is important because buffering (the state
-          of the video application when the player has insufficient
+          of the video application when the <a>player</a> has insufficient
           content within its framebuffer to continuously play content),
            has a direct relationship to engagement and
            retention. For every second of buffering
@@ -634,7 +636,7 @@
         <p>
         An HTTP range request allows a client to request a portion of a larger
         file. In the <a>VOD</a> scenario where a user wants to access a specific
-        location, a range request allows the player access content at a
+        location, a range request allows the <a>player</a> access content at a
         specific location without downloading the entire transport <a>chunk</a>.
         </p>
         <p>
@@ -678,7 +680,7 @@
         distribute content is linked to their ability to protect it with studios and
         sports channels insisting on the capacity for a service provider to detect a
         breach of copyright on a stream by stream basis.  A service provider can
-        include a vendor's SDK in the client that can add a watermark at run-time.
+        include a vendor's <a>SDK</a> in the client that can add a watermark at run-time.
         Normally, the watermark is invisible to the consumer and takes the form of a
         digital signal, this is referred to as forensic water marking. Part of the
         service provided by the watermarking vendor is to monitor the black
@@ -703,7 +705,7 @@
         <section>
         <h3>Live Streaming</h3>
             <p>
-              Even though Live and On-Demand streaming scenarios have a lot in
+              Even though Live and On-Demand <a>streaming</a> scenarios have a lot in
               common, there are a few distinct differences.
             </p>
             <section>
@@ -716,9 +718,9 @@
             </p>
             <p>
             A big difference between <a>VOD</a> and Live content generation can be
-            found in the differences between manifests for the two content
+            found in the differences between <a>manifests</a> for the two content
             types.
-            Besides a general profile that tells the player if the manifest
+            Besides a general profile that tells the <a>player</a> if the manifest
             represents live content, there are a few other, important properties
             that define how a player will be able to playback the live content,
             when updates will be fetched, and how close to the live edge playback
@@ -747,11 +749,11 @@
             playback session usually start at the beginning on the stream, a
             Live playout usually starts close to the live edge of the stream,
             with only a few segments between the playback start position and
-            the end of the current manifest.
+            the end of the current <a>manifest</a>.
             </p>
             <p>
             The other main difference is that the live content changes over
-            time and the player needs to be aware of these changes. In both
+            time and the <a>player</a> needs to be aware of these changes. In both
             DASH and <a>HLS</a>, this results in regular manifest updates. Depending
             on the format, it is possible to define the interval for the
             manifest updates.
@@ -774,7 +776,7 @@
             <h4>Potential Issues</h4>
             <p>
             One of the most common cases that an application needs to be
-            prepared for is the player falling behind the live window. Assume
+            prepared for is the <a>player</a> falling behind the live window. Assume
             for example that you have a buffer window of 10 seconds on your
             live stream. Even if the user interface does not allow explicit
             seeking, buffering events can still stall the playout and push the
@@ -825,12 +827,12 @@
           </p>
           <p>
           Unfortunately, neither DASH or <a>HLS</a> do currently specify a way to
-          reference thumbnail images directly from manifests. However, the
+          reference thumbnail images directly from <a>manifests</a>. However, the
           DASH-IF Guidelines [[DASHIFIOP]] describe an extension to
           reference thumbnail images. The thumbnails would be exposed as single
           or gridded images. All parameters required to load and display the
           thumbnail images are contained in the Manifest. This approach
-          also works for live Manifests that are updated regularly by the player.
+          also works for live Manifests that are updated regularly by the <a>player</a>.
           The following example shows how thumbnails can be referenced according
           to the DASH-IF Guidelines:
           </p>
@@ -1001,7 +1003,7 @@
         session. <i>Client-side ad insertion (CSAI)</i> and <i>Server-side
         ad insertion (SSAI)</i>. The difference here is that Server-side
         insertions are <a>embed</a>ded into the playout directly, while Client-side
-        insertions are added dynamically by the player and are handled in
+        insertions are added dynamically by the <a>player</a> and are handled in
         parallel to the main playout.</p>
 
         <section>
@@ -1013,7 +1015,7 @@
         of content, including on-demand and live.
         </p>
         <p>
-        For <a>Live Streaming</a> use cases, in-video-stream metadata (for example, using ID3 in <a>HLS</a>) can be used to enable all viewers to see an ad at the same time, synced with the content at a specific time offset. Another approach is to use web sockets to signal a player via a pushed event to play an advertisement.
+        For <a>Live Streaming</a> use cases, in-video-stream metadata (for example, using ID3 in <a>HLS</a>) can be used to enable all viewers to see an ad at the same time, synced with the content at a specific time offset. Another approach is to use web sockets to signal a <a>player</a> via a pushed event to play an advertisement.
         </p>
         <p>
 		Additionally, for live TV (broadcast TV), many broadcasters use SCTE-104/35 in their workflows to signal ads. When preparing the content to be distributed through Internet these SCTE-104/35 signals are usually "converted" to ID3/EMSG messages for <a>HLS</a>/DASH respectively. This keeps the media workflow for live ads insertion easy (SCTE to ID3/EMSG conversion is supported by most of encoders/media servers used by live content generators), is easy to consume from media players (most of players support parsing ID3/EMSG metadata), ensures synchronization with the content and avoids the need of using alternative communication channels like websocket that add complexity to the solution.
@@ -1060,13 +1062,13 @@
         nature of the playout, ad-insertions are usually not handle client
         side. One of the reasons is that the live feed continues
         independent of the client side ad insertion. In that case the
-        player can easily fall behind the live window. Server side ad
+        <a>player</a> can easily fall behind the live window. Server side ad
         insertions allow the player to play a continuous feed, independent
         of any ad insertions, which are "injected" on the server side,
         directly into the playout feed.
         </p>
         <p>
-        One of the requirements of the underlying streaming format such as
+        One of the requirements of the underlying <a>streaming</a> format such as
         DASH or <a>HLS</a> is that the <a>encoding</a> does not change during the playout
         of a single rendition. To still be able to insert advertisements,
         <a>HLS</a> and DASH propose different strategies.
@@ -1155,7 +1157,7 @@
       </section>
       <section>
       <h3>Decide on Rendition Set</h3>
-      <p>In modern video streaming use-cases, adaptive bitrate (<a>ABR</a>) streaming technologies use a <a>rendition</a> set to ensure every playback environment has an appropriate file to render.  A rendition set is simply a grouping of the different transcodes of the same mezzanine file. During playback,  <a>ABR</a> technologies detect the user's playback environment, available <a>codec</a>s, resolution and bandwidth; then selects the right segment from one of the video renditions to send to the video player.  This reduces probability of buffering as only the segments of the matching video <a>rendition</a> is loaded.  To create a proper rendition set, you should list the <a>codec</a>s and resolutions that exists for your target audience. Then you need to ascertain the proper bitrate for each <a>codec</a> &amp; resolution, high enough to meet your quality goals but not exceed bandwidth availability.<p>
+      <p>In modern video <a>streaming</a> use-cases, adaptive bitrate (<a>ABR</a>) streaming technologies use a <a>rendition</a> set to ensure every playback environment has an appropriate file to render.  A rendition set is simply a grouping of the different transcodes of the same mezzanine file. During playback,  <a>ABR</a> technologies detect the user's playback environment, available <a>codec</a>s, resolution and bandwidth; then selects the right segment from one of the video renditions to send to the video <a>player</a>.  This reduces probability of buffering as only the segments of the matching video <a>rendition</a> is loaded.  To create a proper rendition set, you should list the <a>codec</a>s and resolutions that exists for your target audience. Then you need to ascertain the proper bitrate for each <a>codec</a> &amp; resolution, high enough to meet your quality goals but not exceed bandwidth availability.<p>
 
       <p>In order to select optimum bitrates, determine your target user based upon
           target devices and user experience. For example, for OTT (Over-the-top)
@@ -1240,10 +1242,10 @@
 
     <section>
         <h3>Packaging your video files for <a>ABR</a> delivery</h3>
-    <p>In order for an <a>ABR</a> technology to utilize your <a>rendition</a> set, each file needs to be properly segmented and exposed to the <a>ABR</a> technology following their spec.  Segmentation refers to the breakdown of each file into timed <a>chunk</a>s so <a>ABR</a> can smoothly switch <a>rendition</a>s without causing a break in the video playback.  Exposure of <a>rendition</a> set and segments are done through a manifest file - .m3u8 for <a>HLS</a> and .mpd for DASH.  The manifest is simply a text file that serves as a directory for the <a>rendition</a>s and includes details (resolution, <a>codec</a>, bitrate, etc) about each file available.  This is necessary so that the <a>ABR</a> can find the correct segment for the users playback environment. A manifest can also contain references to other files that may be necessary for specific video features, such as .vtt files for subtitles and additional audio tracks for multi-lingual video. </p>
-    <p>Information about authoring a manifest for <a>HLS</a> can be found 
-      <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-23">here</a>, 
-      and authoring for DASH can be <a href="http://dashif.org/guidelines/">here</a>. 
+    <p>In order for an <a>ABR</a> technology to utilize your <a>rendition</a> set, each file needs to be properly segmented and exposed to the <a>ABR</a> technology following their spec.  Segmentation refers to the breakdown of each file into timed <a>chunk</a>s so <a>ABR</a> can smoothly switch <a>rendition</a>s without causing a break in the video playback.  Exposure of <a>rendition</a> set and segments are done through a <a>manifest</a> file - .m3u8 for <a>HLS</a> and .mpd for DASH.  The manifest is simply a text file that serves as a directory for the <a>rendition</a>s and includes details (resolution, <a>codec</a>, bitrate, etc) about each file available.  This is necessary so that the <a>ABR</a> can find the correct segment for the users playback environment. A manifest can also contain references to other files that may be necessary for specific video features, such as .vtt files for subtitles and additional audio tracks for multi-lingual video. </p>
+    <p>Information about authoring a manifest for <a>HLS</a> can be found
+      <a href="https://tools.ietf.org/html/draft-pantos-http-live-streaming-23">here</a>,
+      and authoring for DASH can be <a href="http://dashif.org/guidelines/">here</a>.
     </p>
     </section>
     </section>
